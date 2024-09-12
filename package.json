@@ -23,6 +23,7 @@
     "astro": "^4.15.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sharp": "^0.33.5",
     "tinacms": "^2.2.3"
   },
   "devDependencies": {
