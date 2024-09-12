@@ -2,7 +2,9 @@ import { defineMiddleware } from "astro:middleware"
 
 const cachingMiddleware = defineMiddleware(async ({ request }, next) => {
 
-    const cache = caches.default
+    const cacheName = 'default'
+
+    const cache = await caches.open(cacheName)
 
     const cachedResponse = await cache.match(request)
 
@@ -18,7 +20,7 @@ const cachingMiddleware = defineMiddleware(async ({ request }, next) => {
 })
 
 export const onRequest =
-    globalThis.caches?.default
+    globalThis.cache
         ? cachingMiddleware
         : (_, next) => next()
 
