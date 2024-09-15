@@ -7,15 +7,21 @@ import pkg from '@tinacms/auth';
 
 const { isAuthorized } = pkg;
 
-export async function POST({request, response}) {
+export async function POST({request, response, params}) {
+    const { clientID } = params;
+    console.log(clientID);
     return mediaHandler(request, response)
 }
 
-export async function DELETE({request, response}) {
+export async function DELETE({request, response, params}) {
+    const { clientID } = params;
+    console.log(clientID);
     return mediaHandler(request, response)
 }
 
-export async function GET({request, response}) {
+export async function GET({request, response, params}) {
+    const { clientID } = params;
+    console.log(clientID);
     return mediaHandler(request, response)
 }
 
