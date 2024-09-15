@@ -13,9 +13,9 @@ export default defineConfig({
     publicFolder: "public",
   },
   media: {
-    tina: {
-      mediaRoot: "",
-      publicFolder: "public",
+    loadCustomStore: async () => {
+        const pack = await import("next-tinacms-cloudinary");
+        return pack.TinaCloudCloudinaryMediaStore;
     },
   },
   schema: {
@@ -41,6 +41,11 @@ export default defineConfig({
             },
         },
         fields: [
+          {
+              name: "hero",
+              type: "image",
+              label: "Hero Image",
+          },
           {
             type: "string",
             name: "title",
