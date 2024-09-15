@@ -8,19 +8,19 @@ import pkg from '@tinacms/auth';
 const { isAuthorized } = pkg;
 
 export async function POST({request, response, params}) {
-    const { clientID } = params;
+    const { clientID } = request.url.searchParams;
     console.log(clientID);
     return mediaHandler(request, response)
 }
 
 export async function DELETE({request, response, params}) {
-    const { clientID } = params;
+    const { clientID } = request.url.searchParams;
     console.log(clientID);
     return mediaHandler(request, response)
 }
 
 export async function GET({request, response, params}) {
-    const { clientID } = params;
+    const { clientID } = request.url.searchParams;
     console.log(clientID);
     return mediaHandler(request, response)
 }
