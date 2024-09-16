@@ -3,9 +3,7 @@ import {
   createMediaHandler,
 } from 'next-tinacms-cloudinary/dist/handlers'
 
-import pkg from '@tinacms/auth';
-
-const { isAuthorized } = pkg;
+import { isAuthorized } from '@tinacms/auth';
 
 export const config = mediaHandlerConfig
 
@@ -15,6 +13,7 @@ const mediaHandler = createMediaHandler({
   api_secret: process.env.CLOUDINARY_API_SECRET!,
   authorized: async (req, _res): Promise<boolean> => {
     try {
+        console.log(process.env.NODE_ENV);
       if (process.env.NODE_ENV == 'development') {
         return true
       }
@@ -30,13 +29,14 @@ const mediaHandler = createMediaHandler({
 })
 
 export async function POST() {
-    return (() =>mediaHandler)
+    return mediaHandler
 }
 
 export async function DELETE({request, response}) {
-    return (() => mediaHandler(request, response))
+    return mediaHandler(request, response)
 }
 
-export async function GET() {
-  return (() => mediaHandler)
+export async function GET({params}) {
+    console.log(params);
+  return mediaHandler
 }
