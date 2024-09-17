@@ -30,6 +30,8 @@ const handler = createMediaHandler({
 
 export async function GET({ params }) { 
     console.table(params)
+    console.table(handler)
+    console.table(JSON.stringify(handler))
 
     return new Response(
         JSON.stringify(handler), {
