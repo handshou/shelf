@@ -39,6 +39,18 @@ export async function GET({ request, url }) {
     const offset = params.get('offset') || '';
     const clientID = params.get('clientID') || '';
 
+    // Retrieve the authorization token from headers
+    const authorization = request.headers.get('authorization');
+
+    // If it's a Bearer token, extract the token value
+    let token = null;
+    if (authorization && authorization.startsWith('Bearer ')) {
+        token = authorization.split(' ')[1];  // Extract the token
+    }
+
+    // Pass the token into the request object or handle it as needed
+    request.token = token;
+
     // Add the parsed query to the request object
     request.query = { filesOnly, directory, limit, offset, clientID };
 
