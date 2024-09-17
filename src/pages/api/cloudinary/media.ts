@@ -28,8 +28,19 @@ const handler = createMediaHandler({
     },
 })
 
-export async function GET({ request }) { 
-    request.query = { filesOnly: false, directory: '/' }
+export async function GET({ request, url }) { 
+    //request.query = { filesOnly: false, directory: '/' }
+    const params = new URLSearchParams(url.search);
+
+    // Example: Get a specific query parameter, e.g., 'filesOnly'
+    const filesOnly = params.get('filesOnly') || false;  // Default to false if not provided
+    const directory = params.get('directory') || '/';    // Default to root directory
+    const limit = params.get('limit') || '';
+    const offset = params.get('offset') || '';
+    const clientID = params.get('clientID') || '';
+
+    // Add the parsed query to the request object
+    request.query = { filesOnly, directory, limit, offset, clientID };
 
     return new Promise((resolve) => {
         try {
