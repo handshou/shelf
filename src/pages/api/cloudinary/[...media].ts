@@ -3,40 +3,40 @@ import {
   createMediaHandler,
 } from 'next-tinacms-cloudinary/dist/handlers'
 
-import { isAuthorized } from '@tinacms/auth';
+import auth from '@tinacms/auth';
+
+const { isAuthorized } = auth;
 
 export const config = mediaHandlerConfig
 
-const mediaHandler = createMediaHandler({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME!,
-  api_key: process.env.CLOUDINARY_API_KEY!,
-  api_secret: process.env.CLOUDINARY_API_SECRET!,
-  authorized: async (req, _res): Promise<boolean> => {
-    try {
-        console.log(process.env.NODE_ENV);
-      if (process.env.NODE_ENV == 'development') {
-        return true
-      }
+const handler = createMediaHandler({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME!,
+    api_key: process.env.CLOUDINARY_API_KEY!,
+    api_secret: process.env.CLOUDINARY_API_SECRET!,
+    authorized: async (req, _res): Promise<boolean> => {
+        try {
+            if (process.env.NODE_ENV == 'development') {
+                return true
+            }
+            const user = await isAuthorized(req)
 
-      const user = await isAuthorized(req)
-
-      return user ? user.verified : false;
-    } catch (e) {
-      console.error(e)
-      return false
-    }
-  },
+            return user ? user.verified : false;
+        } catch (e) {
+            console.error(e)
+            return false
+        }
+    },
 })
 
-export async function POST() {
-    return mediaHandler
-}
+export async function GET({ params }) { 
+    console.table(params)
 
-export async function DELETE({request, response}) {
-    return mediaHandler(request, response)
-}
-
-export async function GET({params}) {
-    console.log(params);
-  return mediaHandler
+    return new Response(
+        JSON.stringify(handler), {
+            status: 200,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }
+    );
 }
