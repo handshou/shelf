@@ -45,11 +45,13 @@ export async function GET({ request, url }) {
     // If it's a Bearer token, extract the token value
     let token = null;
     if (authorization && authorization.startsWith('Bearer ')) {
-        token = authorization.split(' ')[1];  // Extract the token
+        //token = authorization.split(' ')[1];  // Extract the token
+        token = authorization;
     }
 
     // Pass the token into the request object or handle it as needed
     request.headers.authorization = token;
+    console.log(request.headers.authorization);
 
     // Add the parsed query to the request object
     request.query = { filesOnly, directory, limit, offset, clientID };
