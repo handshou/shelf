@@ -57,6 +57,15 @@ export async function GET({ request, url }) {
     return new Promise((resolve) => {
         try {
             handler(request, {
+                status: (code) => {
+                    resolve(
+                        new Response(
+                            JSON.stringify(code), {
+                                status: 200,
+                                headers: { 'Content-Type': 'application/json' }
+                            })
+                    )
+                },
                 json: (data) => {
                     resolve(
                         new Response(
@@ -93,18 +102,43 @@ export async function POST({ request, url }) {
 }
 
 export async function DELETE({ request, url }) {
-  setupRequest(request, url)
+  setupRequest(request, url);
 
-  // Handle DELETE-specific logic, e.g., removing media
-  // const body = await request.json(); // Parse request body
+  const mediaId = url.pathname.split('/').pop(); // Extract 'sample' from '/api/cloudinary/media/sample'
+  
+  if (!mediaId) {
+    return new Response(JSON.stringify({ error: "Media ID is missing" }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
+  console.log('Received DELETE request for:', url.pathname);
+  console.log('Extracted Media ID:', mediaId);
+
+  request.query = { media: ['media', mediaId] };
 
   return new Promise((resolve) => {
-    handler(request, {
-      status: (code: number) => resolve(new Response(null, { status: code })),
-      json: (data) => resolve(new Response(JSON.stringify(data), {
-        status: 200,
+    try {
+      handler(request, {
+        status: (code) => resolve(new Response(null, { status: code })),
+        json: (data) => resolve(new Response(JSON.stringify(data), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        })),
+      });
+    } catch (err) {
+      console.error('Error in DELETE handler:', JSON.stringify(err, null, 2));
+      resolve(new Response(JSON.stringify({ error: 'Delete operation failed' }), {
+        status: 500,
         headers: { 'Content-Type': 'application/json' }
-      })),
+      }));
+    }
+  }).catch((err) => {
+    console.error('Unhandled rejection:', JSON.stringify(err, null, 2));
+    return new Response(JSON.stringify({ error: 'Unhandled rejection occurred' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
     });
   });
 }
