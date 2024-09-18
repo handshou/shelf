@@ -73,25 +73,21 @@ export async function GET({ request, url }) {
 }
 
 export async function POST({ request, url }) {
-
-    // Handle POST-specific logic, such as receiving form data or files
-    setupRequest(request, url)
     await request.formData();
-
-    return new Promise((resolve, reject) => {
+    setupRequest(request, url)
+    return new Promise((resolve) => {
         try {
             handler(request, {
-                json: (data) => 
+                json: (result) => 
                 resolve(
                     new Response(
-                        JSON.stringify(data), {
+                        JSON.stringify(result), {
                             status: 200,
-                            headers: { 'Content-Type': 'multipart/form-data' }
+                            headers: { 'Content-Type': 'application/json' }
                         })
-                ),
-            });
+                )
+            })
         } catch (err) {
-            reject()
         }
     });
 }
