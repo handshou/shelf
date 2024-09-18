@@ -5,7 +5,7 @@ import {
 
 import auth from '@tinacms/auth';
 
-const { isAuthorized } = auth;
+const { isAuthorized, isUserAuthorized } = auth;
 
 export const config = mediaHandlerConfig
 
@@ -18,10 +18,12 @@ const handler = createMediaHandler({
             if (process.env.NODE_ENV == 'development') {
                 return true
             }
-            return true
-            //const user = await isAuthorized(req)
+            const token = req.headers.get("authorization")
+            const clientID = req.params.get("clientID")
+            const user = await isUserAuthorized({clientID,token});
+            // const user = await isAuthorized(req)
 
-            //return user ? user.verified : false;
+            return user ? user.verified : false;
         } catch (e) {
             console.error(e)
             return false
