@@ -5,7 +5,7 @@ import {
 
 import auth from '@tinacms/auth';
 
-const { isAuthorized, isUserAuthorized } = auth;
+const { isAuthorized } = auth;
 
 export const config = mediaHandlerConfig
 
@@ -18,11 +18,7 @@ const handler = createMediaHandler({
             if (process.env.NODE_ENV == 'development') {
                 return true
             }
-            console.table(req)
-            const token = req.headers.get("authorization")
-            const clientID = req.params.get("clientID")
-            const user = await isUserAuthorized({clientID,token});
-            // const user = await isAuthorized(req)
+            const user = await isAuthorized(req);
 
             return user ? user.verified : false;
         } catch (e) {
@@ -53,7 +49,7 @@ export async function GET({ request, url }) {
     }
 
     // Pass the token into the request object or handle it as needed
-    request.token = token;
+    request.headers.authorization = token;
 
     // Add the parsed query to the request object
     request.query = { filesOnly, directory, limit, offset, clientID };
