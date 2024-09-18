@@ -57,15 +57,6 @@ export async function GET({ request, url }) {
     return new Promise((resolve) => {
         try {
             handler(request, {
-                status: (code: number) => {
-                    resolve(
-                        new Response(
-                            JSON.stringify({ status: code }), {
-                                status: code,
-                                headers: { 'Content-Type': 'application/json' }
-                            })
-                    )
-                },
                 json: (data) => {
                     resolve(
                         new Response(
@@ -81,49 +72,21 @@ export async function GET({ request, url }) {
     })
 }
 
-export async function POST({ ...options  }) {
-    const {request, url} = options;
+export async function POST({ request, url }) {
 
     // Handle POST-specific logic, such as receiving form data or files
-    // const body = await request.json(); // Parse request body
-
     setupRequest(request, url)
-
-    const formData = await request.formData();
-    const file = formData.get("file")
-    const directory = formData.get("directory")
-    const filename = formData.get("filename")
-    console.log('received file: ', file)
-    console.log('received directory: ', directory)
-    console.log('received filename: ', filename)
-
-    request.file = file;
-    request.directory = directory;
+    await request.formData();
 
     return new Promise((resolve, reject) => {
         try {
             handler(request, {
-                status: (code: number) => 
-                resolve(
-                    new Response(
-                        null, { 
-                            status: code 
-                        })
-                ),
                 json: (data) => 
                 resolve(
                     new Response(
                         JSON.stringify(data), {
                             status: 200,
-                            headers: { 'Content-Type': 'application/json' }
-                        })
-                ),
-                body: (body) =>
-                resolve(
-                    new Response(
-                        JSON.stringify(body), {
-                            status: 200,
-                            headers: { 'Content-Type': 'application/json' }
+                            headers: { 'Content-Type': 'multipart/form-data' }
                         })
                 ),
             });
