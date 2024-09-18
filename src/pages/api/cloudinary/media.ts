@@ -18,6 +18,7 @@ const handler = createMediaHandler({
             if (process.env.NODE_ENV == 'development') {
                 return true
             }
+            console.table(req)
             const token = req.headers.get("authorization")
             const clientID = req.params.get("clientID")
             const user = await isUserAuthorized({clientID,token});
