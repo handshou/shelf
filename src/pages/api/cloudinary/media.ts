@@ -28,52 +28,52 @@ const handler = createMediaHandler({
     },
 })
 
-export async function GET({ request, url }) { 
-    //request.query = { filesOnly: false, directory: '/' }
-    const params = new URLSearchParams(url.search);
+const setupRequest = (request, url) => {
+    const params = new URLSearchParams(url.search)
 
     // Example: Get a specific query parameter, e.g., 'filesOnly'
-    const filesOnly = params.get('filesOnly') || false;  // Default to false if not provided
-    const directory = params.get('directory') || '/';    // Default to root directory
-    const limit = params.get('limit') || '';
-    const offset = params.get('offset') || '';
-    const clientID = params.get('clientID') || '';
+    const filesOnly = params.get('filesOnly') || false
+    const directory = params.get('directory') || '/'
+    const limit = params.get('limit') || ''
+    const offset = params.get('offset') || ''
+    const clientID = params.get('clientID') || ''
 
     // Retrieve the authorization token from headers
     const authorization = request.headers.get('authorization');
 
-    // If it's a Bearer token, extract the token value
-    let token = null;
+    let token = null
     if (authorization && authorization.startsWith('Bearer ')) {
-        //token = authorization.split(' ')[1];  // Extract the token
-        token = authorization;
+        token = authorization
     }
-
     // Pass the token into the request object or handle it as needed
-    request.headers.authorization = token;
-    console.log(request.headers.authorization);
+    request.headers.authorization = token
 
     // Add the parsed query to the request object
     request.query = { filesOnly, directory, limit, offset, clientID };
+}
 
+export async function GET({ request, url }) { 
+    setupRequest(request, url);
     return new Promise((resolve) => {
         try {
             handler(request, {
                 status: (code: number) => {
                     resolve(
-                        new Response(JSON.stringify({ status: code }), {
-                            status: code,
-                            headers: { 'Content-Type': 'application/json' }
-                        })
-                    );
+                        new Response(
+                            JSON.stringify({ status: code }), {
+                                status: code,
+                                headers: { 'Content-Type': 'application/json' }
+                            })
+                    )
                 },
                 json: (data) => {
                     resolve(
-                        new Response(JSON.stringify(data), {
-                            status: 200,
-                            headers: { 'Content-Type': 'application/json' }
-                        })
-                    );
+                        new Response(
+                            JSON.stringify(data), {
+                                status: 200,
+                                headers: { 'Content-Type': 'application/json' }
+                            })
+                    )
                 }
             })
         } catch (err) {
@@ -81,24 +81,63 @@ export async function GET({ request, url }) {
     })
 }
 
-export async function POST({ request }) {
-  // Handle POST-specific logic, such as receiving form data or files
-  const body = await request.json(); // Parse request body
+export async function POST({ ...options  }) {
+    const {request, url} = options;
 
-  return new Promise((resolve) => {
-    handler(request, {
-      status: (code: number) => resolve(new Response(null, { status: code })),
-      json: (data) => resolve(new Response(JSON.stringify(data), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' }
-      })),
+    // Handle POST-specific logic, such as receiving form data or files
+    // const body = await request.json(); // Parse request body
+
+    setupRequest(request, url)
+
+    const formData = await request.formData();
+    const file = formData.get("file")
+    const directory = formData.get("directory")
+    const filename = formData.get("filename")
+    console.log('received file: ', file)
+    console.log('received directory: ', directory)
+    console.log('received filename: ', filename)
+
+    request.file = file;
+    request.directory = directory;
+
+    return new Promise((resolve, reject) => {
+        try {
+            handler(request, {
+                status: (code: number) => 
+                resolve(
+                    new Response(
+                        null, { 
+                            status: code 
+                        })
+                ),
+                json: (data) => 
+                resolve(
+                    new Response(
+                        JSON.stringify(data), {
+                            status: 200,
+                            headers: { 'Content-Type': 'application/json' }
+                        })
+                ),
+                body: (body) =>
+                resolve(
+                    new Response(
+                        JSON.stringify(body), {
+                            status: 200,
+                            headers: { 'Content-Type': 'application/json' }
+                        })
+                ),
+            });
+        } catch (err) {
+            reject()
+        }
     });
-  });
 }
 
-export async function DELETE({ request }) {
+export async function DELETE({ request, url }) {
+  setupRequest(request, url)
+
   // Handle DELETE-specific logic, e.g., removing media
-  const body = await request.json(); // Parse request body
+  // const body = await request.json(); // Parse request body
 
   return new Promise((resolve) => {
     handler(request, {
