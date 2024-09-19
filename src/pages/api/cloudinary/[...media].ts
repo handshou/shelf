@@ -104,7 +104,8 @@ export async function POST({ request, url }) {
 export async function DELETE({ request, url }) {
   setupRequest(request, url);
 
-  const mediaId = url.pathname.split('/').pop(); // Extract 'sample' from '/api/cloudinary/media/sample'
+  console.log('Pathname: ', url.pathname)
+  const mediaId = decodeURIComponent(url.pathname.split('/').pop()); // Extract 'sample' from '/api/cloudinary/media/sample'
   
   if (!mediaId) {
     return new Response(JSON.stringify({ error: "Media ID is missing" }), {
@@ -118,7 +119,7 @@ export async function DELETE({ request, url }) {
 
   request.query = { media: ['media', mediaId] };
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     try {
       handler(request, {
         status: (code) => resolve(new Response(null, { status: code })),
@@ -129,7 +130,7 @@ export async function DELETE({ request, url }) {
       });
     } catch (err) {
       console.error('Error in DELETE handler:', JSON.stringify(err, null, 2));
-      resolve(new Response(JSON.stringify({ error: 'Delete operation failed' }), {
+      reject(new Response(JSON.stringify({ error: 'Delete operation failed' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' }
       }));
