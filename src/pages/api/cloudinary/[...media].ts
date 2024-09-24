@@ -66,7 +66,7 @@ const setupRequest = (request: CustomRequest, url: URL) => {
         token = authorization
     }
     // Pass the token into the request object or handle it as needed
-    request.headers.set('authorization', token)
+    request.headers.authorization = token
 
     // Add the parsed query to the request object
     request.query = { filesOnly, directory, limit, offset, clientID }
