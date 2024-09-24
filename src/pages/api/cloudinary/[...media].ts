@@ -175,7 +175,7 @@ export const DELETE: APIRoute = ({ request: req, url }) => {
                 json: (data: any) => 
                 resolve(
                     new Response(JSON.stringify(data), {
-                        status: 202,
+                        status: 200,
                         headers: { 'Content-Type': 'application/json' }})
                 ),
             })
