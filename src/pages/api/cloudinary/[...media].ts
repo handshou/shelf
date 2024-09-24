@@ -164,6 +164,10 @@ export const DELETE: APIRoute = ({ request: req, url }) => {
             headers: { 'Content-Type': 'application/json' }
         })
     }
+    console.log("[DELETE]")
+    console.log("pathname: ", url.pathname)
+    console.log("mediaId: ", mediaId)
+
     request.query = { media: ['media', mediaId] }
     return new Promise((resolve, reject) => {
         try {
