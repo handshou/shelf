@@ -66,6 +66,7 @@ const setupRequest = (request: CustomRequest, url: URL) => {
         token = authorization
     }
     // Pass the token into the request object or handle it as needed
+    // @ts-expect-error
     request.headers.authorization = token
 
     // Add the parsed query to the request object
