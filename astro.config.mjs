@@ -3,6 +3,7 @@ import mdx from '@astrojs/mdx';
 
 import react from "@astrojs/react";
 import vercel from "@astrojs/vercel/serverless";
+
 const tina = ({
   directiveName = 'tina'
 } = {}) => ({
@@ -21,11 +22,9 @@ const tina = ({
 });
 
 // https://astro.build/config
-
-// https://astro.build/config
 export default defineConfig({
   site: 'https://hansel.co',
   integrations: [mdx({}), react(), tina()],
   output: "server",
-  adapter: vercel()
+  adapter: vercel(),
 });
