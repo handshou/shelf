@@ -57,6 +57,7 @@ const setupRequest = (request: CustomRequest, url: URL) => {
     const limit = params.get('limit') || ''
     const offset = params.get('offset') || ''
     const clientID = params.get('clientID') || ''
+    const mediaId = decodeURIComponent(url.pathname.split('/').pop()||'') 
 
     // Retrieve the authorization token from headers
     const authorization = request.headers.get('authorization')
@@ -69,8 +70,10 @@ const setupRequest = (request: CustomRequest, url: URL) => {
     // @ts-expect-error
     request.headers.authorization = token
 
+    const media = ['media', mediaId] as [string, string]
+
     // Add the parsed query to the request object
-    request.query = { filesOnly, directory, limit, offset, clientID }
+    request.query = { filesOnly, directory, limit, offset, clientID, media }
 }
 
 export const GET: APIRoute = ({ request: req, url }) => { 
@@ -169,7 +172,6 @@ export const DELETE: APIRoute = ({ request: req, url }) => {
     console.log("mediaId: ", mediaId)
     console.table(request);
 
-    request.query = { media: ['media', mediaId] }
     return new Promise((resolve, reject) => {
         try {
             handler(request, {
