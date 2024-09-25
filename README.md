@@ -6,20 +6,14 @@ Hello!
 
 ## Environment Variables
 
-```bash
-# run starter kit locally
-cp .env.example .env
-
-```
-
 | Variable               | Link to get it                               |
 | :--------------------- | :------------------------------------------- |
-| TINA_PUBLIC_CLIENT_ID  | ![Click Overview/Project Details](https://app.tina.io/projects) |
-| TINA_CONTENT_TOKEN     | ![Click Tokens](https://app.tina.io/projects/{$clientId}/tokens) |                                             |
-| TINA_SEARCH_TOKEN      | ![Click Tokens](https://app.tina.io/projects/{$clientId}/tokens) | 
-| CLOUDINARY_CLOUD_NAME  | ![Click API Keys - Find next to header](https://console.cloudinary.com/settings) |
-| CLOUDINARY_API_KEY     | ![Click API Keys - In table](https://console.cloudinary.com/settings) |
-| CLOUDINARY_API_SECRET  | ![Click API Keys - In table](https://console.cloudinary.com/settings) |
+| TINA_PUBLIC_CLIENT_ID  | [Overview/Project Details](https://app.tina.io/projects) |
+| TINA_CONTENT_TOKEN     | [Tokens](https://app.tina.io/projects/{$clientId}/tokens) |                                             |
+| TINA_SEARCH_TOKEN      | [Tokens](https://app.tina.io/projects/{$clientId}/tokens) | 
+| CLOUDINARY_CLOUD_NAME  | [API Keys - Find next to header](https://console.cloudinary.com/settings) |
+| CLOUDINARY_API_KEY     | [API Keys - In table](https://console.cloudinary.com/settings) |
+| CLOUDINARY_API_SECRET  | [API Keys - In table](https://console.cloudinary.com/settings) |
 
 ## 🧞 Commands
 
@@ -27,6 +21,7 @@ All commands are run from the root of the project, from a terminal:
 
 | Command                | Action                                           |
 | :--------------------- | :----------------------------------------------- |
+| `cp .env.example .env` | Copies local dev environment variables template  |
 | `npm install`          | Installs dependencies                            |
 | `npm run dev`          | Starts local dev server at `localhost:4321`      |
 | `npm run build`        | Build your production site to `./dist/`          |
