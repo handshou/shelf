@@ -52,10 +52,11 @@ git remote -v
 git fetch upstream
 ```
 
-If this remote url changes, update it.
+> [!NOTE]
+> If this repository changes, update your project remotes.
 
 ```bash
-git remote set-url upstream https://github.com/newusername/repository-name.git
+git remote set-url upstream https://github.com/new-username/new-repository-name.git
 git remote -v
 ```
 
@@ -76,13 +77,21 @@ git remote -v
 
 ### Commands
 
-All commands are run from the root of the project, from a terminal:
+All commands are run from the root of the project.
 
-| Command                | What It Does                                     |
+Essentials:
+
+| Main Command           | What It Does                                     |
 | :--------------------- | :----------------------------------------------- |
 | `cp .env.example .env` | Copy environment vars                            |
+| `vim .env`             | Edit environment vars                            |
 | `npm install`          | Installs dependencies                            |
 | `npm run dev`          | Starts local dev server at `localhost:4321`      |
+
+Others:
+
+| Misc Command           | What It Does                                     |
+| :--------------------- | :----------------------------------------------- |
 | `npm run build`        | Build your production site to `./dist/`          |
 | `npm run preview`      | Preview your build locally, before deploying     |
 | `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
