@@ -1,25 +1,37 @@
 # Shelf 📚
 
-## Writing and publishing made simple, with a peloton of tools for your website.
+Make your website. 
 
-Hosted on Vercel and Cloudinary, built with Astro and Tina - be ready with your website under *10 minutes*.
+## Writing and publishing made simple
 
-You can use Github authentication for all services.
+Hosted on,
+
+- Vercel 
+- Cloudinary 
+
+Built with, 
+
+- Astro 
+- Tina 
+
+Be ready in *10 minutes*. You can use your Github sign in for everything.
 
 ## Quick start
 
 ### Pre-requisites
 
-1. Github account
-1. Sign in, https://app.tina.io
-1. Sign in, https://vercel.com
-1. Sign in, https://console.cloudinary.com/console
+1. A Github account
+1. Sign in https://app.tina.io
+1. Sign in https://vercel.com
+1. Sign in https://console.cloudinary.com/console
+
+### One click deploy
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fhandshou%2Fastro-vercel&env=TINA_PUBLIC_CLIENT_ID,TINA_CONTENT_TOKEN,TINA_SEARCH_TOKEN)
 
 ### Vercel settings
 
-Node version 18 should be used. 
+Node version 18 
 
 ## Developers
 
@@ -48,26 +60,26 @@ git remote set-url upstream https://github.com/newusername/repository-name.git
 git remote -v
 ```
 
-More on git remotes [here](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes).
+[Read more](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes) on git remotes
 
 ## Environment Variables
 
-| Variable               | Link to get it                               |
+| Variable               | How to Get                                   |
 | :--------------------- | :------------------------------------------- |
-| TINA_PUBLIC_CLIENT_ID  | [Project Details](https://app.tina.io/projects) |
-| TINA_CONTENT_TOKEN     | [Tokens](https://app.tina.io/projects/$TINA_PUBLIC_CLIENT_ID/tokens) |
-| TINA_SEARCH_TOKEN      | [Tokens](https://app.tina.io/projects/$TINA_PUBLIC_CLIENT_ID/tokens) |
-| CLOUDINARY_CLOUD_NAME  | [API Keys > Header](https://console.cloudinary.com/settings) |
-| CLOUDINARY_API_KEY     | [API Keys](https://console.cloudinary.com/settings) |
-| CLOUDINARY_API_SECRET  | [API Keys](https://console.cloudinary.com/settings) |
+| TINA_PUBLIC_CLIENT_ID  | [Projects](https://app.tina.io/projects) > Project Details |
+| TINA_CONTENT_TOKEN     | [Projects](https://app.tina.io/projects) > Project Details > [Tokens](https://app.tina.io/projects/$TINA_PUBLIC_CLIENT_ID/tokens) |
+| TINA_SEARCH_TOKEN      | [Projects](https://app.tina.io/projects) > Project Details > [Tokens](https://app.tina.io/projects/$TINA_PUBLIC_CLIENT_ID/tokens) |
+| CLOUDINARY_CLOUD_NAME  | [Settings](https://console.cloudinary.com/settings) > API Keys > See Header |
+| CLOUDINARY_API_KEY     | [Settings](https://console.cloudinary.com/settings) > API Keys |
+| CLOUDINARY_API_SECRET  | [Settings](https://console.cloudinary.com/settings) > API Keys |
 
 ## Commands
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                | Action                                           |
+| Command                | What It Does                                     |
 | :--------------------- | :----------------------------------------------- |
-| `cp .env.example .env` | Copy environment variables template for local    |
+| `cp .env.example .env` | Copy environment vars                            |
 | `npm install`          | Installs dependencies                            |
 | `npm run dev`          | Starts local dev server at `localhost:4321`      |
 | `npm run build`        | Build your production site to `./dist/`          |
@@ -78,6 +90,7 @@ All commands are run from the root of the project, from a terminal:
 ## Credit
 
 Astro
+
 Tina-astro
 
 Vercel deploy button, inspired by [Starter Kit](https://github.com/opengovsg/starter-kit).
