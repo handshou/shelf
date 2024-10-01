@@ -24,6 +24,9 @@ const tina = ({
 // https://astro.build/config
 export default defineConfig({
   site: 'https://hansel.co',
+  image: {
+      domains: ['res.cloudinary.com'],
+  },
   integrations: [mdx({}), react(), tina()],
   output: "server",
   adapter: vercel(),
