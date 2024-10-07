@@ -31,7 +31,7 @@ export default defineConfig({
   },
   integrations: [mdx({}), react(), tina(), 
       tailwind({
-          applyBaseStyles: false,
+          applyBaseStyles: true,
       })
   ],
   output: "server",

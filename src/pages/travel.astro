@@ -1,0 +1,48 @@
+---
+import { getCollection } from "astro:content";
+
+import BottomNavigation from '../components/centered/BottomNavigation'
+import BackButton from '../components/centered/BackButton'
+import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+
+const travelsCollection = await getCollection("travels");
+
+const travels = (await travelsCollection.sort(
+	(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+));
+
+import '../styles/globals.css'
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travels</title>
+  </head>
+  <body class="min-h-screen bg-gray-100 flex flex-col lg:flex-row">
+
+    <!-- Back Button Navigation -->
+    <BackButton client:visible />
+
+    <!-- Left empty space for large screens -->
+    <div class="hidden lg:block lg:w-1/4" />
+
+    <!-- Main content area -->
+    <main class="w-full lg:w-1/2 bg-white min-h-screen relative">
+
+      <!-- Content -->
+      <div className="p-8 space-y-8 pb-48 lg:pb-24">
+        Content
+      </div>
+    </main>
+
+    <!-- Right empty space for large screens -->
+    <div class="hidden lg:block lg:w-1/4" />
+
+    <!-- Bottom Navigation for mobile -->
+    <BottomNavigation client:visible />
+
+  </body>
+</html>
