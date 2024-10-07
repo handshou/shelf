@@ -15,6 +15,7 @@
     "@astrojs/mdx": "^3.1.5",
     "@astrojs/react": "^3.6.2",
     "@astrojs/rss": "^4.0.7",
+    "@astrojs/tailwind": "^5.1.1",
     "@astrojs/ts-plugin": "^1.10.2",
     "@astrojs/vercel": "^7.8.1",
     "@tinacms/auth": "^1.0.6",
@@ -27,6 +28,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sharp": "^0.33.5",
+    "tailwindcss": "^3.4.13",
     "tinacms": "^2.2.3"
   },
   "devDependencies": {
