@@ -29,7 +29,11 @@ export default defineConfig({
   image: {
       domains: ['res.cloudinary.com'],
   },
-  integrations: [mdx({}), react(), tina(), tailwind()],
+  integrations: [mdx({}), react(), tina(), 
+      tailwind({
+          applyBaseStyles: false,
+      })
+  ],
   output: "server",
   adapter: vercel(),
 });
