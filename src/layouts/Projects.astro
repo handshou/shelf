@@ -14,7 +14,13 @@ export interface Props {
 }
 
 const {
-	content: { title, description, pubDate: unconvertedPubDate, updatedDate, heroImage },
+	content: { 
+        title, 
+        description, 
+        pubDate: unconvertedPubDate, 
+        updatedDate, 
+        heroImage 
+    },
 } = Astro.props;
 
 let pubDate = new Date(unconvertedPubDate).toLocaleString('en-CA', {

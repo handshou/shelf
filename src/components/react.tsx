@@ -1,30 +1,51 @@
-import { useTina } from "tinacms/dist/react";
+import React from 'react'
+import { useTina, tinaField } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
+import '../styles/global.css'
+import { type ProjectsQuery } from '../../tina/__generated__/types';
 
-export const MyComponent = (props) => {
+export const ProjectComponent = (props: {
+    data: ProjectsQuery,
+    query: string,
+    variables: {
+        relativePath: string
+    },
+}) => {
     const { data } = useTina(props);
 
-    const { title, pubDate: unPubDate, updatedDate } = data.projects;
+    const { title, pubDate: unPubDate } = data.projects;
 
-    const pubDate =	new Date(unPubDate).toLocaleDateString('en-us', {
+    const LocaleConfig: Intl.DateTimeFormatOptions = {
         year: 'numeric',
         month: 'short',
         day: 'numeric',
-    })
+    }
+    const pubDate =	new Date(unPubDate as string)
+      .toLocaleDateString('en-US', LocaleConfig)
 
     return (
         <>
-            <h1 className="title">{title}</h1>
-            {pubDate && <time dateTime="MMM-DD-YYYY">{pubDate}</time>}
-            {
-            updatedDate && (
-                    <div>
-                    Last updated on <time>{updatedDate}</time>
-                    </div>
-                    )
-            }
+            <h1 
+              data-tina-field={tinaField(data.projects, 'title')}
+              className="title" 
+            >
+              {title}
+            </h1>
+            {pubDate && 
+              <time 
+                data-tina-field={tinaField(data.projects, 'pubDate')} 
+                dateTime="MMM-DD-YYYY"
+              >
+                {pubDate}
+              </time>}
             <hr />
-            <TinaMarkdown content={data.projects.body} />
+            <div 
+              data-tina-field={tinaField(data.projects, 'body')}
+            >
+              <TinaMarkdown 
+                content={data.projects.body} 
+              />
+            </div>
         </>
     );
 };
