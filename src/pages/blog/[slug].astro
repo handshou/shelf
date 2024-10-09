@@ -1,27 +1,23 @@
 ---
-import { getEntry } from 'astro:content';
-import BaseLayout from '../../layouts/BlogPost.astro';
-import { client } from '../../../tina/__generated__/client';
-import { MyComponent } from '../../components/posts';
+import { getEntry } from "astro:content";
+import BaseLayout from "../../layouts/BlogPost.astro";
+import { client } from "../../../tina/__generated__/client";
+import { PostComponent } from "../../components/posts";
 
-Astro.response.headers.set('Cache-Control', 'max-age=0')
-Astro.response.headers.set('Cache-Control', 's-maxage=0')
+Astro.response.headers.set("Cache-Control", "max-age=0");
+Astro.response.headers.set("Cache-Control", "s-maxage=0");
 
 const { slug } = Astro.params;
 
-const response = await client.queries.posts({relativePath: `${slug}.mdx`})
+const response = await client.queries.posts({ relativePath: `${slug}.mdx` });
 
-const posts = await getEntry('posts', slug);
+const posts = await getEntry("posts", slug);
 
 if (posts === undefined) {
-    return Astro.redirect('/404');
+    return Astro.redirect("/404");
 }
-
-const { Content } = await posts.render();
-
 ---
 
 <BaseLayout content={posts.data}>
-    <MyComponent client:tina {...response} />
-    {/*<Content content={proj.data} />*/}
+    <PostComponent client:tina {...response} />
 </BaseLayout>
