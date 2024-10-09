@@ -2,7 +2,7 @@
 import { getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/Projects.astro';
 import { client } from '../../../tina/__generated__/client';
-import { ProjectComponent } from '../../components/react';
+import { ProjectComponent } from '../../components/projects';
 import { type ProjectsQuery } from '../../../tina/__generated__/types';
 
 Astro.response.headers.set('Cache-Control', 'max-age=0')
