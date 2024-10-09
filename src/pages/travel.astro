@@ -3,7 +3,6 @@ import { getCollection } from "astro:content";
 
 import BottomNavigation from '../components/centered/BottomNavigation'
 import BackButton from '../components/centered/BackButton'
-import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 
 const travelsCollection = await getCollection("travels");
 
@@ -34,7 +33,7 @@ import '../styles/globals.css'
 
       <!-- Content -->
       <div className="p-8 space-y-8 pb-48 lg:pb-24">
-        Content
+        <slot />
       </div>
     </main>
 

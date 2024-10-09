@@ -1,27 +1,24 @@
 ---
 import { getEntry } from 'astro:content';
-import BaseLayout from '../../layouts/BlogPost.astro';
+import BaseLayout from '../../pages/travel.astro';
 import { client } from '../../../tina/__generated__/client';
-import { MyComponent } from '../../components/posts';
+import { TravelComponent } from '../../components/travelslot';
 
 Astro.response.headers.set('Cache-Control', 'max-age=0')
 Astro.response.headers.set('Cache-Control', 's-maxage=0')
 
 const { slug } = Astro.params;
 
-const response = await client.queries.posts({relativePath: `${slug}.mdx`})
+const response = await client.queries.travels({relativePath: `${slug}.mdx`})
 
-const posts = await getEntry('posts', slug);
+const travels = await getEntry('travels', slug);
 
-if (posts === undefined) {
+if (travels === undefined) {
     return Astro.redirect('/404');
 }
 
-const { Content } = await posts.render();
-
 ---
 
-<BaseLayout content={posts.data}>
-    <MyComponent client:tina {...response} />
-    {/*<Content content={proj.data} />*/}
+<BaseLayout content={travels.data}>
+    <TravelComponent client:tina {...response} />
 </BaseLayout>
