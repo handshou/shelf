@@ -1,6 +1,6 @@
 ---
 import { getEntry } from 'astro:content';
-import BaseLayout from '../../pages/travel.astro';
+import TravelLayout from '../../pages/travel.astro';
 import { client } from '../../../tina/__generated__/client';
 import { TravelComponent } from '../../components/travelslot';
 
@@ -19,6 +19,6 @@ if (travels === undefined) {
 
 ---
 
-<BaseLayout content={travels.data}>
+<TravelLayout content={travels.data}>
     <TravelComponent client:tina {...response} />
-</BaseLayout>
+</TravelLayout>
