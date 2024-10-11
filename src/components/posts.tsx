@@ -12,7 +12,7 @@ export const PostComponent = (props: {
 }) => {
     const { data } = useTina(props);
 
-    const { title, pubDate: unPubDate } = data.posts;
+	const { title, pubDate: unPubDate, updatedDate } = data.posts;
 
     const pubDate = new Date(unPubDate).toLocaleDateString('en-us', {
         year: 'numeric',
