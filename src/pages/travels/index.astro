@@ -1,0 +1,37 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Browser from '../../components/Browser.astro';
+import TravelsMenu from '../../components/TravelsMenu.astro'
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../config';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+  <body>
+    <div class="hidden lg:block lg:w-1/4" />
+
+    <!-- Main content area -->
+    <main class="w-full bg-white">
+		  <Browser>
+		  	<div class="content mt-4">
+          <TravelsMenu />
+			  </div>
+		  </Browser>
+    </main>
+    <div class="hidden lg:block lg:w-1/4" />
+	</body>
+</html>
+
+<style>
+	.content {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+	}
+    :visited {
+        text-decoration-color: #EEE;
+    }
+</style>

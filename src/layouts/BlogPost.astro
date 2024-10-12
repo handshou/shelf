@@ -22,6 +22,12 @@ const {
 	<head>
 		<BaseHead title={title} description={description} />
 		<style>
+      .sticky {
+        position: sticky;
+        top: 0;
+        overflow: hidden;
+        background-color: #eee;
+      }
 			.blog {
 				/* display: flex;
 				flex-direction: column;
@@ -42,8 +48,9 @@ const {
 		<Browser>
 			<main class="blog">
 				<article>
+          <div class="sticky">
                     <Backtrack url="/blog" title="back to 🪴 garden" />
-                    <br />
+          </div>
 					{heroImage && <img width={720} height={360} src={heroImage} alt="" />}
 					<slot />
 				</article>

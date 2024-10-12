@@ -24,13 +24,13 @@ import '@fontsource/geist-sans';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Travels</title>
+    <title>travels</title>
   </head>
   <body class="min-h-screen bg-gray-100 flex flex-col lg:flex-row">
 
 
     <!-- Back Button Navigation -->
-    <BackButton client:visible />
+    <!-- <BackButton client:visible /> -->
 
     <!-- Left empty space for large screens -->
     <div class="hidden lg:block lg:w-1/4" />
@@ -39,7 +39,7 @@ import '@fontsource/geist-sans';
     <main class="w-full lg:w-1/2 bg-white min-h-screen relative">
 
       <!-- Content -->
-      <div className="p-8 space-y-8 pb-48 lg:pb-24">
+      <div class="space-y-8 pb-48 lg:pb-24">
         <TopNavigation client:tina {...response} title={content.title} client:visible />
         <slot />
       </div>
@@ -48,7 +48,7 @@ import '@fontsource/geist-sans';
     <!-- Right empty space for large screens -->
     <div class="hidden lg:block lg:w-1/4" />
     <!-- Bottom Navigation for mobile -->
-    <BottomNavigation client:visible />
+    <BottomNavigation client:visible /> 
 
   </body>
 </html>
