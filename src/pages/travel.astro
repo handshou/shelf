@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content"
 
-
 import { TopNavigation } from '../components/centered/TopNavigation'
 import BottomNavigation from '../components/centered/BottomNavigation'
 import BackButton from '../components/centered/BackButton'
@@ -17,6 +16,7 @@ const travels = (await travelsCollection.sort(
 ));
 
 import '../styles/globals.css'
+import '@fontsource/geist-sans';
 ---
 
 <!DOCTYPE html>

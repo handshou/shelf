@@ -27,10 +27,10 @@ export function TopNavigation(props) {
 
   return (
     <div className="sticky top-0 z-10 bg-white">
-      <nav className="text-sm p-4" aria-label="Breadcrumb">
+      <nav className="text-sm p-8" aria-label="Breadcrumb">
         {showTitle ? (
           <h2 
-            className="text-xl font-bold"
+            className="font-serif text-4xl font-bold"
           >{tinaTitle}</h2>
         ) : (
           <ol className="list-none p-0 flex">

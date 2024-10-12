@@ -18,12 +18,14 @@ export const TravelComponent = (props: {
         <>
             <div className="p-8 space-y-8 pb-48 lg:pb-24">
                 <h1
-                    className="text-4xl font-bold mb-6"
+                    className="font-serif text-4xl font-bold mb-6"
                     data-tina-field={tinaField(data.travels, 'title')}
                 >
                     {title}
                 </h1>
-                <div data-tina-field={tinaField(data.travels, 'body')}>
+                <div 
+                  data-tina-field={tinaField(data.travels, 'body')}
+                >
                     <TinaMarkdown content={data.travels.body} />
                 </div>
                 <article />
