@@ -1,8 +1,9 @@
-import { useTina } from "tinacms/dist/react";
-import { TinaMarkdown } from "tinacms/dist/rich-text";
-import { type PostsQuery } from "../../tina/__generated__/types";
+import React from "react"
+import { useTina, tinaField } from "tinacms/dist/react"
+import { TinaMarkdown } from "tinacms/dist/rich-text"
+import { type PostsQuery } from "../../tina/__generated__/types"
 
-export const MyComponent = (props: {
+export const PostComponent = (props: {
     data: PostsQuery,
     variables: {
         relativePath: string
@@ -11,7 +12,7 @@ export const MyComponent = (props: {
 }) => {
     const { data } = useTina(props);
 
-    const { title, pubDate: unPubDate, updatedDate } = data.posts;
+    const { title, pubDate: unPubDate } = data.posts;
 
     const pubDate = new Date(unPubDate).toLocaleDateString('en-us', {
         year: 'numeric',
@@ -21,17 +22,26 @@ export const MyComponent = (props: {
 
     return (
         <>
-            <h1 className="title">{title}</h1>
-            {pubDate && <time dateTime="MMM-DD-YYYY">{pubDate}</time>}
-            {
-                updatedDate && (
-                    <div>
-                        Last updated on <time>{updatedDate}</time>
-                    </div>
-                )
+            <h1 
+              className="title"
+              data-tina-field={tinaField(data.posts, "title")}
+            >
+              {title}
+            </h1>
+            {pubDate && 
+              <time 
+                dateTime="MMM-DD-YYYY"
+                data-tina-field={tinaField(data.posts, "pubDate")}
+              >
+                {pubDate}
+              </time>
             }
             <hr />
-            <TinaMarkdown content={data.posts.body} />
+            <div
+              data-tina-field={tinaField(data.posts, "body")}
+            >
+              <TinaMarkdown content={data.posts.body} />
+            </div>
         </>
     );
 };

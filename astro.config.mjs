@@ -4,6 +4,8 @@ import mdx from '@astrojs/mdx';
 import react from "@astrojs/react";
 import vercel from "@astrojs/vercel/serverless";
 
+import tailwind from '@astrojs/tailwind';
+
 const tina = ({
   directiveName = 'tina'
 } = {}) => ({
@@ -27,7 +29,11 @@ export default defineConfig({
   image: {
       domains: ['res.cloudinary.com'],
   },
-  integrations: [mdx({}), react(), tina()],
+  integrations: [mdx({}), react(), tina(), 
+      tailwind({
+          applyBaseStyles: false,
+      })
+  ],
   output: "server",
   adapter: vercel(),
 });

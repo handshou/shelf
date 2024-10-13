@@ -1,0 +1,23 @@
+---
+import { getEntry } from 'astro:content';
+import TravelLayout from '../../pages/travel.astro';
+import { client } from '../../../tina/__generated__/client';
+import { TravelComponent } from '../../components/travelslot';
+
+Astro.response.headers.set('Cache-Control', 'max-age=0')
+Astro.response.headers.set('Cache-Control', 's-maxage=0')
+
+const { slug } = Astro.params;
+
+const response = await client.queries.travels({relativePath: `${slug}.mdx`})
+
+const travels = await getEntry('travels', slug);
+
+if (travels === undefined) {
+    return Astro.redirect('/404');
+}
+
+---
+<TravelLayout content={travels.data}>
+    <TravelComponent client:tina {...response} />
+</TravelLayout>

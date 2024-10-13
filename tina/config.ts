@@ -21,6 +21,53 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        name: "travels",
+        label: "Travels",
+        path: "src/content/travels",
+        format: "mdx",
+        ui: {
+            filename: {
+                readonly: true,
+                slugify: (values) => {
+                    // Values is an object containing all the values of the form. In this case it is {title?: string, topic?: string}
+                    return `${values?.title
+                        ?.toLowerCase()
+                        .replace(/ /g, '-')
+                        .replace(/[!.,@#$%^&*()/\\+=]/g, '')}`
+                },
+            },
+            router: (props) => {
+                return `/travels/${props.document._sys.filename.toLowerCase()}`
+            },
+        },
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "datetime",
+            name: "pubDate",
+            label: "Published date",
+          },
+          {
+            type: "string",
+            name: "description",
+            label: "Description",
+            required: true,
+          },
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Body",
+            isBody: true,
+          },
+        ],
+      },
+      {
         name: "projects",
         label: "Projects",
         path: "src/content/projects",

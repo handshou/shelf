@@ -2,13 +2,18 @@
 import { getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/Projects.astro';
 import { client } from '../../../tina/__generated__/client';
-import { MyComponent } from '../../components/react';
+import { ProjectComponent } from '../../components/projects';
+import { type ProjectsQuery } from '../../../tina/__generated__/types';
 
 Astro.response.headers.set('Cache-Control', 'max-age=0')
 
 const { slug } = Astro.params;
 
-const response = await client.queries.projects({relativePath: `${slug}.md`})
+const response : {
+    data: ProjectsQuery, 
+    variables: { relativePath: string }, 
+    query: string,
+} = await client.queries.projects({relativePath: `${slug}.md`})
 
 const proj = await getEntry('projects', slug);
 
@@ -21,6 +26,7 @@ const { Content } = await proj.render();
 ---
 
 <BaseLayout content={proj.data}>
-    <MyComponent client:tina {...response} />
+    {/* @ts-expect-error */}
+    <ProjectComponent client:tina {...response} />
     {/*<Content content={proj.data} />*/}
 </BaseLayout>

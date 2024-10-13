@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content"
+
+import { TopNavigation } from '../components/centered/TopNavigation'
+import BottomNavigation from '../components/centered/BottomNavigation'
+import BackButton from '../components/centered/BackButton'
+
+import { client } from '../../tina/__generated__/client'
+const { slug } = Astro.params
+const response = await client.queries.travels({relativePath:`${slug}.mdx`})
+
+const travelsCollection = await getCollection("travels")
+const { content } = Astro.props
+const travels = (await travelsCollection.sort(
+	(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+));
+
+import '../styles/globals.css'
+import '@fontsource/geist-sans';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>travels</title>
+  </head>
+  <body class="min-h-screen bg-gray-100 flex flex-col lg:flex-row">
+
+
+    <!-- Back Button Navigation -->
+    <!-- <BackButton client:visible /> -->
+
+    <!-- Left empty space for large screens -->
+    <div class="hidden lg:block lg:w-1/4" />
+
+    <!-- Main content area -->
+    <main class="w-full lg:w-1/2 bg-white min-h-screen relative">
+
+      <!-- Content -->
+      <div class="space-y-8 pb-48 lg:pb-24">
+        <TopNavigation client:tina {...response} title={content.title} client:visible />
+        <slot />
+      </div>
+    </main>
+
+    <!-- Right empty space for large screens -->
+    <div class="hidden lg:block lg:w-1/4" />
+    <!-- Bottom Navigation for mobile -->
+    <BottomNavigation client:visible /> 
+
+  </body>
+</html>
