@@ -31,7 +31,7 @@ const isNotionApiTokenSet = !!import.meta.env.NOTION_API_TOKEN
 </header>
 <body class="bg">
 	<div class="content">
-		<div class="scroll">
+		<div id="scroll" class="scroll">
             <div class="token">
 		    {
 			    isNotionApiTokenSet
@@ -139,3 +139,53 @@ const isNotionApiTokenSet = !!import.meta.env.NOTION_API_TOKEN
 		margin: 0.5em 0;
 	} */
 </style>
+
+<script>
+  const container = document.getElementById('scroll');
+
+  const handleKeyDown = (e) => {
+    if (!container) return;
+
+    const scrollTop = container.scrollTop;
+    const containerHeight = container.clientHeight;
+    const scrollHeight = container.scrollHeight;
+
+    const scrollStep = 200; // Adjust this to control the scroll speed
+
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'PageDown': {
+        // Scroll down, but not beyond the content's bottom limit
+        const newScrollTop = Math.min(scrollTop + scrollStep, scrollHeight - containerHeight);
+        container.scrollTo({
+          top: newScrollTop,
+          behavior: 'smooth',
+        });
+        e.preventDefault();
+        break;
+      }
+
+      case 'ArrowUp':
+      case 'PageUp': {
+        // Scroll up, but not above the top of the container
+        const newScrollTop = Math.max(scrollTop - scrollStep, 0);
+        container.scrollTo({
+          top: newScrollTop,
+          behavior: 'smooth',
+        });
+        e.preventDefault();
+        break;
+      }
+
+      default:
+        break;
+    }
+}
+  // Attach event listener on mount
+  window.addEventListener('keydown', handleKeyDown);
+
+  // Cleanup event listener when component is destroyed
+  window.addEventListener('unload', () => {
+    window.removeEventListener('keydown', handleKeyDown);
+  });
+</script>
