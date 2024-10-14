@@ -10,17 +10,16 @@ const isNotionApiTokenSet = !!import.meta.env.NOTION_API_TOKEN
 		{SITE_TITLE}
 	</h2>
 	<nav>
-		<div class="wrapper">
+		<div class="wrapper"> 
 			<div class="btn close-btn"></div>
 			<div class="btn min-btn"></div>
 			<div class="btn max-btn"></div>
 		</div>
 		<div class="tabs">
-			<HeaderLink href="/" emoji="🧑🏽‍🌾">gardener</HeaderLink>
+			<HeaderLink href="/" emoji="🧑🏽‍🌾">home</>
+      </HeaderLink>
 			<HeaderLink href="/blog" emoji="🪴">garden</HeaderLink>
-			{/*
-            <HeaderLink href="/journey" emoji="🚴">journey</HeaderLink>
-            */}
+      <HeaderLink href="/travels" emoji="🚴">travels</HeaderLink>
 			<HeaderLink href="/projects" emoji="👨‍💻">projects</HeaderLink>
             {/*
 			<HeaderLink href="/albums" emoji="📷">albums</HeaderLink>
@@ -124,8 +123,13 @@ const isNotionApiTokenSet = !!import.meta.env.NOTION_API_TOKEN
 	.scroll {
 		padding: 0 1em 1em 1em;
 		overflow-y: scroll;
-		height: 60vh;
+		height: 75vh;
 	}
+    @media (max-width: 550px) {
+      .scroll {
+        height: 60vh;
+      }
+    }
 	.bg {
 		display: flex;
 		flex-direction: column;

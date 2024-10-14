@@ -9,14 +9,26 @@ Astro.response.headers.set('Cache-Control', 's-maxage=0')
 
 const { slug } = Astro.params
 
-const response = await client.queries.travels({ relativePath: `${slug}.mdx` })
-
 const travels = await getEntry('travels', slug)
 
 if (travels === undefined) {
 	return Astro.redirect('/404')
 }
+
+const response = await client.queries.travels({ relativePath: `${slug}.mdx` })
 ---
 <TravelLayout content={travels.data}>
     <TravelComponent client:tina {...response} />
 </TravelLayout>
+
+<script>
+  import { isBottom, titlePosition } from '../../store/titleStore'
+
+ titlePosition.subscribe(() => {
+     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+       isBottom.set(true)
+     } else {
+       isBottom.set(false)
+     }
+  })
+</script>

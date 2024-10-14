@@ -3,13 +3,14 @@ import { useTina } from 'tinacms/dist/react'
 
 import { SITE_TITLE } from '../../config'
 
-import { breadcrumbPosition, titlePosition } from '../../store/titleStore'
+import { breadcrumbPosition, isBottom, showNavigation, titlePosition } from '../../store/titleStore'
 
 export function TopNavigation(props) {
 	const { data } = useTina(props)
 	const { title: tinaTitle } = data.travels
 
 	const [showTitle, setShowTitle] = useState(false)
+	const [lastScrollY, setLastScrollY] = useState(0)
 	const titleRef = useRef(null)
 
 	useEffect(() => {
@@ -22,6 +23,12 @@ export function TopNavigation(props) {
 				const crumbRect = crumbElement?.getBoundingClientRect()
 				titlePosition.set(titleRect?.top + titleRect?.height || 0)
 				breadcrumbPosition.set(crumbRect?.height || 0)
+				if (window.scrollY > lastScrollY) {
+					showNavigation.set(false)
+				} else {
+					showNavigation.set(true)
+				}
+				setLastScrollY(window.scrollY)
 			},
 			{ passive: true }
 		)
@@ -32,17 +39,20 @@ export function TopNavigation(props) {
 			titlePosition.set(titleRect?.top + titleRect?.height || 0)
 			breadcrumbPosition.set(crumbRect?.height || 0)
 		})
-	}, [])
+	}, [lastScrollY])
 
 	useEffect(() => {
 		titlePosition.subscribe((pos) => {
-			if (pos - breadcrumbPosition.get() >= 0) setShowTitle(false)
-			else setShowTitle(true)
+			if (pos - breadcrumbPosition.get() >= 0 || isBottom.get()) {
+				setShowTitle(false)
+			} else {
+				setShowTitle(true)
+			}
 		})
 	}, [])
 
 	return (
-		<div className="travel-crumb sticky top-0 z-10 bg-white">
+		<div className="travel-crumb sticky top-0 z-10 bg-white h-20">
 			<nav className="text-sm pt-8 pl-8" aria-label="Breadcrumb">
 				{showTitle ? (
 					<h2 className="font-serif text-4xl font-bold">{tinaTitle}</h2>
@@ -59,6 +69,12 @@ export function TopNavigation(props) {
 								travels
 							</a>
 						</li>
+						{isBottom.get() && (
+							<>
+								<span className="mx-2">/</span>
+								<li className="flex items-center text-gray-900">{tinaTitle.toLowerCase()}</li>
+							</>
+						)}
 					</ol>
 				)}
 			</nav>

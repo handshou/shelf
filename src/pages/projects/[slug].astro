@@ -9,12 +9,6 @@ Astro.response.headers.set('Cache-Control', 'max-age=0')
 
 const { slug } = Astro.params
 
-const response: {
-	data: ProjectsQuery
-	variables: { relativePath: string }
-	query: string
-} = await client.queries.projects({ relativePath: `${slug}.md` })
-
 const proj = await getEntry('projects', slug)
 
 if (proj === undefined) {
@@ -22,6 +16,12 @@ if (proj === undefined) {
 }
 
 const { Content } = await proj.render()
+
+const response: {
+	data: ProjectsQuery
+	variables: { relativePath: string }
+	query: string
+} = await client.queries.projects({ relativePath: `${slug}.md` })
 ---
 
 <BaseLayout content={proj.data}>
