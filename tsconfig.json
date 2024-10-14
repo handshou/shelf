@@ -1,6 +1,11 @@
 {
   "extends": "astro/tsconfigs/base",
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@layouts/*": ["src/layouts/*"]
+    },
     "strictNullChecks": true,
     "allowJs": true,
     "jsx": "react-jsx",
@@ -8,15 +13,11 @@
     "types": ["node"],
     "moduleResolution": "node",
     "plugins": [
-        {
-            "name": "@astrojs/ts-plugin",
-        },
-    ],
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ]
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-      "node_modules"
-  ],
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }

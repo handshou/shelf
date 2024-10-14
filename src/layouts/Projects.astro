@@ -1,33 +1,27 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Browser from '../components/Browser.astro';
-import Backtrack from '../components/Backtrack.astro';
+import Backtrack from '../components/Backtrack.astro'
+import BaseHead from '../components/BaseHead.astro'
+import Browser from '../components/Browser.astro'
 
 export interface Props {
 	content: {
-		title: string;
-		description: string;
-		pubDate?: string;
-		updatedDate?: string;
-		heroImage?: string;
-	};
+		title: string
+		description: string
+		pubDate?: string
+		updatedDate?: string
+		heroImage?: string
+	}
 }
 
 const {
-	content: { 
-        title, 
-        description, 
-        pubDate: unconvertedPubDate, 
-        updatedDate, 
-        heroImage 
-    },
-} = Astro.props;
+	content: { title, description, pubDate: unconvertedPubDate, updatedDate, heroImage },
+} = Astro.props
 
 let pubDate = new Date(unconvertedPubDate).toLocaleString('en-CA', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric'
-  });
+	month: 'short',
+	day: 'numeric',
+	year: 'numeric',
+})
 ---
 
 <html lang="en">

@@ -7,6 +7,9 @@
     "dev": "export NODE_ENV=development; tinacms dev -c 'astro dev'",
     "start": "astro dev",
     "build": "tinacms build && astro check && astro build",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "ci:lint": "biome ci --formatter-enabled=true --organize-imports-enabled=true  --reporter=github",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -35,6 +38,7 @@
     "tinacms": "^2.2.6"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.3",
     "@playwright/test": "^1.40.1",
     "@types/node": "^20.7.1",
     "prettier-plugin-astro": "^0.12.0",

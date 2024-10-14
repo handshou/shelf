@@ -1,15 +1,15 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection } from 'astro:content'
 
-import BaseHead from '../components/BaseHead.astro';
-import Browser from '../components/Browser.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+import BaseHead from '../components/BaseHead.astro'
+import Browser from '../components/Browser.astro'
+import { SITE_DESCRIPTION, SITE_TITLE } from '../config'
 
-const postsCollection = await getCollection("posts");
+const postsCollection = await getCollection('posts')
 
-const posts = (await postsCollection.sort(
+const posts = await postsCollection.sort(
 	(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
-));
+)
 ---
 
 <!DOCTYPE html>
