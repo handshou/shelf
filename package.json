@@ -4,7 +4,7 @@
   "version": "0.0.2",
   "private": true,
   "scripts": {
-    "dev": "export NODE_ENV=development; tinacms dev -c 'astro dev'",
+    "dev": "export NODE_ENV=development; tinacms dev -c 'astro dev --host'",
     "start": "astro dev",
     "build": "tinacms build && astro check && astro build",
     "lint": "biome check .",
@@ -28,6 +28,7 @@
     "@types/react": "^18.2.23",
     "@types/react-dom": "^18.2.8",
     "astro": "^4.15.4",
+    "astro-cloudinary": "^1.1.0",
     "cloudinary": "^2.5.0",
     "nanostores": "^0.11.3",
     "next-tinacms-cloudinary": "^8.0.6",

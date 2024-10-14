@@ -2,6 +2,12 @@
 import BaseHead from '../../components/BaseHead.astro'
 import Browser from '../../components/Browser.astro'
 import TravelsMenu from '../../components/TravelsMenu.astro'
+
+import { getCollection } from 'astro:content'
+const jordanAssets = await getCollection('jordan')
+const hanoiAssets = await getCollection('hanoi')
+const israelAssets = await getCollection('israel')
+
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../config'
 ---
 
@@ -17,7 +23,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../../config'
     <main class="w-full bg-white">
 		  <Browser>
 		  	<div class="content mt-4">
-          <TravelsMenu />
+          <TravelsMenu assets={[...jordanAssets, ...israelAssets, ...hanoiAssets]} />
 			  </div>
 		  </Browser>
     </main>

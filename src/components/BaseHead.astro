@@ -41,3 +41,11 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- Chrome, Firefox OS, and Opera -->
+<meta name="theme-color" content="#FFFFFF">
+<!-- Windows Phone -->
+<meta name="msapplication-navbutton-color" content="#FFFFFF">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+

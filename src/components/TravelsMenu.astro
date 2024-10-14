@@ -1,10 +1,29 @@
 ---
+import { CldImage } from 'astro-cloudinary'
 import '../styles/globals.css'
+
+const { assets } = Astro.props
 ---
 <html>
 <body>
 
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    {
+      assets.map((asset) => {
+        return (
+          <div>
+            <CldImage 
+              class="h-auto max-w-full rounded-lg"
+              alt="" 
+              src={asset.data.public_id} 
+              width={asset.data.width} 
+              height={asset.data.height} 
+              sizes="25vw"
+            />
+          </div>
+        )
+      })
+    }
     <div class="grid gap-4">
         <div>
           <a href="/travels/jordan">

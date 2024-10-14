@@ -71,8 +71,8 @@ git remote -v
 | TINA_PUBLIC_CLIENT_ID  | [Projects](https://app.tina.io/projects) > Project Details |
 | TINA_CONTENT_TOKEN     | [Projects](https://app.tina.io/projects) > Project Details > [Tokens](https://app.tina.io/projects/$TINA_PUBLIC_CLIENT_ID/tokens) |
 | TINA_SEARCH_TOKEN      | [Projects](https://app.tina.io/projects) > Project Details > [Tokens](https://app.tina.io/projects/$TINA_PUBLIC_CLIENT_ID/tokens) |
-| CLOUDINARY_CLOUD_NAME  | [Settings](https://console.cloudinary.com/settings) > API Keys > See Header |
-| CLOUDINARY_API_KEY     | [Settings](https://console.cloudinary.com/settings) > API Keys |
+| PUBLIC_CLOUDINARY_CLOUD_NAME  | [Settings](https://console.cloudinary.com/settings) > API Keys > See Header |
+| PUBLIC_CLOUDINARY_API_KEY     | [Settings](https://console.cloudinary.com/settings) > API Keys |
 | CLOUDINARY_API_SECRET  | [Settings](https://console.cloudinary.com/settings) > API Keys |
 
 ### Commands
