@@ -1,22 +1,22 @@
 ---
-import { getCollection } from "astro:content"
+import { getCollection } from 'astro:content'
 
-import { TopNavigation } from '../components/centered/TopNavigation'
-import BottomNavigation from '../components/centered/BottomNavigation'
 import BackButton from '../components/centered/BackButton'
+import BottomNavigation from '../components/centered/BottomNavigation'
+import { TopNavigation } from '../components/centered/TopNavigation'
 
 import { client } from '../../tina/__generated__/client'
 const { slug } = Astro.params
-const response = await client.queries.travels({relativePath:`${slug}.mdx`})
+const response = await client.queries.travels({ relativePath: `${slug}.mdx` })
 
-const travelsCollection = await getCollection("travels")
+const travelsCollection = await getCollection('travels')
 const { content } = Astro.props
-const travels = (await travelsCollection.sort(
+const travels = await travelsCollection.sort(
 	(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
-));
+)
 
 import '../styles/globals.css'
-import '@fontsource/geist-sans';
+import '@fontsource/geist-sans'
 ---
 
 <!DOCTYPE html>

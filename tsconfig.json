@@ -13,16 +13,11 @@
     "types": ["node"],
     "moduleResolution": "node",
     "plugins": [
-        {
-            "name": "@astrojs/ts-plugin",
-        },
-    ],
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.astro"
-  ],
-  "exclude": [
-      "node_modules"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.astro"],
+  "exclude": ["node_modules"]
 }

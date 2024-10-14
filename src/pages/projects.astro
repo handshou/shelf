@@ -1,18 +1,17 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection } from 'astro:content'
 
-import BaseHead from '../components/BaseHead.astro';
-import Browser from '../components/Browser.astro';
-import Card from '../components/Card.astro';
+import BaseHead from '../components/BaseHead.astro'
+import Browser from '../components/Browser.astro'
+import Card from '../components/Card.astro'
 
-import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../config'
 
-const projectsCollection = await getCollection('projects');
+const projectsCollection = await getCollection('projects')
 
 const projects = await projectsCollection.sort(
-    (a, b) => Number(new Date(b.data.pubDate.valueOf())) - 
-      Number(new Date(a.data.pubDate.valueOf()))
-);
+	(a, b) => Number(new Date(b.data.pubDate.valueOf())) - Number(new Date(a.data.pubDate.valueOf()))
+)
 ---
 
 <!DOCTYPE html>

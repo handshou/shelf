@@ -1,21 +1,21 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Browser from '../components/Browser.astro';
-import Backtrack from '../components/Backtrack.astro';
+import Backtrack from '../components/Backtrack.astro'
+import BaseHead from '../components/BaseHead.astro'
+import Browser from '../components/Browser.astro'
 
 export interface Props {
 	content: {
-		title: string;
-		description: string;
-		pubDate?: string;
-		updatedDate?: string;
-		heroImage?: string;
-	};
+		title: string
+		description: string
+		pubDate?: string
+		updatedDate?: string
+		heroImage?: string
+	}
 }
 
 const {
 	content: { title, description, pubDate, updatedDate, heroImage },
-} = Astro.props;
+} = Astro.props
 ---
 
 <html lang="en">

@@ -5,11 +5,11 @@ export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		extend: {
-      fontFamily: {
-        serif: ['Thunder', ...defaultTheme.fontFamily.serif],
-        sans: ['Geist Sans', ...defaultTheme.fontFamily.sans],
-      },
-    },
+			fontFamily: {
+				serif: ['Thunder', ...defaultTheme.fontFamily.serif],
+				sans: ['Geist Sans', ...defaultTheme.fontFamily.sans],
+			},
+		},
 	},
 	plugins: [],
 }
