@@ -1,8 +1,8 @@
 ---
 import { getEntry } from 'astro:content'
 import { client } from '../../../tina/__generated__/client'
-import { TravelComponent } from '../../components/travelslot'
 import TravelLayout from '../../components/travel.astro'
+import { TravelComponent } from '../../components/travelslot'
 
 Astro.response.headers.set('Cache-Control', 'max-age=0')
 Astro.response.headers.set('Cache-Control', 's-maxage=0')
