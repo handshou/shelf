@@ -1,30 +1,35 @@
 ---
-import { CldImage } from 'astro-cloudinary'
-import '../styles/globals.css'
+import { CldImage } from "astro-cloudinary";
+import "../styles/globals.css";
 
-const { assets } = Astro.props
+const { assets } = Astro.props;
 ---
+
 <html>
-<body>
-
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-    {
-      assets.map((asset) => {
-        return (
-          <div>
-            <CldImage 
-              class="h-auto max-w-full rounded-lg"
-              alt="" 
-              src={asset.data.public_id} 
-              width={asset.data.width} 
-              height={asset.data.height} 
-              sizes="25vw"
-            />
-          </div>
-        )
-      })
-    }
-</div>
-
-</body>
+  <body>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      {
+        assets
+          .map((value) => ({ value, sort: Math.random() }))
+          .sort((a, b) => a.sort - b.sort)
+          .map(({ value }) => value)
+          .map((asset) => {
+            return (
+              <div>
+                <a href={asset.data.folder}>
+                  <CldImage
+                    class="h-auto max-w-full rounded-lg"
+                    alt={asset.data.public_id}
+                    src={asset.data.public_id}
+                    width={asset.data.width}
+                    height={asset.data.height}
+                    sizes="25vw"
+                  />
+                </a>
+              </div>
+            );
+          })
+      }
+    </div>
+  </body>
 </html>
