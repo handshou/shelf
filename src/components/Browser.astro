@@ -157,7 +157,16 @@ const isNotionApiTokenSet = !!import.meta.env.NOTION_API_TOKEN
     const scrollStep = 200; // Adjust this to control the scroll speed
 
     switch (e.key) {
-      case 'ArrowDown':
+      case 'ArrowDown': {
+        if (e.metaKey) {
+          container.scrollTo({
+            top: scrollHeight,
+            behavior: 'auto',
+          })
+          e.preventDefault();
+          break;
+        }
+      }
       case 'PageDown': {
         // Scroll down, but not beyond the content's bottom limit
         const newScrollTop = Math.min(scrollTop + scrollStep, scrollHeight - containerHeight);
@@ -170,6 +179,14 @@ const isNotionApiTokenSet = !!import.meta.env.NOTION_API_TOKEN
       }
 
       case 'ArrowUp':
+        if (e.metaKey) {
+          container.scrollTo({
+            top: 0,
+            behavior: 'auto',
+          })
+          e.preventDefault();
+          break;
+        }
       case 'PageUp': {
         // Scroll up, but not above the top of the container
         const newScrollTop = Math.max(scrollTop - scrollStep, 0);
