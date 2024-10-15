@@ -3,33 +3,35 @@ import { CldImage } from 'astro-cloudinary'
 import '../styles/globals.css'
 
 const { assets } = Astro.props
+
+// Shuffle assets
+const shuffledAssets = assets
+	.map((value) => ({ value, sort: Math.random() }))
+	.sort((a, b) => a.sort - b.sort)
+	.map(({ value }) => value)
 ---
 
 <html>
   <body>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-      {
-        assets
-          .map((value) => ({ value, sort: Math.random() }))
-          .sort((a, b) => a.sort - b.sort)
-          .map(({ value }) => value)
-          .map((asset) => {
-            return (
-              <div>
-                <a href={asset.data.folder}>
-                  <CldImage
-                    class="h-auto max-w-full rounded-lg"
-                    alt={asset.data.public_id}
-                    src={asset.data.public_id}
-                    width={asset.data.width}
-                    height={asset.data.height}
-                    sizes="50vw"
-                  />
-                </a>
-              </div>
-            );
-          })
-      }
+      {shuffledAssets.map((asset) => (
+        <div class="relative overflow-hidden">
+          <a href={asset.data.folder}>
+            <CldImage
+              class="h-auto w-full object-cover rounded-lg"
+              alt={asset.data.public_id}
+              src={asset.data.public_id}
+              width={asset.data.width*0.4}
+              height={asset.data.width*0.5}
+              crop="fill"
+              gravity="center"
+              aspectRatio={5/4}
+              sizes="(max-width: 640px) 50vw, 100vw"
+            />
+          </a>
+        </div>
+      ))}
     </div>
   </body>
 </html>
+
