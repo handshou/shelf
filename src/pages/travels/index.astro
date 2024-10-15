@@ -16,18 +16,18 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../../config'
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-  <body>
-    <div class="hidden lg:block lg:w-1/4" />
+  <body class="max-w-full flex flex-col min-h-screen items-center lg:flex-row">
+    <div class="hidden lg:block lg:w-1/5" />
 
     <!-- Main content area -->
-    <main class="w-full bg-white">
+    <main class="w-full bg-white lg:w-3/5">
 		  <Browser>
 		  	<div class="content mt-4">
           <TravelsMenu assets={[...jordanAssets, ...israelAssets, ...hanoiAssets]} />
 			  </div>
 		  </Browser>
     </main>
-    <div class="hidden lg:block lg:w-1/4" />
+    <div class="hidden lg:block lg:w-1/5" />
 	</body>
 </html>
 
