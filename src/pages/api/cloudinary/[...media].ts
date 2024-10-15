@@ -27,8 +27,8 @@ cloudinary.config({
 })
 
 const handler = createMediaHandler({
-	cloud_name: process.env.CLOUDINARY_CLOUD_NAME || '',
-	api_key: process.env.CLOUDINARY_API_KEY || '',
+	cloud_name: process.env.PUBLIC_CLOUDINARY_CLOUD_NAME || '',
+	api_key: process.env.PUBLIC_CLOUDINARY_API_KEY || '',
 	api_secret: process.env.CLOUDINARY_API_SECRET || '',
 	authorized: async (req, _res): Promise<boolean> => {
 		try {
