@@ -13,17 +13,20 @@ const postsCollection = defineCollection({
 export const collections = {
   hanoi: defineCollection({
     loader: cldAssetsLoader({
-      folder: 'hanoi'
+      folder: 'hanoi',
+      limit: 20
     })
   }),
   israel: defineCollection({
     loader: cldAssetsLoader({
-      folder: 'travel/telaviv'
+      folder: 'travel/telaviv',
+      limit: 20
     })
   }),
   jordan: defineCollection({
     loader: cldAssetsLoader({
-      folder: 'travel/jordan'
+      folder: 'travel/jordan',
+      limit: 20
     })
   }),
   posts: postsCollection,
