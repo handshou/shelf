@@ -18,6 +18,7 @@ const shuffledAssets = assets
         <div class="relative overflow-hidden">
           <a href={asset.data.folder}>
             <CldImage
+              client:visible={{rootMargin: "200px"}}
               class="h-auto w-full object-cover rounded-lg"
               alt={asset.data.public_id}
               src={asset.data.public_id}
