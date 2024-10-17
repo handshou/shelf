@@ -3,11 +3,11 @@ import { tinaField, useTina } from 'tinacms/dist/react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import type { TravelsQuery } from '../../tina/__generated__/types'
 
-import { AdvancedImage, responsive, lazyload } from '@cloudinary/react';
-import { Cloudinary } from "@cloudinary/url-gen";
-import { quality } from "@cloudinary/url-gen/actions/delivery";
-import { format } from "@cloudinary/url-gen/actions/delivery";
-import { auto } from "@cloudinary/url-gen/qualifiers/format";
+import { AdvancedImage, lazyload, responsive } from '@cloudinary/react'
+import { Cloudinary } from '@cloudinary/url-gen'
+import { quality } from '@cloudinary/url-gen/actions/delivery'
+import { format } from '@cloudinary/url-gen/actions/delivery'
+import { auto } from '@cloudinary/url-gen/qualifiers/format'
 
 export const TravelComponent = (props: {
 	data: TravelsQuery
@@ -20,41 +20,39 @@ export const TravelComponent = (props: {
 
 	const { title } = data.travels
 
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: 'dbifqlg1w' 
-    }
-  });
+	const cld = new Cloudinary({
+		cloud: {
+			cloudName: 'dbifqlg1w',
+		},
+	})
 
-  const extractImageIdFromUrl = (source) =>
-{
-    const regex = /\/upload\/v\d{8,12}\/(.+)$/;
-    const matches = regex.exec(source);
+	const extractImageIdFromUrl = (source) => {
+		const regex = /\/upload\/v\d{8,12}\/(.+)$/
+		const matches = regex.exec(source)
 
-    if (matches) {
-        return matches[1];
-    }
+		if (matches) {
+			return matches[1]
+		}
 
-    return null;
-};
+		return null
+	}
 
-  const myImage = (url) => 
-    cld.image(extractImageIdFromUrl(url))
-      .delivery(quality(70))
-      .delivery(format(auto()))
+	const myImage = (url) =>
+		cld.image(extractImageIdFromUrl(url)).delivery(quality(70)).delivery(format(auto()))
 
-  const components = {
-    a: (props) => (
-    <a href={props.url} target="_blank" rel="noopener noreferrer">
-      {props.children}
-    </a>),
+	const components = {
+		a: (props) => (
+			<a href={props.url} target="_blank" rel="noopener noreferrer">
+				{props.children}
+			</a>
+		),
 
-    img: (props) => (
-    <a href={props.url} target="_blank" rel="noopener noreferrer">
-      <AdvancedImage cldImg={myImage(props.url)} plugins={[lazyload(), responsive()]} />
-    </a>
-    ),
-  }
+		img: (props) => (
+			<a href={props.url} target="_blank" rel="noopener noreferrer">
+				<AdvancedImage cldImg={myImage(props.url)} plugins={[lazyload(), responsive()]} />
+			</a>
+		),
+	}
 
 	return (
 		<>
@@ -66,9 +64,9 @@ export const TravelComponent = (props: {
 					{title}
 				</h1>
 				<div data-tina-field={tinaField(data.travels, 'body')}>
-				  <article className="prose prose-img:rounded-lg prose-base prose-neutral lg:prose-neutral">
-					  <TinaMarkdown components={components} content={data.travels.body} />
-          </article>
+					<article className="prose prose-img:rounded-lg prose-base prose-neutral lg:prose-neutral">
+						<TinaMarkdown components={components} content={data.travels.body} />
+					</article>
 				</div>
 			</div>
 		</>
