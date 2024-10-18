@@ -4,62 +4,50 @@ import Browser from '../components/Browser.astro'
 import { SITE_DESCRIPTION, SITE_TITLE } from '../config'
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Browser title={SITE_TITLE}>
-			<main class="content">
-				<h1>🧑🏽‍🌾 </h1>
-					Welcome! See my
-                    <ul class="list">
-                        <li>
-                            <a href="/blog">
-                                <b>🪴 garden</b>
-                            </a>
-                        </li>
-                        
-                        <li>
-                            <a href="/travels">
-                                <b>🚴 travels</b>
-                             </a>
-                        </li>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Browser title={SITE_TITLE}>
+      <main class="content">
+        <h1>🧑🏽‍🌾</h1>
+        Welcome! See my
+        <ul class="list">
+          <li>
+            <a href="/blog">
+              <b>🪴 garden</b>
+            </a>
+          </li>
 
-                        <li>
-                              
-                            <a href="/projects">
-                                <b>👨‍💻 projects</b>
-                            </a>
-                        </li>
-                        {/*
-                        <li>
-                            Browse photo 
-                            <a href="albums">
-                                <b>📷 albums</b> 
-                            </a>
-                        </li>
-                        */}
-                    </ul>
+          <li>
+            <a href="/travels">
+              <b>🚴 travels</b>
+            </a>
+          </li>
 
-                    <p>Made using<a href="https://github.com/handshou/shelf">
-                      📚 shelf</a> 
-                    </p>
-                    
-                    </p>
-			</main>
-		</Browser>
-	</body>
+          <li>
+            <a href="/projects">
+              <b>👨‍💻 projects</b>
+            </a>
+          </li>
+        </ul>
+
+        <p>
+          Made using<a href="https://github.com/handshou/shelf"> 📚 shelf</a>
+        </p>
+      </main>
+    </Browser>
+    <style>
+      .content {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+      :visited {
+        text-decoration-color: #eee;
+      }
+    </style>
+  </body>
 </html>
-
-<style>
-	.content {
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-	}
-    :visited {
-        text-decoration-color: #EEE;
-    }
-</style>
