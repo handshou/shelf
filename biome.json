@@ -54,6 +54,16 @@
           }
         }
       }
+    },
+    {
+      "include": ["*.tsx"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "useValidAnchor": "warn"
+          }
+        }
+      }
     }
   ]
 }
