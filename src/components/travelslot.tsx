@@ -47,7 +47,6 @@ const convertDMSToDecimal = (dms) => {
 	const latitude = convertSingleDMS(latString)
 	const longitude = convertSingleDMS(lonString)
 
-	console.log({ latitude, longitude })
 	return { latitude, longitude }
 }
 
@@ -86,7 +85,7 @@ const getIframeFromCoordinates = async (latitude, longitude) => {
 		}
 
 		const iframeSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox.minLon},${bbox.minLat},${bbox.maxLon},${bbox.maxLat}&layer=mapnik&marker=${latitude},${longitude}`
-		return `<h3>${location.split(/,(.*)/s)[0]}</h3><p>${location.split(/,(.*)/s)[1]}</p> <iframe width="100%" height="400px" src="${iframeSrc}"></iframe>`
+		return `<h3>${location.split(/,(.*)/s)[0]}</h3><p>${location.split(/,(.*)/s)[1]}</p> <iframe loading="lazy" width="100%" height="400px" src="${iframeSrc}"></iframe>`
 	} catch (error) {
 		console.error('Error fetching location:', error)
 		return '<p>Location not found</p>'
