@@ -4,8 +4,11 @@ import '../styles/globals.css'
 
 const { assets } = Astro.props
 
+const imgExists = (img) => img.data.last_updated
+
 // Shuffle assets
 const shuffledAssets = assets
+	.filter(imgExists)
 	.map((value) => ({ value, sort: Math.random() }))
 	.sort((a, b) => a.sort - b.sort)
 	.map(({ value }) => value)
