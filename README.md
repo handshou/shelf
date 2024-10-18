@@ -68,6 +68,7 @@ git remote -v
 
 | Variable               | How to Get                                   |
 | :--------------------- | :------------------------------------------- |
+| GOOGLE_MAPS_API_KEY    | [Enable Maps Embed API](https://developers.google.com/maps/documentation/embed/cloud-setup#enabling-apis) > [Keys & Credentials](https://console.cloud.google.com/google/maps-apis/credentials) |
 | TINA_PUBLIC_CLIENT_ID  | [Projects](https://app.tina.io/projects) > Project Details |
 | TINA_CONTENT_TOKEN     | [Projects](https://app.tina.io/projects) > Project Details > [Tokens](https://app.tina.io/projects/$TINA_PUBLIC_CLIENT_ID/tokens) |
 | TINA_SEARCH_TOKEN      | [Projects](https://app.tina.io/projects) > Project Details > [Tokens](https://app.tina.io/projects/$TINA_PUBLIC_CLIENT_ID/tokens) |
