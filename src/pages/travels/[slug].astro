@@ -18,7 +18,7 @@ if (travels === undefined) {
 const response = await client.queries.travels({ relativePath: `${slug}.mdx` })
 ---
 <TravelLayout content={travels.data}>
-    <TravelComponent client:load client:tina {...response} />
+    <TravelComponent client:tina {...response} client:visible />
 </TravelLayout>
 
 <script>
