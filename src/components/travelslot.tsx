@@ -10,90 +10,88 @@ import { format } from '@cloudinary/url-gen/actions/delivery'
 import { auto } from '@cloudinary/url-gen/qualifiers/format'
 
 const convertDMSToDecimal = (dms) => {
-    // Split the input into latitude and longitude
-    const [latString, lonString] = dms.split(',').map(coord => coord.trim());
+	// Split the input into latitude and longitude
+	const [latString, lonString] = dms.split(',').map((coord) => coord.trim())
 
-    const convertSingleDMS = (coord) => {
-        // Remove the direction and trim spaces
-        const direction = coord.slice(-1);
-        const cleanedCoord = coord.slice(0, -1).trim();
+	const convertSingleDMS = (coord) => {
+		// Remove the direction and trim spaces
+		const direction = coord.slice(-1)
+		const cleanedCoord = coord.slice(0, -1).trim()
 
-        // Split by spaces and handle the presence of seconds
-        const parts = cleanedCoord.split(/\s+/);
-        let degrees = parseFloat(parts[0]);
-        let minutes = parseFloat(parts[1]) || 0;
-        let seconds = parseFloat(parts[2]) || 0;
+		// Split by spaces and handle the presence of seconds
+		const parts = cleanedCoord.split(/\s+/)
+		const degrees = Number.parseFloat(parts[0])
+		let minutes = Number.parseFloat(parts[1]) || 0
+		let seconds = Number.parseFloat(parts[2]) || 0
 
-        // If only degrees and minutes are present
-        if (parts.length === 2) {
-            seconds = 0; // Assume no seconds provided
-        } else if (parts.length === 1) {
-            minutes = 0; // Only degrees provided
-            seconds = 0;
-        }
+		// If only degrees and minutes are present
+		if (parts.length === 2) {
+			seconds = 0 // Assume no seconds provided
+		} else if (parts.length === 1) {
+			minutes = 0 // Only degrees provided
+			seconds = 0
+		}
 
-        // Calculate the decimal value
-        let decimal = degrees + (minutes / 60) + (seconds / 3600);
+		// Calculate the decimal value
+		let decimal = degrees + minutes / 60 + seconds / 3600
 
-        // Adjust for direction
-        if (direction === 'S' || direction === 'W') {
-            decimal *= -1;
-        }
+		// Adjust for direction
+		if (direction === 'S' || direction === 'W') {
+			decimal *= -1
+		}
 
-        return decimal;
-    };
+		return decimal
+	}
 
-    // Convert latitude and longitude
-    const latitude = convertSingleDMS(latString);
-    const longitude = convertSingleDMS(lonString);
+	// Convert latitude and longitude
+	const latitude = convertSingleDMS(latString)
+	const longitude = convertSingleDMS(lonString)
 
-console.log({latitude, longitude})
-    return { latitude, longitude };
-};
+	console.log({ latitude, longitude })
+	return { latitude, longitude }
+}
 
 // Example usage
-const gpsCoordinates = "30 19' 45.49N, 35 26' 34.86E";
+const gpsCoordinates = "30 19' 45.49N, 35 26' 34.86E"
 
 const TinaEmbed = ({ latitude, longitude }) => {
-  const [iframeMarkup, setIframeMarkup] = useState('');
+	const [iframeMarkup, setIframeMarkup] = useState('')
 
-  useEffect(() => {
-    const fetchIframe = async () => {
-      const markup = await getIframeFromCoordinates(latitude, longitude);
-      setIframeMarkup(markup);
-    };
+	useEffect(() => {
+		const fetchIframe = async () => {
+			const markup = await getIframeFromCoordinates(latitude, longitude)
+			setIframeMarkup(markup)
+		}
 
-    fetchIframe();
-  }, [latitude, longitude]);
+		fetchIframe()
+	}, [latitude, longitude])
 
-  return (
-    <div dangerouslySetInnerHTML={{ __html: iframeMarkup }} />
-  );
-};
+	return <div dangerouslySetInnerHTML={{ __html: iframeMarkup }} />
+}
 
 const getIframeFromCoordinates = async (latitude, longitude) => {
-  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
-  
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    const location = data.display_name;
-    
-   // Calculate bounding box for the OSM iframe
-    const bbox = {
-        minLon: longitude - 0.001,
-        minLat: latitude - 0.001,
-        maxLon: longitude + 0.001,
-        maxLat: latitude + 0.001,
-    };
+	const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
 
-    const iframeSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox.minLon},${bbox.minLat},${bbox.maxLon},${bbox.maxLat}&layer=mapnik&marker=${latitude},${longitude}`;
-    return `<h3>${location.split(/,(.*)/s)[0]}</h3><p>${location.split(/,(.*)/s)[1]}</p> <iframe width="100%" height="400px" src="${iframeSrc}"></iframe>`;
-  } catch (error) {
-    console.error('Error fetching location:', error);
-    return '<p>Location not found</p>';
-  }
-};
+	try {
+		const response = await fetch(url)
+		const data = await response.json()
+		const location = data.display_name
+
+		// Calculate bounding box for the OSM iframe
+		const bbox = {
+			minLon: longitude - 0.001,
+			minLat: latitude - 0.001,
+			maxLon: longitude + 0.001,
+			maxLat: latitude + 0.001,
+		}
+
+		const iframeSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox.minLon},${bbox.minLat},${bbox.maxLon},${bbox.maxLat}&layer=mapnik&marker=${latitude},${longitude}`
+		return `<h3>${location.split(/,(.*)/s)[0]}</h3><p>${location.split(/,(.*)/s)[1]}</p> <iframe width="100%" height="400px" src="${iframeSrc}"></iframe>`
+	} catch (error) {
+		console.error('Error fetching location:', error)
+		return '<p>Location not found</p>'
+	}
+}
 
 export const TravelComponent = (props: {
 	data: TravelsQuery
@@ -112,7 +110,7 @@ export const TravelComponent = (props: {
 		},
 	})
 
-  const API_KEY = import.meta.env.GOOGLE_MAPS_API_KEY
+	const API_KEY = import.meta.env.GOOGLE_MAPS_API_KEY
 
 	const extractImageIdFromUrl = (source) => {
 		const regex = /\/upload\/v\d{8,12}\/(.+)$/
@@ -141,9 +139,9 @@ export const TravelComponent = (props: {
 			</a>
 		),
 
-    html: (props) => (
-    <>
-      {/*<iframe width="100%" height="350" 
+		html: (props) => (
+			<>
+				{/*<iframe width="100%" height="350" 
         src={"https://www.openstreetmap.org/export/embed.html?" 
         + "bbox=" + "103.84615302085876" 
         + "%2C"   + "1.2855071020885447" 
@@ -155,7 +153,7 @@ export const TravelComponent = (props: {
           View Larger Map
         </a>
       </small>*/}
-      {/*<iframe 
+				{/*<iframe 
       width="100%"
       height="350"
       src={`https://nominatim.openstreetmap.org/ui/reverse.html?lat=30.32967&lon=35.44303`}
@@ -182,9 +180,9 @@ export const TravelComponent = (props: {
       </iframe>
       <iframe src = "https://maps.google.com/maps?q=10.305385,77.923029&hl=es;z=14&amp;output=embed"></iframe>
       */}
-      <TinaEmbed {...convertDMSToDecimal(gpsCoordinates)} />
-      </>
-    ),
+				<TinaEmbed {...convertDMSToDecimal(gpsCoordinates)} />
+			</>
+		),
 	}
 
 	return (
