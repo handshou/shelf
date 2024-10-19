@@ -11,24 +11,39 @@ const mapField = {
     {
       name: "Map",
       label: "Map",
+      list: true,
       fields: [
+        {
+          type: 'string',
+          name: 'mapType',
+          label: 'Map Type',
+          ui: {
+            defaultItem: {
+              mapType: "Openstreetmaps",
+            },
+          },
+          options: [
+            {
+              value: "Openstreetmaps", label: "Openstreetmaps"
+            },
+            {
+              value: "GoogleGPS", label: "Google GPS"
+            },
+            {
+              value: "GoogleSearch", label: "Google Search"
+            },
+            {
+              value: "GoogleGeneral", label: "Google General (no marker)"
+            },
+          ]
+        },
         {
           type: 'string',
           name: 'gpsCoordinates',
           label: 'GPS Coordinates',
           isRequired: true,
-          placeholder: '30 19\' 45.49N\, 35 26\' 34.86E',
+          placeholder: '30 19 45.49N\, 35 26 34.86E',
           validate: validateGPSCoordinates,
-        },
-        {
-          type: 'string',
-          name: 'latitude',
-          label: 'Latitude',
-        },
-        {
-          type: 'string',
-          name: 'longitude',
-          label: 'Longitude',
         },
       ],
     },

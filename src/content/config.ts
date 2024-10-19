@@ -15,18 +15,21 @@ export const collections = {
 		loader: cldAssetsLoader({
 			folder: 'travels/hanoi',
 			limit: 40,
+      fields: ["last_updated", "width", "height", "secure_url"],
 		}),
 	}),
 	israel: defineCollection({
 		loader: cldAssetsLoader({
 			folder: 'travels/israel',
-			limit: 20,
+			limit: 40,
+      fields: ["last_updated", "width", "height", "secure_url"],
 		}),
 	}),
 	jordan: defineCollection({
 		loader: cldAssetsLoader({
 			folder: 'travels/jordan',
-			limit: 30,
+      limit: 40,
+      fields: ["last_updated", "width", "height", "secure_url"],
 		}),
 	}),
 	posts: postsCollection,

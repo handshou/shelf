@@ -9,6 +9,7 @@ import { quality } from '@cloudinary/url-gen/actions/delivery'
 import { format } from '@cloudinary/url-gen/actions/delivery'
 import { auto } from '@cloudinary/url-gen/qualifiers/format'
 
+
 const convertDMSToDecimal = (dms) => {
 	// Split the input into latitude and longitude
 	const [latString, lonString] = dms.split(',').map((coord) => coord.trim())
@@ -50,7 +51,7 @@ const convertDMSToDecimal = (dms) => {
 	return { latitude, longitude }
 }
 
-const validateGPSCoordinates = (value) => {
+const validateGPSCoordinates = (value, allValues, meta, field) => {
   if (!value || value.trim() === "") {
     return 'GPS coordinates are required';
   }
@@ -116,12 +117,12 @@ const validateGPSCoordinates = (value) => {
 // Example usage
 const gpsCoordinates = "30 19' 45.49N, 35 26' 34.86E"
 
-const TinaEmbed = ({ latitude, longitude }) => {
+const TinaEmbed = ({ latitude, longitude, mapType }) => {
 	const [iframeMarkup, setIframeMarkup] = useState('')
 
 	useEffect(() => {
 		const fetchIframe = async () => {
-			const markup = await getIframeFromCoordinates(latitude, longitude)
+			const markup = await getIframeFromCoordinates(latitude, longitude, mapType)
 			setIframeMarkup(markup)
 		}
 
@@ -131,7 +132,7 @@ const TinaEmbed = ({ latitude, longitude }) => {
 	return <div dangerouslySetInnerHTML={{ __html: iframeMarkup }} />
 }
 
-const getIframeFromCoordinates = async (latitude, longitude) => {
+const getIframeFromCoordinates = async (latitude, longitude, mapType) => {
 	const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
 
 	try {
@@ -147,8 +148,20 @@ const getIframeFromCoordinates = async (latitude, longitude) => {
 			maxLat: latitude + 0.001,
 		}
 
-		const iframeSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox.minLon},${bbox.minLat},${bbox.maxLon},${bbox.maxLat}&layer=mapnik&marker=${latitude},${longitude}`
-		return `<h3>${location.split(/,(.*)/s)[0]}</h3><p>${location.split(/,(.*)/s)[1]}</p> <iframe loading="lazy" width="100%" height="400px" src="${iframeSrc}"></iframe>`
+    const API_KEY = "AIzaSyCAI6zyaX8_CUvt4jdwKMFHnquhJgCHoGw"
+
+		let iframeSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox.minLon},${bbox.minLat},${bbox.maxLon},${bbox.maxLat}&layer=mapnik&marker=${latitude},${longitude}`
+    if (mapType === "GoogleGPS") {
+      iframeSrc = `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=${latitude},${longitude}`
+    }
+    if (mapType === "GoogleSearch") {
+      iframeSrc = `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=${encodeURI(location)}`
+    }
+    if (mapType === "GoogleGeneral") {
+      iframeSrc = `https://www.google.com/maps/embed/v1/search?key=${API_KEY}&q=${encodeURI(location)}&center=${latitude},${longitude}&zoom=17`
+    }
+    console.log('iframeSrc: ', iframeSrc)
+		return `<h3>${location.split(/,(.*)/s)[0]}</h3><p>${location.split(/,(.*)/s)[1]}</p> <iframe loading="lazy" width="100%" height="300px" allowFullScreen src="${iframeSrc}"></iframe>`
 	} catch (error) {
 		console.error('Error fetching location:', error)
 		return '<p>Location not found</p>'
@@ -172,7 +185,6 @@ const TravelComponent = (props: {
 		},
 	})
 
-	const API_KEY = import.meta.env.GOOGLE_MAPS_API_KEY
 
 	const extractImageIdFromUrl = (source) => {
 		const regex = /\/upload\/v\d{8,12}\/(.+)$/
@@ -202,7 +214,7 @@ const TravelComponent = (props: {
 		),
 
 		Map: (props) => {
-      let { gpsCoordinates="30 19' 45.49N, 35 26' 34.86E"} = props
+      let { gpsCoordinates="30 19' 45.49N, 35 26' 34.86E", mapType } = props
       if (typeof validateGPSCoordinates(gpsCoordinates) == 'string')
         gpsCoordinates="30 19' 45.49N, 35 26' 34.86E"
 
@@ -246,7 +258,7 @@ const TravelComponent = (props: {
       </iframe>
       <iframe src = "https://maps.google.com/maps?q=10.305385,77.923029&hl=es;z=14&amp;output=embed"></iframe>
       */}
-				<TinaEmbed {...convertDMSToDecimal(gpsCoordinates)} />
+				<TinaEmbed {...convertDMSToDecimal(gpsCoordinates)} mapType={mapType} />
 			</>)
 		},
 	}
