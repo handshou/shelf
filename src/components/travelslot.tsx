@@ -118,6 +118,10 @@ const validateGPSCoordinates = (value, allValues, meta, field) => {
 	return true // Validation passed
 }
 
+const IFrame = ({ embedCode }) => {
+	return <div dangerouslySetInnerHTML={{ __html: embedCode }} />
+}
+
 const TinaEmbed = ({ latitude, longitude, mapType }) => {
 	const [iframeMarkup, setIframeMarkup] = useState('')
 
@@ -261,6 +265,10 @@ const TravelComponent = (props: {
 				</>
 			)
 		},
+
+		IFrame: (props) => {
+			return <IFrame embedCode={props.embedCode} />
+		},
 	}
 
 	return (
@@ -282,4 +290,4 @@ const TravelComponent = (props: {
 	)
 }
 
-export { TinaEmbed, TravelComponent, validateGPSCoordinates }
+export { TinaEmbed, TravelComponent, validateGPSCoordinates, IFrame }

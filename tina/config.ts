@@ -1,17 +1,28 @@
 import { defineConfig } from "tinacms";
-import { TinaEmbed, validateGPSCoordinates } from "../src/components/travelslot";
+import { IFrame, TinaEmbed, validateGPSCoordinates } from "../src/components/travelslot";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
 const mapField = {
   components: {
-    TinaEmbed
+    TinaEmbed,
+    IFrame
   },
   templates: [
     {
+      name: "IFrame",
+      label: "iFrame",
+      fields: [
+        {
+          type: 'string',
+          name: 'embedCode',
+          label: 'Embed Code'
+        },
+      ],
+    },
+    {
       name: "Map",
       label: "Map",
-      list: true,
       fields: [
         {
           type: 'string',
