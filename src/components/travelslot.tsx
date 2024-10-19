@@ -9,6 +9,7 @@ import { quality } from '@cloudinary/url-gen/actions/delivery'
 import { format } from '@cloudinary/url-gen/actions/delivery'
 import { auto } from '@cloudinary/url-gen/qualifiers/format'
 
+const API_KEY = import.meta.env?.PUBLIC_GOOGLE_MAPS_API_KEY || ''
 
 const convertDMSToDecimal = (dms) => {
 	// Split the input into latitude and longitude
@@ -52,70 +53,70 @@ const convertDMSToDecimal = (dms) => {
 }
 
 const validateGPSCoordinates = (value, allValues, meta, field) => {
-  if (!value || value.trim() === "") {
-    return 'GPS coordinates are required';
-  }
+	if (!value || value.trim() === '') {
+		return 'GPS coordinates are required'
+	}
 
-  const parts = value.split(',');
+	const parts = value.split(',')
 
-  if (parts.length !== 2) {
-    return 'Invalid format. Expected format: 30 19\' 45.49N, 35 26\' 34.86E';
-  }
+	if (parts.length !== 2) {
+		return 'Invalid format. Expected format: 30 19 45.49N, 35 26 34.86E'
+	}
 
-  const validatePart = (part) => {
-    const trimmedPart = part.trim();
-    const direction = trimmedPart.slice(-1);
-    const dmsString = trimmedPart.slice(0, -1).trim();
+	const validatePart = (part) => {
+		const trimmedPart = part.trim()
+		const direction = trimmedPart.slice(-1)
+		const dmsString = trimmedPart.slice(0, -1).trim()
 
-    // Split DMS string into parts
-    const dmsParts = dmsString.split(/\s+/);
+		// Split DMS string into parts
+		const dmsParts = dmsString.split(/\s+/)
 
-    if (dmsParts.length < 3 || dmsParts.length > 4) {
-      return 'Invalid DMS format';
-    }
+		if (dmsParts.length < 3 || dmsParts.length > 4) {
+			return 'Invalid DMS format'
+		}
 
-    // Convert degrees, minutes, and seconds to numbers
-    const degrees = Number(dmsParts[0]);
-    const minutes = Number(dmsParts[1]);
-    const seconds = dmsParts.length === 4 ? Number(dmsParts[2]) : 0;
+		// Convert degrees, minutes, and seconds to numbers
+		const degrees = Number(dmsParts[0])
+		const minutes = Number(dmsParts[1])
+		const seconds = dmsParts.length === 4 ? Number(dmsParts[2]) : 0
 
-    // Validate that degrees, minutes, and seconds are numbers
-    if (
-      isNaN(degrees) ||
-      isNaN(minutes) ||
-      isNaN(seconds) ||
-      degrees < 0 || degrees > 180 || // Valid degrees range
-      minutes < 0 || minutes >= 60 || // Valid minutes range
-      seconds < 0 || seconds >= 60 // Valid seconds range
-    ) {
-      return 'Degrees, minutes, and seconds must be valid numbers';
-    }
+		// Validate that degrees, minutes, and seconds are numbers
+		if (
+			Number.isNaN(degrees) ||
+			Number.isNaN(minutes) ||
+			Number.isNaN(seconds) ||
+			degrees < 0 ||
+			degrees > 180 || // Valid degrees range
+			minutes < 0 ||
+			minutes >= 60 || // Valid minutes range
+			seconds < 0 ||
+			seconds >= 60 // Valid seconds range
+		) {
+			return 'Degrees, minutes, and seconds must be valid numbers'
+		}
 
-    // Validate direction
-    if (!['N', 'S', 'E', 'W'].includes(direction)) {
-      return 'Direction must be N, S, E, or W';
-    }
+		// Validate direction
+		if (!['N', 'S', 'E', 'W'].includes(direction)) {
+			return 'Direction must be N, S, E, or W'
+		}
 
-    return true; // Validation passed
-  };
+		return true // Validation passed
+	}
 
-  // Validate both latitude and longitude
-  const latValidation = validatePart(parts[0]);
-  const lonValidation = validatePart(parts[1]);
+	// Validate both latitude and longitude
+	const latValidation = validatePart(parts[0])
+	const lonValidation = validatePart(parts[1])
 
-  if (latValidation !== true) {
-    return latValidation; // Return error from latitude validation
-  }
+	if (latValidation !== true) {
+		return latValidation // Return error from latitude validation
+	}
 
-  if (lonValidation !== true) {
-    return lonValidation; // Return error from longitude validation
-  }
+	if (lonValidation !== true) {
+		return lonValidation // Return error from longitude validation
+	}
 
-  return true; // Validation passed
-};
-
-// Example usage
-const gpsCoordinates = "30 19' 45.49N, 35 26' 34.86E"
+	return true // Validation passed
+}
 
 const TinaEmbed = ({ latitude, longitude, mapType }) => {
 	const [iframeMarkup, setIframeMarkup] = useState('')
@@ -148,19 +149,17 @@ const getIframeFromCoordinates = async (latitude, longitude, mapType) => {
 			maxLat: latitude + 0.001,
 		}
 
-    const API_KEY = "AIzaSyCAI6zyaX8_CUvt4jdwKMFHnquhJgCHoGw"
-
 		let iframeSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox.minLon},${bbox.minLat},${bbox.maxLon},${bbox.maxLat}&layer=mapnik&marker=${latitude},${longitude}`
-    if (mapType === "GoogleGPS") {
-      iframeSrc = `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=${latitude},${longitude}`
-    }
-    if (mapType === "GoogleSearch") {
-      iframeSrc = `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=${encodeURI(location)}`
-    }
-    if (mapType === "GoogleGeneral") {
-      iframeSrc = `https://www.google.com/maps/embed/v1/search?key=${API_KEY}&q=${encodeURI(location)}&center=${latitude},${longitude}&zoom=17`
-    }
-    console.log('iframeSrc: ', iframeSrc)
+		if (mapType === 'GoogleGPS') {
+			iframeSrc = `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=${latitude},${longitude}`
+		}
+		if (mapType === 'GoogleSearch') {
+			iframeSrc = `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=${encodeURI(location)}`
+		}
+		if (mapType === 'GoogleGeneral') {
+			iframeSrc = `https://www.google.com/maps/embed/v1/search?key=${API_KEY}&q=${encodeURI(location)}&center=${latitude},${longitude}&zoom=17`
+		}
+		console.log('iframeSrc: ', iframeSrc)
 		return `<h3>${location.split(/,(.*)/s)[0]}</h3><p>${location.split(/,(.*)/s)[1]}</p> <iframe loading="lazy" width="100%" height="300px" allowFullScreen src="${iframeSrc}"></iframe>`
 	} catch (error) {
 		console.error('Error fetching location:', error)
@@ -184,7 +183,6 @@ const TravelComponent = (props: {
 			cloudName: 'dbifqlg1w',
 		},
 	})
-
 
 	const extractImageIdFromUrl = (source) => {
 		const regex = /\/upload\/v\d{8,12}\/(.+)$/
@@ -214,12 +212,13 @@ const TravelComponent = (props: {
 		),
 
 		Map: (props) => {
-      let { gpsCoordinates="30 19' 45.49N, 35 26' 34.86E", mapType } = props
-      if (typeof validateGPSCoordinates(gpsCoordinates) == 'string')
-        gpsCoordinates="30 19' 45.49N, 35 26' 34.86E"
+			let { gpsCoordinates = "30 19' 45.49N, 35 26' 34.86E", mapType } = props
+			if (typeof validateGPSCoordinates(gpsCoordinates) === 'string')
+				gpsCoordinates = "30 19' 45.49N, 35 26' 34.86E"
 
-			return (<>
-				{/*<iframe width="100%" height="350" 
+			return (
+				<>
+					{/*<iframe width="100%" height="350" 
         src={"https://www.openstreetmap.org/export/embed.html?" 
         + "bbox=" + "103.84615302085876" 
         + "%2C"   + "1.2855071020885447" 
@@ -231,7 +230,7 @@ const TravelComponent = (props: {
           View Larger Map
         </a>
       </small>*/}
-				{/*<iframe 
+					{/*<iframe 
       width="100%"
       height="350"
       src={`https://nominatim.openstreetmap.org/ui/reverse.html?lat=30.32967&lon=35.44303`}
@@ -258,8 +257,9 @@ const TravelComponent = (props: {
       </iframe>
       <iframe src = "https://maps.google.com/maps?q=10.305385,77.923029&hl=es;z=14&amp;output=embed"></iframe>
       */}
-				<TinaEmbed {...convertDMSToDecimal(gpsCoordinates)} mapType={mapType} />
-			</>)
+					<TinaEmbed {...convertDMSToDecimal(gpsCoordinates)} mapType={mapType} />
+				</>
+			)
 		},
 	}
 
@@ -280,6 +280,6 @@ const TravelComponent = (props: {
 			</div>
 		</>
 	)
-} 
+}
 
 export { TinaEmbed, TravelComponent, validateGPSCoordinates }
