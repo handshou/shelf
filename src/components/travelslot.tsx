@@ -211,7 +211,11 @@ const TravelComponent = (props: {
 
 		img: (props) => (
 			<a href={props.url} target="_blank" rel="noopener noreferrer">
-				<AdvancedImage cldImg={myImage(props.url)} plugins={[lazyload(), responsive()]} />
+				<AdvancedImage
+					className="ease-in duration-50 border-transparent border-2 -m-px mb-8 hover:border-1 hover:border-spacing-1 hover:border-orange-600"
+					cldImg={myImage(props.url)}
+					plugins={[lazyload(), responsive()]}
+				/>
 			</a>
 		),
 
