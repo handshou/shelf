@@ -275,7 +275,7 @@ const TravelComponent = (props: {
 		<>
 			<div className="p-8 space-y-8 pb-48 lg:pb-24">
 				<h1
-					className="travel-title font-serif text-4xl font-bold mb-6"
+					className="travel-title font-serif text-3xl tracking-wide mb-6 lowercase"
 					data-tina-field={tinaField(data.travels, 'title')}
 				>
 					{title}

@@ -3,7 +3,7 @@ import { useTina } from 'tinacms/dist/react'
 
 import '@/styles/globals.css'
 import { Button } from '@/components/ui/button'
-import { ArrowLeftIcon, ChevronLeftIcon } from '@radix-ui/react-icons'
+import { ArrowLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
 
 import { SITE_TITLE } from '../../config'
 
@@ -56,12 +56,14 @@ export function TopNavigation(props) {
 	}, [])
 
 	return (
-		<div className="travel-crumb sticky top-0 z-10 bg-white h-20">
-			<nav className="text-sm pt-8 pl-8" aria-label="Breadcrumb">
+		<div className="travel-crumb sticky top-0 z-10 bg-white lg:h-16 h-12">
+			<nav className="text-sm pt-4 lg:pt-8 pl-8" aria-label="Breadcrumb">
 				{showTitle ? (
-					<h2 className="font-serif text-4xl font-bold">{tinaTitle}</h2>
+					<h2 className="font-serif text-xl lg:text-2xl tracking-wide lowercase animate-fade">
+						{tinaTitle}
+					</h2>
 				) : (
-					<ol className="list-none p-0 flex">
+					<ol className="list-none p-0 flex animate-fade">
 						<li className="flex items-center">
 							<a href="/" className="text-gray-500 hover:text-gray-700">
 								{SITE_TITLE}
@@ -69,7 +71,7 @@ export function TopNavigation(props) {
 						</li>
 						<li className="flex items-center">
 							<span className="mx-2">
-								<ChevronLeftIcon />
+								<ChevronRightIcon />
 							</span>
 							<a href="/travels" className="text-gray-500 hover:text-gray-700">
 								travels
@@ -78,7 +80,7 @@ export function TopNavigation(props) {
 						{isBottom.get() && (
 							<li className="flex items-center text-gray-900 font-bold">
 								<span className="mx-2">
-									<ChevronLeftIcon />
+									<ChevronRightIcon />
 								</span>
 								{tinaTitle.toLowerCase()}
 							</li>
