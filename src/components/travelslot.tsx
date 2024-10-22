@@ -3,7 +3,7 @@ import { tinaField, useTina } from 'tinacms/dist/react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import type { TravelsQuery } from '../../tina/__generated__/types'
 
-import { AdvancedVideo, AdvancedImage, lazyload, responsive } from '@cloudinary/react'
+import { AdvancedImage, AdvancedVideo, lazyload, responsive } from '@cloudinary/react'
 import { Cloudinary } from '@cloudinary/url-gen'
 import { quality } from '@cloudinary/url-gen/actions/delivery'
 import { format } from '@cloudinary/url-gen/actions/delivery'
@@ -12,244 +12,243 @@ import { auto } from '@cloudinary/url-gen/qualifiers/format'
 const API_KEY = import.meta.env?.PUBLIC_GOOGLE_MAPS_API_KEY || ''
 
 const convertDMSToDecimal = (dms) => {
-  // Split the input into latitude and longitude
-  const [latString, lonString] = dms.split(',').map((coord) => coord.trim())
+	// Split the input into latitude and longitude
+	const [latString, lonString] = dms.split(',').map((coord) => coord.trim())
 
-  const convertSingleDMS = (coord) => {
-    // Remove the direction and trim spaces
-    const direction = coord.slice(-1)
-    const cleanedCoord = coord.slice(0, -1).trim()
+	const convertSingleDMS = (coord) => {
+		// Remove the direction and trim spaces
+		const direction = coord.slice(-1)
+		const cleanedCoord = coord.slice(0, -1).trim()
 
-    // Split by spaces and handle the presence of seconds
-    const parts = cleanedCoord.split(/\s+/)
-    const degrees = Number.parseFloat(parts[0])
-    let minutes = Number.parseFloat(parts[1]) || 0
-    let seconds = Number.parseFloat(parts[2]) || 0
+		// Split by spaces and handle the presence of seconds
+		const parts = cleanedCoord.split(/\s+/)
+		const degrees = Number.parseFloat(parts[0])
+		let minutes = Number.parseFloat(parts[1]) || 0
+		let seconds = Number.parseFloat(parts[2]) || 0
 
-    // If only degrees and minutes are present
-    if (parts.length === 2) {
-      seconds = 0 // Assume no seconds provided
-    } else if (parts.length === 1) {
-      minutes = 0 // Only degrees provided
-      seconds = 0
-    }
+		// If only degrees and minutes are present
+		if (parts.length === 2) {
+			seconds = 0 // Assume no seconds provided
+		} else if (parts.length === 1) {
+			minutes = 0 // Only degrees provided
+			seconds = 0
+		}
 
-    // Calculate the decimal value
-    let decimal = degrees + minutes / 60 + seconds / 3600
+		// Calculate the decimal value
+		let decimal = degrees + minutes / 60 + seconds / 3600
 
-    // Adjust for direction
-    if (direction === 'S' || direction === 'W') {
-      decimal *= -1
-    }
+		// Adjust for direction
+		if (direction === 'S' || direction === 'W') {
+			decimal *= -1
+		}
 
-    return decimal
-  }
+		return decimal
+	}
 
-  // Convert latitude and longitude
-  const latitude = convertSingleDMS(latString)
-  const longitude = convertSingleDMS(lonString)
+	// Convert latitude and longitude
+	const latitude = convertSingleDMS(latString)
+	const longitude = convertSingleDMS(lonString)
 
-  return { latitude, longitude }
+	return { latitude, longitude }
 }
 
 const validateGPSCoordinates = (value, allValues, meta, field) => {
-  if (!value || value.trim() === '') {
-    return 'GPS coordinates are required'
-  }
+	if (!value || value.trim() === '') {
+		return 'GPS coordinates are required'
+	}
 
-  const parts = value.split(',')
+	const parts = value.split(',')
 
-  if (parts.length !== 2) {
-    return 'Invalid format. Expected format: 30 19 45.49N, 35 26 34.86E'
-  }
+	if (parts.length !== 2) {
+		return 'Invalid format. Expected format: 30 19 45.49N, 35 26 34.86E'
+	}
 
-  const validatePart = (part) => {
-    const trimmedPart = part.trim()
-    const direction = trimmedPart.slice(-1)
-    const dmsString = trimmedPart.slice(0, -1).trim()
+	const validatePart = (part) => {
+		const trimmedPart = part.trim()
+		const direction = trimmedPart.slice(-1)
+		const dmsString = trimmedPart.slice(0, -1).trim()
 
-    // Split DMS string into parts
-    const dmsParts = dmsString.split(/\s+/)
+		// Split DMS string into parts
+		const dmsParts = dmsString.split(/\s+/)
 
-    if (dmsParts.length < 3 || dmsParts.length > 4) {
-      return 'Invalid DMS format'
-    }
+		if (dmsParts.length < 3 || dmsParts.length > 4) {
+			return 'Invalid DMS format'
+		}
 
-    // Convert degrees, minutes, and seconds to numbers
-    const degrees = Number(dmsParts[0])
-    const minutes = Number(dmsParts[1])
-    const seconds = dmsParts.length === 4 ? Number(dmsParts[2]) : 0
+		// Convert degrees, minutes, and seconds to numbers
+		const degrees = Number(dmsParts[0])
+		const minutes = Number(dmsParts[1])
+		const seconds = dmsParts.length === 4 ? Number(dmsParts[2]) : 0
 
-    // Validate that degrees, minutes, and seconds are numbers
-    if (
-      Number.isNaN(degrees) ||
-      Number.isNaN(minutes) ||
-      Number.isNaN(seconds) ||
-      degrees < 0 ||
-      degrees > 180 || // Valid degrees range
-      minutes < 0 ||
-      minutes >= 60 || // Valid minutes range
-      seconds < 0 ||
-      seconds >= 60 // Valid seconds range
-    ) {
-      return 'Degrees, minutes, and seconds must be valid numbers'
-    }
+		// Validate that degrees, minutes, and seconds are numbers
+		if (
+			Number.isNaN(degrees) ||
+			Number.isNaN(minutes) ||
+			Number.isNaN(seconds) ||
+			degrees < 0 ||
+			degrees > 180 || // Valid degrees range
+			minutes < 0 ||
+			minutes >= 60 || // Valid minutes range
+			seconds < 0 ||
+			seconds >= 60 // Valid seconds range
+		) {
+			return 'Degrees, minutes, and seconds must be valid numbers'
+		}
 
-    // Validate direction
-    if (!['N', 'S', 'E', 'W'].includes(direction)) {
-      return 'Direction must be N, S, E, or W'
-    }
+		// Validate direction
+		if (!['N', 'S', 'E', 'W'].includes(direction)) {
+			return 'Direction must be N, S, E, or W'
+		}
 
-    return true // Validation passed
-  }
+		return true // Validation passed
+	}
 
-  // Validate both latitude and longitude
-  const latValidation = validatePart(parts[0])
-  const lonValidation = validatePart(parts[1])
+	// Validate both latitude and longitude
+	const latValidation = validatePart(parts[0])
+	const lonValidation = validatePart(parts[1])
 
-  if (latValidation !== true) {
-    return latValidation // Return error from latitude validation
-  }
+	if (latValidation !== true) {
+		return latValidation // Return error from latitude validation
+	}
 
-  if (lonValidation !== true) {
-    return lonValidation // Return error from longitude validation
-  }
+	if (lonValidation !== true) {
+		return lonValidation // Return error from longitude validation
+	}
 
-  return true // Validation passed
+	return true // Validation passed
 }
 
 const IFrame = ({ embedCode }) => {
-  return <div dangerouslySetInnerHTML={{ __html: embedCode }} />
+	return <div dangerouslySetInnerHTML={{ __html: embedCode }} />
 }
 
 const TinaEmbed = ({ latitude, longitude, mapType }) => {
-  const [iframeMarkup, setIframeMarkup] = useState('')
+	const [iframeMarkup, setIframeMarkup] = useState('')
 
-  useEffect(() => {
-    const fetchIframe = async () => {
-      const markup = await getIframeFromCoordinates(latitude, longitude, mapType)
-      setIframeMarkup(markup)
-    }
+	useEffect(() => {
+		const fetchIframe = async () => {
+			const markup = await getIframeFromCoordinates(latitude, longitude, mapType)
+			setIframeMarkup(markup)
+		}
 
-    fetchIframe()
-  }, [latitude, longitude])
+		fetchIframe()
+	}, [latitude, longitude])
 
-  return <div dangerouslySetInnerHTML={{ __html: iframeMarkup }} />
+	return <div dangerouslySetInnerHTML={{ __html: iframeMarkup }} />
 }
 
 const getIframeFromCoordinates = async (latitude, longitude, mapType) => {
-  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+	const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
 
-  try {
-    const response = await fetch(url)
-    const data = await response.json()
-    const location = data.display_name
+	try {
+		const response = await fetch(url)
+		const data = await response.json()
+		const location = data.display_name
 
-    // Calculate bounding box for the OSM iframe
-    const bbox = {
-      minLon: longitude - 0.001,
-      minLat: latitude - 0.001,
-      maxLon: longitude + 0.001,
-      maxLat: latitude + 0.001,
-    }
+		// Calculate bounding box for the OSM iframe
+		const bbox = {
+			minLon: longitude - 0.001,
+			minLat: latitude - 0.001,
+			maxLon: longitude + 0.001,
+			maxLat: latitude + 0.001,
+		}
 
-    let iframeSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox.minLon},${bbox.minLat},${bbox.maxLon},${bbox.maxLat}&layer=mapnik&marker=${latitude},${longitude}`
-    if (mapType === 'GoogleGPS') {
-      iframeSrc = `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=${latitude},${longitude}`
-    }
-    if (mapType === 'GoogleSearch') {
-      iframeSrc = `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=${encodeURI(location)}`
-    }
-    if (mapType === 'GoogleGeneral') {
-      iframeSrc = `https://www.google.com/maps/embed/v1/search?key=${API_KEY}&q=${encodeURI(location)}&center=${latitude},${longitude}&zoom=17`
-    }
-    console.log('iframeSrc: ', iframeSrc)
-    return `<h3>${location.split(/,(.*)/s)[0]}</h3><p>${location.split(/,(.*)/s)[1]}</p> <iframe loading="lazy" width="100%" height="300px" allowFullScreen src="${iframeSrc}"></iframe>`
-  } catch (error) {
-    console.error('Error fetching location:', error)
-    return '<p>Location not found</p>'
-  }
+		let iframeSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox.minLon},${bbox.minLat},${bbox.maxLon},${bbox.maxLat}&layer=mapnik&marker=${latitude},${longitude}`
+		if (mapType === 'GoogleGPS') {
+			iframeSrc = `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=${latitude},${longitude}`
+		}
+		if (mapType === 'GoogleSearch') {
+			iframeSrc = `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=${encodeURI(location)}`
+		}
+		if (mapType === 'GoogleGeneral') {
+			iframeSrc = `https://www.google.com/maps/embed/v1/search?key=${API_KEY}&q=${encodeURI(location)}&center=${latitude},${longitude}&zoom=17`
+		}
+		console.log('iframeSrc: ', iframeSrc)
+		return `<h3>${location.split(/,(.*)/s)[0]}</h3><p>${location.split(/,(.*)/s)[1]}</p> <iframe loading="lazy" width="100%" height="300px" allowFullScreen src="${iframeSrc}"></iframe>`
+	} catch (error) {
+		console.error('Error fetching location:', error)
+		return '<p>Location not found</p>'
+	}
 }
 
 const TravelComponent = (props: {
-  data: TravelsQuery
-  variables: {
-    relativePath: string
-  }
-  query: string
+	data: TravelsQuery
+	variables: {
+		relativePath: string
+	}
+	query: string
 }) => {
-  const { data } = useTina(props)
+	const { data } = useTina(props)
 
-  const { title } = data.travels
+	const { title } = data.travels
 
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: 'dbifqlg1w',
-    },
-  })
+	const cld = new Cloudinary({
+		cloud: {
+			cloudName: 'dbifqlg1w',
+		},
+	})
 
-const extractVideoIdFromUrl = (source) => {
-    // Check if the source is a valid string
-    if (!source || typeof source !== 'string') {
-        console.error('Invalid source URL provided');
-        return null;
-    }
+	const extractVideoIdFromUrl = (source) => {
+		// Check if the source is a valid string
+		if (!source || typeof source !== 'string') {
+			console.error('Invalid source URL provided')
+			return null
+		}
 
-    // Regular expression to capture the path + public ID (after /upload/v<version>)
-    const regex = /\/upload\/v\d{8,12}\/(.+)\.[^/.]+/;
-    const matches = regex.exec(source);
+		// Regular expression to capture the path + public ID (after /upload/v<version>)
+		const regex = /\/upload\/v\d{8,12}\/(.+)\.[^/.]+/
+		const matches = regex.exec(source)
 
-    // Check if there was a match
-    if (matches && matches[1]) {
-        return matches[1];  // Return the directory/path and public ID
-    }
+		// Check if there was a match
+		if (matches && matches[1]) {
+			return matches[1] // Return the directory/path and public ID
+		}
 
-    console.error('No match found in the provided URL');
-    return null;
-}
+		console.error('No match found in the provided URL')
+		return null
+	}
 
-  const extractImageIdFromUrl = (source) => {
-    const regex = /\/upload\/v\d{8,12}\/(.+)$/
-    const matches = regex.exec(source)
+	const extractImageIdFromUrl = (source) => {
+		const regex = /\/upload\/v\d{8,12}\/(.+)$/
+		const matches = regex.exec(source)
 
-    if (matches) {
-      return matches[1]
-    }
+		if (matches) {
+			return matches[1]
+		}
 
-    return null
-  }
+		return null
+	}
 
-  const myImage = (url) =>
-    cld.image(extractImageIdFromUrl(url)).delivery(quality(70)).delivery(format(auto()))
+	const myImage = (url) =>
+		cld.image(extractImageIdFromUrl(url)).delivery(quality(70)).delivery(format(auto()))
 
-  const myVideo = (url) =>
-    cld.video(extractVideoIdFromUrl(url))
+	const myVideo = (url) => cld.video(extractVideoIdFromUrl(url))
 
-  const components = {
-    a: (props) => (
-      <a href={props.url} target="_blank" rel="noopener noreferrer">
-        {props.children}
-      </a>
-    ),
+	const components = {
+		a: (props) => (
+			<a href={props.url} target="_blank" rel="noopener noreferrer">
+				{props.children}
+			</a>
+		),
 
-    img: (props) => (
-      <a href={props.url} target="_blank" rel="noopener noreferrer">
-        <AdvancedImage
-          className="ease-in duration-50 border-transparent border-2 -m-px mb-8 hover:border-1 hover:border-spacing-1 hover:border-orange-600"
-          cldImg={myImage(props.url)}
-          plugins={[lazyload(), responsive()]}
-        />
-      </a>
-    ),
+		img: (props) => (
+			<a href={props.url} target="_blank" rel="noopener noreferrer">
+				<AdvancedImage
+					className="ease-in duration-50 border-transparent border-2 -m-px mb-8 hover:border-1 hover:border-spacing-1 hover:border-orange-600"
+					cldImg={myImage(props.url)}
+					plugins={[lazyload(), responsive()]}
+				/>
+			</a>
+		),
 
-    Map: (props) => {
-      let { gpsCoordinates = "30 19' 45.49N, 35 26' 34.86E", mapType } = props
-      if (typeof validateGPSCoordinates(gpsCoordinates) === 'string')
-        gpsCoordinates = "30 19' 45.49N, 35 26' 34.86E"
+		Map: (props) => {
+			let { gpsCoordinates = "30 19' 45.49N, 35 26' 34.86E", mapType } = props
+			if (typeof validateGPSCoordinates(gpsCoordinates) === 'string')
+				gpsCoordinates = "30 19' 45.49N, 35 26' 34.86E"
 
-      return (
-        <>
-          {/*<iframe width="100%" height="350" 
+			return (
+				<>
+					{/*<iframe width="100%" height="350" 
         src={"https://www.openstreetmap.org/export/embed.html?" 
         + "bbox=" + "103.84615302085876" 
         + "%2C"   + "1.2855071020885447" 
@@ -261,7 +260,7 @@ const extractVideoIdFromUrl = (source) => {
           View Larger Map
         </a>
       </small>*/}
-          {/*<iframe 
+					{/*<iframe 
       width="100%"
       height="350"
       src={`https://nominatim.openstreetmap.org/ui/reverse.html?lat=30.32967&lon=35.44303`}
@@ -288,45 +287,48 @@ const extractVideoIdFromUrl = (source) => {
       </iframe>
       <iframe src = "https://maps.google.com/maps?q=10.305385,77.923029&hl=es;z=14&amp;output=embed"></iframe>
       */}
-          <TinaEmbed {...convertDMSToDecimal(gpsCoordinates)} mapType={mapType} />
-        </>
-      )
-    },
+					<TinaEmbed {...convertDMSToDecimal(gpsCoordinates)} mapType={mapType} />
+				</>
+			)
+		},
 
-    IFrame: (props) => {
-      return <IFrame embedCode={props.embedCode} />
-    },
+		IFrame: (props) => {
+			return <IFrame embedCode={props.embedCode} />
+		},
 
-    Video: (props) => {
-      return <div className="flex justify-center items-center min-h-screen">
-      <div className="w-2/3 max-w-xs">
-      <AdvancedVideo
-        cldVid={myVideo(props.videoUrl)}
-        cldPoster="auto"
-        controls
-        plugins={[lazyload()]}
-      /></div>
-      </div>
-    },
-  }
+		Video: (props) => {
+			return (
+				<div className="flex justify-center items-center min-h-screen">
+					<div className="w-2/3 max-w-xs">
+						<AdvancedVideo
+							cldVid={myVideo(props.videoUrl)}
+							cldPoster="auto"
+							controls
+							plugins={[lazyload()]}
+						/>
+					</div>
+				</div>
+			)
+		},
+	}
 
-  return (
-    <>
-      <div className="p-8 space-y-8 pb-48 lg:pb-24">
-        <h1
-          className="travel-title font-serif text-3xl tracking-wide mb-6 lowercase"
-          data-tina-field={tinaField(data.travels, 'title')}
-        >
-          {title}
-        </h1>
-        <div data-tina-field={tinaField(data.travels, 'body')}>
-          <article className="prose prose-img:rounded-lg prose-base prose-neutral lg:prose-neutral">
-            <TinaMarkdown components={components} content={data.travels.body} />
-          </article>
-        </div>
-      </div>
-    </>
-  )
+	return (
+		<>
+			<div className="p-8 space-y-8 pb-48 lg:pb-24">
+				<h1
+					className="travel-title font-serif text-3xl tracking-wide mb-6 lowercase"
+					data-tina-field={tinaField(data.travels, 'title')}
+				>
+					{title}
+				</h1>
+				<div data-tina-field={tinaField(data.travels, 'body')}>
+					<article className="prose prose-img:rounded-lg prose-base prose-neutral lg:prose-neutral">
+						<TinaMarkdown components={components} content={data.travels.body} />
+					</article>
+				</div>
+			</div>
+		</>
+	)
 }
 
 export { TinaEmbed, TravelComponent, validateGPSCoordinates, IFrame }
