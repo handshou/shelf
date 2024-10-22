@@ -300,7 +300,7 @@ const TravelComponent = (props: {
 
 		Video: (props) => {
 			return (
-				<div className="flex justify-center items-center min-h-screen">
+				<div className="flex justify-center items-center">
 					<div className="w-2/3 max-w-xs">
 						<AdvancedVideo
 							cldVid={myVideo(props.videoUrl)}
