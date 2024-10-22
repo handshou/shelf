@@ -10,6 +10,17 @@ const mapField = {
   },
   templates: [
     {
+      name: "Video",
+      label: "cldVideo",
+      fields: [
+        {
+          type: 'string',
+          name: 'videoUrl',
+          label: 'Video URL'
+        },
+      ],
+    },
+    {
       name: "IFrame",
       label: "iFrame",
       fields: [
