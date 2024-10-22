@@ -118,6 +118,7 @@ const validateGPSCoordinates = (value, allValues, meta, field) => {
 	return true // Validation passed
 }
 
+// TODO: https://tina.io/docs/editing/blocks/
 const IFrame = ({ embedCode }) => {
 	return <div dangerouslySetInnerHTML={{ __html: embedCode }} />
 }
@@ -132,8 +133,9 @@ const TinaEmbed = ({ latitude, longitude, mapType }) => {
 		}
 
 		fetchIframe()
-	}, [latitude, longitude])
+	}, [latitude, longitude, mapType])
 
+	// TODO: https://tina.io/docs/editing/blocks/
 	return <div dangerouslySetInnerHTML={{ __html: iframeMarkup }} />
 }
 
@@ -200,7 +202,7 @@ const TravelComponent = (props: {
 		const matches = regex.exec(source)
 
 		// Check if there was a match
-		if (matches && matches[1]) {
+		if (matches?.[1]) {
 			return matches[1] // Return the directory/path and public ID
 		}
 
