@@ -3,7 +3,7 @@ import type React from 'react'
 import '../styles/globals.css'
 
 import {
-	type Card,
+	Card,
 	CardContent,
 	CardDescription,
 	CardFooter,
@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils'
 
 type CardProps = React.ComponentProps<typeof Card>
 
-export function Card({ className, ...props }: CardProps) {
+export function ProjectCard({ className, ...props }: CardProps) {
 	return (
 		<a href={props.url}>
 			<Card

@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content'
 
 import BaseHead from '../components/BaseHead.astro'
 import Browser from '../components/Browser.astro'
-import { Card } from '../components/Card'
+import { ProjectCard } from '../components/Card'
 
 import { SITE_DESCRIPTION, SITE_TITLE } from '../config'
 
@@ -40,7 +40,7 @@ const projects = await projectsCollection.sort(
         <div class="project-content">
           {
             projects.map((proj) => (
-              <Card
+              <ProjectCard
                 className=""
                 title={proj.data.title}
                 footer={`Updated ${new Date(
