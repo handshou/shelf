@@ -1,5 +1,7 @@
 import defaultTheme from 'tailwindcss/defaultTheme'
 
+const plugin = require('tailwindcss/plugin')
+
 /** @type {import('tailwindcss').Config} */
 export default {
 	darkMode: ['class'],
@@ -68,5 +70,15 @@ export default {
 			},
 		},
 	},
-	plugins: [require('@tailwindcss/typography'), require('tailwindcss-animate')],
+	plugins: [
+		require('@tailwindcss/typography'),
+		require('tailwindcss-animate'),
+		plugin(({ addVariant, e }) => {
+			addVariant('not-first', ({ modifySelectors, separator }) => {
+				modifySelectors(({ className }) => {
+					return `.${e(`not-first${separator}${className}`)}:not(:first-child)`
+				})
+			})
+		}),
+	],
 }

@@ -324,7 +324,24 @@ const TravelComponent = (props: {
 					{title}
 				</h1>
 				<div data-tina-field={tinaField(data.travels, 'body')}>
-					<article className="prose prose-img:rounded-lg prose-base prose-neutral lg:prose-neutral">
+					<article
+						className="
+            prose 
+            prose-img:rounded-lg 
+            prose-base 
+            prose-neutral 
+            lg:prose-neutral 
+            first:prose-tr:bg-slate-50
+            first:prose-tr:text-gray-500
+            first:prose-tr:text-xs
+            first:prose-tr:uppercase
+            first:prose-tr:font-medium
+            not-first:hover:prose-tr:bg-orange-50
+            prose-td:!border-none
+            prose-table:!border-none
+            border-separate border-tools-table-outline
+            "
+					>
 						<TinaMarkdown components={components} content={data.travels.body} />
 					</article>
 				</div>
