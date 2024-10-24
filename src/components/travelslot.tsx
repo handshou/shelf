@@ -337,9 +337,9 @@ const TravelComponent = (props: {
             first:prose-tr:uppercase
             first:prose-tr:font-medium
             not-first:hover:prose-tr:bg-orange-50
-            prose-td:!border-none
             prose-table:!border-none
-            border-separate border-tools-table-outline
+            prose-td:!border-none
+            prose-td:!px-1
             "
 					>
 						<TinaMarkdown components={components} content={data.travels.body} />
