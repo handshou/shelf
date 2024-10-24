@@ -11,33 +11,33 @@ const israelAssets = await getCollection('israel')
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../config'
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
   <body class="max-w-full flex flex-col min-h-screen items-center lg:flex-row">
-    <div class="hidden lg:block lg:w-1/5" />
+    <div class="hidden lg:block lg:w-1/5"></div>
 
     <!-- Main content area -->
     <main class="w-full bg-white lg:w-3/5">
-		  <Browser>
-		  	<div class="content mt-4 rounded-lg">
-          <TravelsMenu assets={[...jordanAssets, ...israelAssets, ...hanoiAssets]} />
-			  </div>
-		  </Browser>
+      <Browser>
+        <div class="content mt-4 rounded-lg">
+          <TravelsMenu
+            assets={[...jordanAssets, ...israelAssets, ...hanoiAssets]}
+          />
+        </div>
+      </Browser>
     </main>
-    <div class="hidden lg:block lg:w-1/5" />
-	</body>
-</html>
-
-<style>
-	.content {
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-	}
-    :visited {
-        text-decoration-color: #EEE;
+    <div class="hidden lg:block lg:w-1/5"></div>
+  </body><style>
+    .content {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
     }
-</style>
+    :visited {
+      text-decoration-color: #eee;
+    }
+  </style>
+</html>

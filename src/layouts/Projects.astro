@@ -3,6 +3,8 @@ import Backtrack from '../components/Backtrack.astro'
 import BaseHead from '../components/BaseHead.astro'
 import Browser from '../components/Browser.astro'
 
+import '../styles/globals.css'
+
 export interface Props {
 	content: {
 		title: string
@@ -25,37 +27,39 @@ let pubDate = new Date(unconvertedPubDate).toLocaleString('en-CA', {
 ---
 
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
+  <head>
+    <BaseHead title={title} description={description} />
+    <style>
       .sticky {
         position: sticky;
         top: 0;
         overflow: hidden;
         background-color: #eee;
       }
-			.title {
-				font-size: 2em;
-				margin: 0.25em 0 0;
-			}
-			hr {
-				border-top: 1px solid #ddd;
-				margin: 1rem 0;
-			}
-		</style>
-	</head>
+      .title {
+        font-size: 2em;
+        margin: 0.25em 0 0;
+      }
+      hr {
+        border-top: 1px solid #ddd;
+        margin: 1rem 0;
+      }
+    </style>
+  </head>
 
-	<body>
-		<Browser>
-			<main>
-				<article>
+  <body class="max-w-full flex flex-col min-h-screen items-center lg:flex-row">
+    <div class="hidden lg:block lg:w-1/5"></div>
+    <main class="w-full bg-white lg:w-3/5">
+      <Browser>
+        <article>
           <div class="sticky">
-                    <Backtrack url="/projects" title="back to 👨‍💻 projects" />
+            <Backtrack url="/projects" title="back to 👨‍💻 projects" />
           </div>
-					{heroImage && <img width={720} height={360} src={heroImage} alt="" />}
-					<slot />
-				</article>
-			</main>
-		</Browser>
-	</body>
+          {heroImage && <img width={720} height={360} src={heroImage} alt="" />}
+          <slot />
+        </article>
+      </Browser>
+    </main>
+    <div class="hidden lg:block lg:w-1/5"></div>
+  </body>
 </html>

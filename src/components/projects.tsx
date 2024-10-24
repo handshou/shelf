@@ -24,17 +24,22 @@ export const ProjectComponent = (props: {
 
 	return (
 		<>
-			<h1 data-tina-field={tinaField(data.projects, 'title')} className="title">
+			<h1
+				className="title font-serif uppercase text-4xl tracking-wide pt-4"
+				data-tina-field={tinaField(data.projects, 'title')}
+			>
 				{title}
 			</h1>
-			{pubDate && (
-				<time data-tina-field={tinaField(data.projects, 'pubDate')} dateTime="MMM-DD-YYYY">
-					{pubDate}
-				</time>
-			)}
-			<hr />
-			<div data-tina-field={tinaField(data.projects, 'body')}>
+			<div className="prose font-sans" data-tina-field={tinaField(data.projects, 'body')}>
 				<TinaMarkdown content={data.projects.body} />
+			</div>
+			<div className="py-4 font-sans font-medium uppercase text-neutral-400">
+				updated{' '}
+				{pubDate && (
+					<time data-tina-field={tinaField(data.projects, 'pubDate')} dateTime="MMM-DD-YYYY">
+						{pubDate}
+					</time>
+				)}
 			</div>
 		</>
 	)

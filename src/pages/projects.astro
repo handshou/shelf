@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content'
 
 import BaseHead from '../components/BaseHead.astro'
 import Browser from '../components/Browser.astro'
-import Card from '../components/Card.astro'
+import { Card } from '../components/Card'
 
 import { SITE_DESCRIPTION, SITE_TITLE } from '../config'
 
@@ -14,49 +14,51 @@ const projects = await projectsCollection.sort(
 )
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			h1 {
-                display: flex;
-                align-items: center;
-                flex-direction: column;
-			}
-			.project-content {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-				justify-content: space-evenly;
-				gap: 0;
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      h1 {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+      .project-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+        justify-content: space-evenly;
+        gap: 0;
         margin-top: 1.5ch;
-			}
-		</style>
-	</head>
-	<body>
-		<Browser>
-			<main>
-				<section>
-					<div class="project-content">
-						{
-							projects.map((proj) => (
-								<Card 
-									title={proj.data.title}
-									footer={`Updated ${
-										new Date(proj.data.pubDate)
-                                          .toLocaleDateString('en-us', {
-											year: 'numeric',
-											month: 'short',
-											day: 'numeric',
-									})}`}
-									url={`/projects/${proj.slug}`}>
-									{proj.data.description}
-								</Card>
-							))
-						}
-					</div>
-				</section>
-			</main>
-		</Browser>
-	</body>
+      }
+    </style>
+  </head>
+  <body class="max-w-full flex flex-col min-h-screen items-center lg:flex-row">
+    <div class="hidden lg:block lg:w-1/5"></div>
+    <main class="w-full bg-white lg:w-3/5">
+      <Browser>
+        <div class="project-content">
+          {
+            projects.map((proj) => (
+              <Card
+                className=""
+                title={proj.data.title}
+                footer={`Updated ${new Date(
+                  proj.data.pubDate,
+                ).toLocaleDateString("en-us", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}`}
+                url={`/projects/${proj.slug}`}
+              >
+                {proj.data.description}
+              </Card>
+            ))
+          }
+        </div>
+      </Browser>
+    </main>
+    <div class="hidden lg:block lg:w-1/5"></div>
+  </body>
 </html>
