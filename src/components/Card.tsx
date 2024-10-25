@@ -22,13 +22,17 @@ export function ProjectCard({ className, ...props }: CardProps) {
 				{...props}
 			>
 				<CardHeader>
-					<CardTitle>{props.title}</CardTitle>
+					<CardTitle className="font-normal font-serif tracking-wide text-2xl lowercase">
+						{props.title}
+					</CardTitle>
 				</CardHeader>
-				<CardContent className="grid gap-4">
+				<CardContent className="font-sans grid gap-4">
 					<div>{props.children}</div>
 				</CardContent>
 				<CardFooter>
-					<CardDescription>{props.footer}</CardDescription>
+					<CardDescription className="font-sans uppercase text-neutral-400">
+						{props.footer}
+					</CardDescription>
 				</CardFooter>
 			</Card>
 		</a>
