@@ -1,11 +1,11 @@
 ---
 import { getCollection } from 'astro:content'
 
-import BaseHead from '../components/BaseHead.astro'
-import Browser from '../components/Browser.astro'
-import { ProjectCard } from '../components/Card'
+import BaseHead from '../../components/BaseHead.astro'
+import Browser from '../../components/Browser.astro'
+import { ProjectCard } from '../../components/Card'
 
-import { SITE_DESCRIPTION, SITE_TITLE } from '../config'
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../config'
 
 const projectsCollection = await getCollection('projects')
 
