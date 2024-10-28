@@ -1,9 +1,10 @@
 ---
 import { getEntry } from 'astro:content'
+import Backtrack from '@ac/Backtrack.astro'
+import BaseLayout from '@layouts/Safari.astro'
+import { ProjectComponent } from '@rc/projects'
 import { client } from '../../../tina/__generated__/client'
 import { type ProjectsQuery } from '../../../tina/__generated__/types'
-import { ProjectComponent } from '../../components/projects'
-import BaseLayout from '../../layouts/Projects.astro'
 
 Astro.response.headers.set('Cache-Control', 'max-age=0')
 
@@ -15,8 +16,6 @@ if (proj === undefined) {
 	return Astro.redirect('/404')
 }
 
-const { Content } = await proj.render()
-
 const response: {
 	data: ProjectsQuery
 	variables: { relativePath: string }
@@ -24,8 +23,18 @@ const response: {
 } = await client.queries.projects({ relativePath: `${slug}.md` })
 ---
 
+<style>
+  .sticky {
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    background-color: #eee;
+  }
+</style>
 <BaseLayout content={proj.data}>
-    {/* @ts-expect-error */}
-    <ProjectComponent client:tina {...response} />
-    {/*<Content content={proj.data} />*/}
+  <div class="sticky">
+    <Backtrack url="/projects" title="back to 👨‍💻 projects" />
+  </div>
+  {/* @ts-expect-error */}
+  <ProjectComponent client:tina {...response} />
 </BaseLayout>

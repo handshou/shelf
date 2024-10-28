@@ -22,16 +22,21 @@ export const PostComponent = (props: {
 
 	return (
 		<>
-			<h1 className="title" data-tina-field={tinaField(data.posts, 'title')}>
+			<h1
+				className="title font-serif lowercase text-4xl tracking-wide pt-4"
+				data-tina-field={tinaField(data.posts, 'title')}
+			>
 				{title}
 			</h1>
-			{pubDate && (
-				<time dateTime="MMM-DD-YYYY" data-tina-field={tinaField(data.posts, 'pubDate')}>
-					{pubDate}
-				</time>
-			)}
+			<div className="py-4 font-sans text-sm uppercase text-neutral-400">
+				{pubDate && (
+					<time dateTime="MMM-DD-YYYY" data-tina-field={tinaField(data.posts, 'pubDate')}>
+						{pubDate}
+					</time>
+				)}
+			</div>
 			<hr />
-			<div data-tina-field={tinaField(data.posts, 'body')}>
+			<div className="prose font-sans" data-tina-field={tinaField(data.posts, 'body')}>
 				<TinaMarkdown content={data.posts.body} />
 			</div>
 		</>

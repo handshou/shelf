@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useTina } from 'tinacms/dist/react'
 
-import '@/styles/globals.css'
-import { Button } from '@/components/ui/button'
-import { ArrowLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
+import '@styles/globals.css'
+import { ChevronRightIcon } from '@radix-ui/react-icons'
 
-import { SITE_TITLE } from '../../config'
+import { SITE_TITLE } from '@/config'
 
-import { breadcrumbPosition, isBottom, showNavigation, titlePosition } from '../../store/titleStore'
+import { breadcrumbPosition, isBottom, showNavigation, titlePosition } from '@store/titleStore'
 
 export function TopNavigation(props) {
 	const { data } = useTina(props)

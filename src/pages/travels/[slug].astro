@@ -1,8 +1,8 @@
 ---
 import { getEntry } from 'astro:content'
+import TravelLayout from '@layouts/Travel.astro'
+import { TravelComponent } from '@rc/travelslot'
 import { client } from '../../../tina/__generated__/client'
-import TravelLayout from '../../components/travel.astro'
-import { TravelComponent } from '../../components/travelslot'
 
 Astro.response.headers.set('Cache-Control', 'max-age=0')
 Astro.response.headers.set('Cache-Control', 's-maxage=0')
@@ -22,7 +22,7 @@ const response = await client.queries.travels({ relativePath: `${slug}.mdx` })
 </TravelLayout>
 
 <script>
-  import { isBottom, titlePosition } from '../../store/titleStore'
+  import { isBottom, titlePosition } from '@store/titleStore'
 
  titlePosition.subscribe(() => {
      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {

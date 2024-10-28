@@ -3,9 +3,13 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@components/*": ["src/components/*"],
-      "@layouts/*": ["src/layouts/*"]
+      "@/*": ["src/*"],
+      "@config": ["src/content/config.ts"],
+      "@store/*": ["src/lib/store/*"],
+      "@styles/*": ["src/lib/styles/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@ac/*": ["src/components/astro/*"],
+      "@rc/*": ["src/components/react/*"]
     },
     "strictNullChecks": true,
     "allowJs": true,
@@ -19,6 +23,6 @@
       }
     ]
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.astro", "src/**/*.tsx"],
   "exclude": ["node_modules"]
 }

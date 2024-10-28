@@ -1,6 +1,6 @@
-import type React from 'react'
+import React from 'react'
 
-import '../styles/globals.css'
+import '@styles/globals.css'
 
 import {
 	Card,

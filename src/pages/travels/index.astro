@@ -1,36 +1,22 @@
 ---
-import BaseHead from '../../components/BaseHead.astro'
-import Browser from '../../components/Browser.astro'
-import TravelsMenu from '../../components/TravelsMenu.astro'
+import TravelsMenu from '@ac/TravelsMenu.astro'
+import BaseLayout from '@layouts/Safari.astro'
 
 import { getCollection } from 'astro:content'
 const jordanAssets = await getCollection('jordan')
 const hanoiAssets = await getCollection('hanoi')
 const israelAssets = await getCollection('israel')
 
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../config'
+import { SITE_DESCRIPTION, SITE_TITLE } from '@/config'
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body class="max-w-full flex flex-col min-h-screen items-center lg:flex-row">
-    <div class="hidden lg:block lg:w-1/5"></div>
+<BaseLayout content={{ title: SITE_TITLE, description: SITE_DESCRIPTION }}>
+  <div class="content mt-4 rounded-lg">
+    <TravelsMenu assets={[...jordanAssets, ...israelAssets, ...hanoiAssets]} />
+  </div>
 
-    <!-- Main content area -->
-    <main class="w-full bg-white lg:w-3/5">
-      <Browser>
-        <div class="content mt-4 rounded-lg">
-          <TravelsMenu
-            assets={[...jordanAssets, ...israelAssets, ...hanoiAssets]}
-          />
-        </div>
-      </Browser>
-    </main>
-    <div class="hidden lg:block lg:w-1/5"></div>
-  </body><style>
+  <div class="hidden lg:block lg:w-1/5"></div>
+  <style>
     .content {
       display: flex;
       align-items: center;
@@ -40,4 +26,4 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../../config'
       text-decoration-color: #eee;
     }
   </style>
-</html>
+</BaseLayout>

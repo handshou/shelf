@@ -1,53 +1,47 @@
 ---
-import BaseHead from '../components/BaseHead.astro'
-import Browser from '../components/Browser.astro'
-import { SITE_DESCRIPTION, SITE_TITLE } from '../config'
+import { SITE_DESCRIPTION, SITE_TITLE } from '@/config'
+import BaseLayout from '@layouts/Safari.astro'
 ---
+<BaseLayout content={{ title: SITE_TITLE, description: SITE_DESCRIPTION }}>
+    <main class="font-sans prose content pt-4">
+      <h1>🧑🏽‍🌾</h1>
+      Welcome! See my
+      <ul class="list">
+        <li>
+          🪴
+          <a href="/blog">
+            <b>garden</b>
+          </a>
+        </li>
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body>
-    <Browser title={SITE_TITLE}>
-      <main class="content">
-        <h1>🧑🏽‍🌾</h1>
-        Welcome! See my
-        <ul class="list">
-          <li>
-            <a href="/blog">
-              <b>🪴 garden</b>
-            </a>
-          </li>
+        <li>
+          🚴
+          <a href="/travels">
+            <b>travels</b>
+          </a>
+        </li>
 
-          <li>
-            <a href="/travels">
-              <b>🚴 travels</b>
-            </a>
-          </li>
-
-          <li>
-            <a href="/projects">
-              <b>👨‍💻 projects</b>
-            </a>
-          </li>
-        </ul>
-
-        <p>
-          Made using<a href="https://github.com/handshou/shelf"> 📚 shelf</a>
-        </p>
-      </main>
-    </Browser>
+        <li>
+          👨‍💻
+          <a href="/projects">
+            <b>projects</b>
+          </a>
+        </li>
+      </ul>
+      <p>
+        Made using 📚 <a href="https://github.com/handshou/shelf">shelf</a>
+      </p>
+    </main>
     <style>
       .content {
         display: flex;
         align-items: center;
+        justify-content: center;
         flex-direction: column;
+        height: 50vh;
       }
       :visited {
         text-decoration-color: #eee;
       }
     </style>
-  </body>
-</html>
+</BaseLayout>

@@ -1,5 +1,5 @@
 import { defineConfig } from "tinacms";
-import { IFrame, TinaEmbed, validateGPSCoordinates } from "../src/components/travelslot";
+import { IFrame, TinaEmbed, validateGPSCoordinates } from "@rc/travelslot";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";

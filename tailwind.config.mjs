@@ -8,6 +8,13 @@ export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		extend: {
+			typography: {
+				DEFAULT: {
+					css: {
+						maxWidth: '100vw',
+					},
+				},
+			},
 			animation: {
 				fade: 'fadeIn 0.5s ease-in-out',
 			},

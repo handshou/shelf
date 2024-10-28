@@ -1,95 +1,86 @@
 ---
 import { getCollection } from 'astro:content'
 
-import BaseHead from '../../components/BaseHead.astro'
-import Browser from '../../components/Browser.astro'
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../config'
+import { SITE_DESCRIPTION, SITE_TITLE } from '@/config'
+import BaseLayout from '@layouts/Safari.astro'
 
 const postsCollection = await getCollection('posts')
 
 const posts = await postsCollection.sort(
 	(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 )
+
+const contentHeader = {
+	title: SITE_TITLE,
+	description: SITE_DESCRIPTION,
+}
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			h1 {
-         display: flex;
-         align-items: center;
-         flex-direction: column;
-			}
-			ul {
-				list-style-type: none;
-				padding: unset;
-			}
-			ul li {
-				display: flex;
-			}
-			ul li time {
-				font-style: italic;
-        font-family: monospace;
-        font-size: 1.2em;
-        padding-top: 0.2ch;
-        margin-right: 2ch;
-				color: #595959;
-			}
-			ul li a:visited {
-				color: #8e32dc;
-			}
-      .col {
-        flex: 1;
-        flex-flow: column wrap;
-        align-items: center;
-        display: flex;
-
+<style>
+  h1 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  ul {
+    list-style-type: none;
+    padding: unset;
+  }
+  ul li {
+    display: flex;
+  }
+  ul li time {
+    font-style: italic;
+    font-family: monospace;
+    font-size: 1.2em;
+    padding-top: 0.2ch;
+    margin-right: 2ch;
+    color: #595959;
+  }
+  ul li a:visited {
+    color: #8e32dc;
+  }
+  .col {
+    flex: 1;
+    flex-flow: column wrap;
+    align-items: center;
+    display: flex;
+  }
+  .row {
+    display: flex;
+    width: 100vw;
+    a:last-child {
+      align-self: flex-start;
+      margin-left: -1ch;
+    }
+    :first-child {
+      align-items: flex-end;
+    }
+  }
+</style>
+<BaseLayout content={contentHeader}>
+  <section class="font-sans pt-4">
+    <ul>
+      {
+        posts.map((post) => (
+          <li>
+            <div class="row">
+              <div class="col">
+                <time datetime={post.data.pubDate}>
+                  {new Date(post.data.pubDate).toLocaleDateString("en-us", {
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit",
+                  })}
+                </time>
+              </div>
+              <div class="col">
+                <a href={`blog/${post.slug}`}>{post.data.title}</a>
+              </div>
+            </div>
+          </li>
+        ))
       }
-      .row {
-        display: flex;
-        width: 100vw;
-        a:last-child {
-          align-self: flex-start;
-          margin-left: -1ch;
-        }
-        :first-child {
-          align-items: flex-end;
-        }
-      }
-		</style>
-	</head>
-	<body>
-		<Browser>
-			<main>
-				<section>
-					<ul>
-						{
-							postsCollection.map((post) => (
-								<li>
-                <div class="row">
-                  <div class="col">
-									  <time datetime={post.data.pubDate}>
-										  {
-                        new Date(post.data.pubDate).toLocaleDateString('en-us', {
-										  	  year: 'numeric',
-										  	  month: 'short',
-										  	  day: '2-digit',
-										    })
-                      }
-									  </time>
-                  </div>
-                  <div class="col">
-									  <a href={`blog/${post.slug}`}>{post.data.title}</a>
-                  </div>
-                </div>
-								</li>
-							))
-						}
-					</ul>
-				</section>
-			</main>
-		</Browser>
-	</body>
-</html>
+    </ul>
+  </section>
+</BaseLayout>

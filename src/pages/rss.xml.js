@@ -1,5 +1,5 @@
+import { SITE_DESCRIPTION, SITE_TITLE } from '@/config'
 import rss, { pagesGlobToRssItems } from '@astrojs/rss'
-import { SITE_DESCRIPTION, SITE_TITLE } from '../config'
 
 export async function GET(context) {
 	return rss({
