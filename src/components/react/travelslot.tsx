@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { tinaField, useTina } from 'tinacms/dist/react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
-import type { TravelsQuery } from '../../tina/__generated__/types'
+import type { TravelsQuery } from '../../../tina/__generated__/types'
 
 import { AdvancedImage, AdvancedVideo, lazyload, responsive } from '@cloudinary/react'
 import { Cloudinary } from '@cloudinary/url-gen'
@@ -52,7 +52,7 @@ const convertDMSToDecimal = (dms) => {
 	return { latitude, longitude }
 }
 
-const validateGPSCoordinates = (value, allValues, meta, field) => {
+const validateGPSCoordinates = (value: string) => {
 	if (!value || value.trim() === '') {
 		return 'GPS coordinates are required'
 	}
@@ -194,7 +194,7 @@ const TravelComponent = (props: {
 		// Check if the source is a valid string
 		if (!source || typeof source !== 'string') {
 			console.error('Invalid source URL provided')
-			return null
+			return source
 		}
 
 		// Regular expression to capture the path + public ID (after /upload/v<version>)
@@ -218,7 +218,7 @@ const TravelComponent = (props: {
 			return matches[1]
 		}
 
-		return null
+		return source
 	}
 
 	const myImage = (url) =>

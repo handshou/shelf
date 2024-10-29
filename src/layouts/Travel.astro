@@ -1,18 +1,13 @@
 ---
-import { getCollection } from 'astro:content'
-
 import BackButton from '@rc/BackButton'
 import { TopNavigation } from '@rc/TopNavigation'
 
 import { client } from '../../tina/__generated__/client'
-const { slug } = Astro.params
-const response = await client.queries.travels({ relativePath: `${slug}.mdx` })
 
-const travelsCollection = await getCollection('travels')
+const { slug } = Astro.params
+const { data } = await client.queries.travels({ relativePath: `${slug}.mdx` })
+
 const { content } = Astro.props
-const travels = await travelsCollection.sort(
-	(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
-)
 
 import '@styles/globals.css'
 import '@fontsource/geist-sans'
@@ -39,7 +34,7 @@ import '@fontsource/geist-sans'
 
       <!-- Content -->
       <div class="space-y-8 pb-48 lg:pb-24">
-        <TopNavigation client:tina {...response} title={content.title} client:visible />
+        <TopNavigation client:tina data={data} title={content.title} client:visible />
         <slot />
       </div>
     </main>

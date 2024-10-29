@@ -15,8 +15,8 @@ import { cn } from '@/lib/utils'
 type CardProps = ComponentProps<typeof Card>
 
 interface ProjectCardProps extends CardProps {
-  url: string,
-  footer: string,
+	url: string
+	footer: string
 }
 
 export const ProjectCard = ({ className, ...props }: ProjectCardProps) => {
@@ -43,4 +43,3 @@ export const ProjectCard = ({ className, ...props }: ProjectCardProps) => {
 		</a>
 	)
 }
-

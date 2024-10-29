@@ -1,7 +1,6 @@
-import React from 'react'
 import { tinaField, useTina } from 'tinacms/dist/react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
-import type { PostsQuery } from '../../tina/__generated__/types'
+import type { PostsQuery } from '../../../tina/__generated__/types'
 
 export const PostComponent = (props: {
 	data: PostsQuery
@@ -14,11 +13,12 @@ export const PostComponent = (props: {
 
 	const { title, pubDate: unPubDate } = data.posts
 
-	const pubDate = new Date(unPubDate).toLocaleDateString('en-us', {
+	const LocaleConfig: Intl.DateTimeFormatOptions = {
 		year: 'numeric',
 		month: 'short',
 		day: 'numeric',
-	})
+	}
+	const pubDate = new Date(unPubDate as string).toLocaleDateString('en-US', LocaleConfig)
 
 	return (
 		<>

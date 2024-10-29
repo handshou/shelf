@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import type { TravelsQuery } from '../../../tina/__generated__/types'
+
 import { useTina } from 'tinacms/dist/react'
 
 import '@styles/globals.css'
@@ -8,13 +10,18 @@ import { SITE_TITLE } from '@/config'
 
 import { breadcrumbPosition, isBottom, showNavigation, titlePosition } from '@store/titleStore'
 
-export function TopNavigation(props) {
+export const TopNavigation = (props: {
+	data: TravelsQuery
+	query: string
+	variables: {
+		relativePath: string
+	}
+}) => {
 	const { data } = useTina(props)
 	const { title: tinaTitle } = data.travels
 
 	const [showTitle, setShowTitle] = useState(false)
 	const [lastScrollY, setLastScrollY] = useState(0)
-	const titleRef = useRef(null)
 
 	useEffect(() => {
 		const titleElement = document.querySelector('.travel-title')
@@ -24,7 +31,8 @@ export function TopNavigation(props) {
 			() => {
 				const titleRect = titleElement?.getBoundingClientRect()
 				const crumbRect = crumbElement?.getBoundingClientRect()
-				titlePosition.set(titleRect?.top + titleRect?.height || 0)
+				const { top = 0, height = 0 } = titleRect ?? {}
+				titlePosition.set(top + height)
 				breadcrumbPosition.set(crumbRect?.height || 0)
 				if (window.scrollY > lastScrollY) {
 					showNavigation.set(false)
@@ -39,7 +47,8 @@ export function TopNavigation(props) {
 		return window?.removeEventListener('wheel', () => {
 			const titleRect = titleElement?.getBoundingClientRect()
 			const crumbRect = crumbElement?.getBoundingClientRect()
-			titlePosition.set(titleRect?.top + titleRect?.height || 0)
+			const { top = 0, height = 0 } = titleRect ?? {}
+			titlePosition.set(top + height)
 			breadcrumbPosition.set(crumbRect?.height || 0)
 		})
 	}, [lastScrollY])

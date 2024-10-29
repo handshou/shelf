@@ -1,7 +1,8 @@
 import { expect, test } from '@playwright/test'
+import { SITE_TITLE } from '../src/config'
 
 test('title is visible', async ({ page }) => {
 	await page.goto('/')
 
-	await expect(page.getByText('🎈')).toBeVisible()
+	await expect(page.getByText(SITE_TITLE)).toBeVisible()
 })
