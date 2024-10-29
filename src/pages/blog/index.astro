@@ -1,27 +1,26 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection } from 'astro:content'
 
-import { SITE_DESCRIPTION, SITE_TITLE } from "@/config";
-import BaseLayout from "@layouts/Safari.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from '@/config'
+import BaseLayout from '@layouts/Safari.astro'
 
-const postsCollection = await getCollection("posts");
+const postsCollection = await getCollection('posts')
 
 const posts = postsCollection.sort(
-  (a, b) =>
-    new Date(b.data.pubDate as string).valueOf() -
-    new Date(a.data.pubDate as string).valueOf(),
-);
+	(a, b) =>
+		new Date(b.data.pubDate as string).valueOf() - new Date(a.data.pubDate as string).valueOf()
+)
 
 const contentHeader = {
-  title: SITE_TITLE,
-  description: SITE_DESCRIPTION,
-};
+	title: SITE_TITLE,
+	description: SITE_DESCRIPTION,
+}
 
 const LocaleConfig: Intl.DateTimeFormatOptions = {
-  year: "numeric",
-  month: "short",
-  day: "2-digit",
-};
+	year: 'numeric',
+	month: 'short',
+	day: '2-digit',
+}
 ---
 
 <style>

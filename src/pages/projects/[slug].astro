@@ -1,27 +1,27 @@
 ---
-import { getEntry } from "astro:content";
-import Backtrack from "@ac/Backtrack.astro";
-import BaseLayout from "@layouts/Safari.astro";
-import { ProjectComponent } from "@rc/projects";
-import { client } from "../../../tina/__generated__/client";
-import { type ProjectsQuery } from "../../../tina/__generated__/types";
+import { getEntry } from 'astro:content'
+import Backtrack from '@ac/Backtrack.astro'
+import BaseLayout from '@layouts/Safari.astro'
+import { ProjectComponent } from '@rc/projects'
+import { client } from '../../../tina/__generated__/client'
+import { type ProjectsQuery } from '../../../tina/__generated__/types'
 
-Astro.response.headers.set("Cache-Control", "max-age=0");
+Astro.response.headers.set('Cache-Control', 'max-age=0')
 
-const { slug } = Astro.params;
+const { slug } = Astro.params
 
 // @ts-ignore
-const proj = await getEntry("projects", slug);
+const proj = await getEntry('projects', slug)
 
 if (proj === undefined) {
-  return Astro.redirect("/404");
+	return Astro.redirect('/404')
 }
 
 const response: {
-  data: ProjectsQuery;
-  variables: { relativePath: string };
-  query: string;
-} = await client.queries.projects({ relativePath: `${slug}.md` });
+	data: ProjectsQuery
+	variables: { relativePath: string }
+	query: string
+} = await client.queries.projects({ relativePath: `${slug}.md` })
 ---
 
 <style>

@@ -1,134 +1,134 @@
 ---
-import { SITE_TITLE } from "@/config";
-import HeaderLink from "./HeaderLink.astro";
+import { SITE_TITLE } from '@/config'
+import HeaderLink from './HeaderLink.astro'
 ---
 
 <header>
-  <h2>
-    {SITE_TITLE}
-  </h2>
-  <nav>
-    <div class="wrapper">
-      <div class="btn close-btn"></div>
-      <div class="btn min-btn"></div>
-      <div class="btn max-btn"></div>
-    </div>
-    <div class="tabs">
-      <HeaderLink href="/" emoji="🧑🏽‍🌾">home</HeaderLink>
-    </div>
-    <HeaderLink href="/blog" emoji="🪴">garden</HeaderLink>
-    <HeaderLink href="/travels" emoji="🚴">travels</HeaderLink>
-    <HeaderLink href="/projects" emoji="👨‍💻">projects</HeaderLink>
-  </nav>
-  <div class="wrapper"></div>
+	<h2>
+		{SITE_TITLE}
+	</h2>
+	<nav>
+		<div class="wrapper"> 
+			<div class="btn close-btn"></div>
+			<div class="btn min-btn"></div>
+			<div class="btn max-btn"></div>
+		</div>
+		<div class="tabs">
+			<HeaderLink href="/" emoji="🧑🏽‍🌾">home</>
+      </HeaderLink>
+			<HeaderLink href="/blog" emoji="🪴">garden</HeaderLink>
+      <HeaderLink href="/travels" emoji="🚴">travels</HeaderLink>
+			<HeaderLink href="/projects" emoji="👨‍💻">projects</HeaderLink>
+		</div>
+		<div class="wrapper"></div>
+	</nav>
 </header>
-
 <body class="bg">
-  <div class="content">
-    <div id="scroll" class="scroll">
-      <slot />
-    </div>
-  </div>
+	<div class="content">
+		<div id="scroll" class="scroll">
+			<slot />
+		</div>
+	</div>
 </body>
 <style>
-  .tabs {
-    display: flex;
-    flex-direction: row;
-    width: 36em;
-    gap: 0em;
-    justify-content: space-between;
-    align-items: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 100;
-  }
-  .wrapper {
-    display: flex;
-    flex-direction: row;
-    width: 5em;
-    justify-content: left;
-    align-items: center;
-    margin-left: 0.3em;
-    margin-right: 0.7em;
-  }
-  @media (max-width: 550px) {
-    .wrapper {
-      display: none;
+	.tabs {
+		display: flex;
+		flex-direction: row;
+		width: 36em;
+		gap: 0em;
+		justify-content: space-between;
+		align-items: center;
+		font-family:Arial, Helvetica, sans-serif;
+		font-weight: 100;
+	}
+	.wrapper {
+ 		display: flex; 
+    	flex-direction: row;
+		width: 5em;
+		justify-content: left;
+		align-items: center;
+		margin-left: 0.3em;
+	    margin-right: 0.7em;
     }
-    .tabs {
-      margin-left: 0.5em;
+    @media (max-width: 550px) {
+	    .wrapper {
+    		display: none; 
+	    }
+        .tabs {
+            margin-left: 0.5em;
+        }
     }
-  }
-  .token {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-  }
-  .btn {
-    width: 0.65em;
-    height: 0.65em;
-    border-radius: 50%;
-    margin-right: 0.5em;
-  }
-  .btn:last-child {
-    margin-right: 0;
-  }
-  .close-btn {
-    background: #ff5d5b;
-    border: 1px solid #cf544d;
-  }
-  .max-btn {
-    background: #00cd4e;
-    border: 1px solid #0ea642;
-  }
-  .min-btn {
-    background: #ffbb39;
-    border: 1px solid #cfa64e;
-  }
-  nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    filter: drop-shadow(0px 2px 3px #5e5e5e);
-    background-color: #5e5e5e;
-    border-radius: 0.5em 0.5em 0 0;
-    border-style: solid;
-    border-width: 5px 5px;
-    border-color: #5e5e5e;
-  }
-  .content {
-    filter: drop-shadow(0px 2px 3px #5e5e5e);
-    background-color: #f0f0f0;
-    border-radius: 0 0 0.5em 0.5em;
-    border-style: solid;
-    border-width: 0.1em;
-    border-color: #5e5e5e;
-  }
-  .scroll::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-    scrollbar-width: none; /* Firefox */
-  }
-  .scroll {
-    padding: 0 1em 1em 1em;
-    overflow-y: scroll;
-    height: 70vh;
-  }
-  @media (max-width: 550px) {
-    .scroll {
-      height: 60vh;
+    .token {
+        display: none;
+        flex-direction: column;
+        align-items: center;
     }
-  }
-  .bg {
-    display: flex;
-    flex-direction: column;
-    background-color: #eeeeee;
-  }
+	.btn {
+		width: 0.65em;
+		height: 0.65em;
+		border-radius: 50%;
+		margin-right: 0.5em;
+	}
+	.btn:last-child {
+		margin-right: 0;
+	}
+	.close-btn {
+		background: #FF5D5B;
+		border: 1px solid #CF544D;
+	}
+	.max-btn {
+		background: #00CD4E;
+		border: 1px solid #0EA642;
+	}
+	.min-btn {
+		background: #FFBB39;
+		border: 1px solid #CFA64E	
+	}
+	nav {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		filter: drop-shadow(0px 2px 3px #5e5e5e);
+		background-color: #5e5e5e;
+		border-radius: 0.5em 0.5em 0 0;
+		border-style: solid;
+		border-width: 5px 5px;
+		border-color: #5e5e5e;
+	}
+	.content {
+		filter: drop-shadow(0px 2px 3px #5e5e5e);
+		background-color: #F0F0F0;
+		border-radius: 0 0 0.5em 0.5em;
+		border-style: solid;
+		border-width: 0.1em;
+		border-color: #5e5e5e;
+	}
+	.scroll::-webkit-scrollbar { 
+    	display: none;  /* Safari and Chrome */
+		-ms-overflow-style: none;  /* Internet Explorer 10+ */
+    	scrollbar-width: none;  /* Firefox */
+	}
+	.scroll {
+		padding: 0 1em 1em 1em;
+		overflow-y: scroll;
+		height: 70vh;
+	}
+    @media (max-width: 550px) {
+      .scroll {
+        height: 60vh;
+      }
+    }
+	.bg {
+		display: flex;
+		flex-direction: column;
+		background-color: #eeeeee;
+    }
 </style>
 
 <script>
-  import type { KeyboardEvent } from "react";
+import type { KeyboardEvent } from "react";
 
-  const container = document.getElementById("scroll");
+  const container = document.getElementById('scroll');
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (!container) return;
@@ -140,45 +140,42 @@ import HeaderLink from "./HeaderLink.astro";
     const scrollStep = 200; // Adjust this to control the scroll speed
 
     switch (e.key) {
-      case "ArrowDown": {
+      case 'ArrowDown': {
         if (e.metaKey) {
           container.scrollTo({
             top: scrollHeight,
-            behavior: "auto",
-          });
+            behavior: 'auto',
+          })
           e.preventDefault();
           break;
         }
       }
-      case "PageDown": {
+      case 'PageDown': {
         // Scroll down, but not beyond the content's bottom limit
-        const newScrollTop = Math.min(
-          scrollTop + scrollStep,
-          scrollHeight - containerHeight,
-        );
+        const newScrollTop = Math.min(scrollTop + scrollStep, scrollHeight - containerHeight);
         container.scrollTo({
           top: newScrollTop,
-          behavior: "smooth",
+          behavior: 'smooth',
         });
         e.preventDefault();
         break;
       }
 
-      case "ArrowUp":
+      case 'ArrowUp':
         if (e.metaKey) {
           container.scrollTo({
             top: 0,
-            behavior: "auto",
-          });
+            behavior: 'auto',
+          })
           e.preventDefault();
           break;
         }
-      case "PageUp": {
+      case 'PageUp': {
         // Scroll up, but not above the top of the container
         const newScrollTop = Math.max(scrollTop - scrollStep, 0);
         container.scrollTo({
           top: newScrollTop,
-          behavior: "smooth",
+          behavior: 'smooth',
         });
         e.preventDefault();
         break;
@@ -187,15 +184,14 @@ import HeaderLink from "./HeaderLink.astro";
       default:
         break;
     }
-  };
+}
   // Attach event listener on mount
-
   /* @ts-ignore */
-  window.addEventListener("keydown", handleKeyDown);
+  window.addEventListener('keydown', handleKeyDown);
 
   // Cleanup event listener when component is destroyed
-  window.addEventListener("unload", () => {
+  window.addEventListener('unload', () => {
     /* @ts-ignore */
-    window.removeEventListener("keydown", handleKeyDown);
+    window.removeEventListener('keydown', handleKeyDown);
   });
 </script>

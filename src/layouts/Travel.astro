@@ -1,16 +1,16 @@
 ---
-import BackButton from "@rc/BackButton";
-import { TopNavigation } from "@rc/TopNavigation";
+import BackButton from '@rc/BackButton'
+import { TopNavigation } from '@rc/TopNavigation'
 
-import { client } from "../../tina/__generated__/client";
+import { client } from '../../tina/__generated__/client'
 
-const { slug } = Astro.params;
-const { data } = await client.queries.travels({ relativePath: `${slug}.mdx` });
+const { slug } = Astro.params
+const { data } = await client.queries.travels({ relativePath: `${slug}.mdx` })
 
-const { content } = Astro.props;
+const { content } = Astro.props
 
-import "@styles/globals.css";
-import "@fontsource/geist-sans";
+import '@styles/globals.css'
+import '@fontsource/geist-sans'
 ---
 
 <!doctype html>

@@ -1,23 +1,23 @@
 ---
-import { getEntry } from "astro:content";
-import Backtrack from "@ac/Backtrack.astro";
-import BaseLayout from "@layouts/Safari.astro";
-import { PostComponent } from "@rc/posts";
-import { client } from "../../../tina/__generated__/client";
+import { getEntry } from 'astro:content'
+import Backtrack from '@ac/Backtrack.astro'
+import BaseLayout from '@layouts/Safari.astro'
+import { PostComponent } from '@rc/posts'
+import { client } from '../../../tina/__generated__/client'
 
-Astro.response.headers.set("Cache-Control", "max-age=0");
-Astro.response.headers.set("Cache-Control", "s-maxage=0");
+Astro.response.headers.set('Cache-Control', 'max-age=0')
+Astro.response.headers.set('Cache-Control', 's-maxage=0')
 
-const { slug } = Astro.params;
+const { slug } = Astro.params
 
 // @ts-ignore
-const posts = await getEntry("posts", slug);
+const posts = await getEntry('posts', slug)
 
 if (posts === undefined) {
-  return Astro.redirect("/404");
+	return Astro.redirect('/404')
 }
 
-const response = await client.queries.posts({ relativePath: `${slug}.mdx` });
+const response = await client.queries.posts({ relativePath: `${slug}.mdx` })
 ---
 
 <style>
