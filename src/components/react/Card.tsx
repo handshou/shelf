@@ -1,4 +1,4 @@
-import React from 'react'
+import type { ComponentProps } from 'react'
 
 import '@styles/globals.css'
 
@@ -12,9 +12,14 @@ import {
 } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 
-type CardProps = React.ComponentProps<typeof Card>
+type CardProps = ComponentProps<typeof Card>
 
-export function ProjectCard({ className, ...props }: CardProps) {
+interface ProjectCardProps extends CardProps {
+  url: string,
+  footer: string,
+}
+
+export const ProjectCard = ({ className, ...props }: ProjectCardProps) => {
 	return (
 		<a href={props.url}>
 			<Card
@@ -38,3 +43,4 @@ export function ProjectCard({ className, ...props }: CardProps) {
 		</a>
 	)
 }
+
