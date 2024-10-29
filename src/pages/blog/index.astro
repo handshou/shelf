@@ -1,19 +1,27 @@
 ---
-import { getCollection } from 'astro:content'
+import { getCollection } from "astro:content";
 
-import { SITE_DESCRIPTION, SITE_TITLE } from '@/config'
-import BaseLayout from '@layouts/Safari.astro'
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/config";
+import BaseLayout from "@layouts/Safari.astro";
 
-const postsCollection = await getCollection('posts')
+const postsCollection = await getCollection("posts");
 
-const posts = await postsCollection.sort(
-	(a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
-)
+const posts = postsCollection.sort(
+  (a, b) =>
+    new Date(b.data.pubDate as string).valueOf() -
+    new Date(a.data.pubDate as string).valueOf(),
+);
 
 const contentHeader = {
-	title: SITE_TITLE,
-	description: SITE_DESCRIPTION,
-}
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+};
+
+const LocaleConfig: Intl.DateTimeFormatOptions = {
+  year: "numeric",
+  month: "short",
+  day: "2-digit",
+};
 ---
 
 <style>
@@ -66,12 +74,11 @@ const contentHeader = {
           <li>
             <div class="row">
               <div class="col">
-                <time datetime={post.data.pubDate}>
-                  {new Date(post.data.pubDate).toLocaleDateString("en-us", {
-                    year: "numeric",
-                    month: "short",
-                    day: "2-digit",
-                  })}
+                <time datetime={post.data.pubDate as string}>
+                  {new Date(post.data.pubDate as string).toLocaleDateString(
+                    "en-us",
+                    LocaleConfig,
+                  )}
                 </time>
               </div>
               <div class="col">

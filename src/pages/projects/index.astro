@@ -8,7 +8,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '@/config'
 
 const projectsCollection = await getCollection('projects')
 
-const projects = await projectsCollection.sort(
+const projects = projectsCollection.sort(
 	(a, b) => Number(new Date(b.data.pubDate.valueOf())) - Number(new Date(a.data.pubDate.valueOf()))
 )
 

@@ -1,5 +1,5 @@
 import { defineConfig } from "tinacms";
-import { IFrame, TinaEmbed, validateGPSCoordinates } from "../src/components/react/travelslot";
+import { type MapType, IFrame, TinaEmbed, validateGPSCoordinates } from "../src/components/react/travelslot";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
@@ -41,7 +41,7 @@ const mapField = {
           label: 'Map Type',
           ui: {
             defaultItem: {
-              mapType: "Openstreetmaps",
+              mapType: "Openstreetmaps" as MapType,
             },
           },
           options: [

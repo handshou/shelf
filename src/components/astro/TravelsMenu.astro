@@ -1,41 +1,55 @@
 ---
-import { CldImage } from 'astro-cloudinary'
-import '@styles/globals.css'
+import { CldImage } from "astro-cloudinary";
+import "@styles/globals.css";
 
-const { assets } = Astro.props
+const { assets } = Astro.props;
 
-const imgExists = (img) => img.data.last_updated
+type AssetType = {
+  data: {
+    public_id: string;
+    folder: string;
+    width: number;
+    last_updated: string;
+  };
+};
+
+const imgExists = (img: AssetType) => img.data.last_updated;
 
 // Shuffle assets
 const shuffledAssets = assets
-	.filter(imgExists)
-	.map((value) => ({ value, sort: Math.random() }))
-	.sort((a, b) => a.sort - b.sort)
-	.map(({ value }) => value)
+  .filter(imgExists)
+  .map((value: AssetType) => ({ value, sort: Math.random() }))
+  .sort(
+    (
+      a: { value: AssetType; sort: number },
+      b: { value: AssetType; sort: number },
+    ) => a.sort - b.sort,
+  )
+  .map(({ value }) => value);
 ---
 
 <html>
   <body>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
       {
-        shuffledAssets.map((asset) => (
+        shuffledAssets.map((asset: AssetType) => (
           <div class="relative ease-out duration-300 hover:-translate-y-1">
             <a href={asset.data.folder}>
-                <div class="opacity-80 font-sans text-xs text-neutral-200 text-left drop-shadow-md left-2 bottom-2 absolute pr-1">
+              <div class="opacity-80 font-sans text-xs text-neutral-200 text-left drop-shadow-md left-2 bottom-2 absolute pr-1">
                 {asset.data.folder.split("/")[1]}
-                </div>
-                <CldImage
-                  class="h-auto w-full object-cover rounded-lg"
-                  alt={asset.data.public_id}
-                  src={asset.data.public_id}
-                  width={asset.data.width * 0.4}
-                  height={asset.data.width * 0.5}
-                  crop="fill"
-                  gravity="center"
-                  aspectRatio={5 / 4}
-                  format="auto"
-                  sizes="(max-width: 640px) 40vw, 30vw"
-                />
+              </div>
+              <CldImage
+                class="h-auto w-full object-cover rounded-lg"
+                alt={asset.data.public_id}
+                src={asset.data.public_id}
+                width={asset.data.width * 0.4}
+                height={asset.data.width * 0.5}
+                crop="fill"
+                gravity="center"
+                aspectRatio={5 / 4}
+                format="auto"
+                sizes="(max-width: 640px) 40vw, 30vw"
+              />
             </a>
           </div>
         ))

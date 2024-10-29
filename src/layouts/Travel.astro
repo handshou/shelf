@@ -1,19 +1,19 @@
 ---
-import BackButton from '@rc/BackButton'
-import { TopNavigation } from '@rc/TopNavigation'
+import BackButton from "@rc/BackButton";
+import { TopNavigation } from "@rc/TopNavigation";
 
-import { client } from '../../tina/__generated__/client'
+import { client } from "../../tina/__generated__/client";
 
-const { slug } = Astro.params
-const { data } = await client.queries.travels({ relativePath: `${slug}.mdx` })
+const { slug } = Astro.params;
+const { data } = await client.queries.travels({ relativePath: `${slug}.mdx` });
 
-const { content } = Astro.props
+const { content } = Astro.props;
 
-import '@styles/globals.css'
-import '@fontsource/geist-sans'
+import "@styles/globals.css";
+import "@fontsource/geist-sans";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -21,32 +21,32 @@ import '@fontsource/geist-sans'
     <title>travels</title>
   </head>
   <body class="min-h-screen bg-gray-100 flex flex-col lg:flex-row">
-
-
     <!-- Back Button Navigation -->
     <BackButton client:visible />
 
     <!-- Left empty space for large screens -->
-    <div class="hidden lg:block lg:w-1/4" />
+    <div class="hidden lg:block lg:w-1/4"></div>
 
     <!-- Main content area -->
     <main class="w-full lg:w-1/2 bg-white min-h-screen relative">
-
       <!-- Content -->
       <div class="space-y-8 pb-48 lg:pb-24">
-        <TopNavigation client:tina data={data} title={content.title} client:visible />
+        {/* @ts-ignore */}
+        <TopNavigation
+          client:tina
+          data={data}
+          title={content.title}
+          client:visible
+        />
         <slot />
       </div>
     </main>
 
     <!-- Right empty space for large screens -->
-    <div class="hidden lg:block lg:w-1/4" />
+    <div class="hidden lg:block lg:w-1/4"></div>
     <!-- Bottom Navigation for mobile -->
     <!-- <BottomNavigation client:visible /> -->
-
   </body>
 </html>
 
-<script>
-  
-</script>
+<script></script>
