@@ -353,7 +353,7 @@ const TravelComponent = (props: {
             prose-td:!p-1
             "
 					>
-						{/* @ts-ignore*/}
+						{/* @ts-ignore component types must match TinaMarkdown component types*/}
 						<TinaMarkdown components={components} content={data.travels.body} />
 					</article>
 				</div>
