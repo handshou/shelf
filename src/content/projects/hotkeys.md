@@ -19,8 +19,10 @@ Move files: Delete existing D
 
 Copy mode: Enter mode: Leader \[\
 Copy mode: Enter visual mode: ^+Space\
-Copy mode: Execute copy: ^+w (into system clipboard)
+Copy mode: Execute copy: ^+w (into system clipboard)\
+Synchronized input: Leader + setw synchronize-panes on
 
 Docker Exec
 
-Quit: ^+P, ^+Q
+Leader: ^+P\
+Quit: Leader ^+Q
