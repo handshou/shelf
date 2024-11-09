@@ -4,11 +4,26 @@ pubDate: 2024-11-08T16:00:00.000Z
 description: Saving the earth
 ---
 
-![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731135291/posts/file_uy2stl.gif)
+![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731138717/posts/file_whzdmc.gif)
 
-Started October, ended 30 November 2021.
+Web demo: [itch.io](http://handshou.itch.io/tree-of-life)
+
+I started this project in October 2021, and finished on November 30, 2021. Together with 3 teammates who designed the beautiful art and playtested it with a small group of students weekly. Felisha worked on art and production, Yu Ling worked on our documentation and level designs, Pei Chih crafted our story and art too.
+
+The design requirements:
+
+* A multi-level single player game that has increasing difficulty
+* Final battle/boss
+
+Tower defense was unique to our batch and so we decided to stand out with a challenging concept. Environmental concerns were also a big theme for us, and we drew on Plants vs Zombies as an inspiration.
+
+Time is a huge privilege during the school term, but since it was my final semester in school, I decided to sink hours into this module. Here's how the 2021 year schedule looked like: 
 
 ![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731132961/posts/file_umuj0z.png)
+
+I picked two challenges to write about. First is a path finding algorithm to enable quick level building. If the enemies could move by themselves instead of a set path, we would be done with just level design and difficulty balancing! Sounds simple, right? Right?
+
+## Challenge 1: Path finding
 
 Code on [Github](https://github.com/treeolife/treeolife/blob/3ead2d6cc26bb5987b7482c952f26bef06e059ab/treeoflife/scripts/scr_fill_the_grid/scr_fill_the_grid.gml).
 
@@ -44,6 +59,8 @@ function scr_fill_the_grid(start_x, start_y, goal_x, goal_y)
 End function
 
 ```
+
+## Challenge 2: Iteractive items
 
 Code on [Github](https://github.com/treeolife/treeolife/blob/3ead2d6cc26bb5987b7482c952f26bef06e059ab/treeoflife/objects/pItem/Step_0.gml).
 
@@ -85,3 +102,11 @@ Else
         Move x position to the left by decrementing based on time
 
 ```
+
+## Other challenges
+
+* Game inputs
+* Camera, movement, fluidity
+* Producing game sprites
+* Organisation of code
+* Make it pretty
