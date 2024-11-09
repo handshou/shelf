@@ -4,6 +4,8 @@ pubDate: 2024-11-08T16:00:00.000Z
 description: Saving the earth
 ---
 
+![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731135291/posts/file_uy2stl.gif)
+
 Started October, ended 30 November 2021.
 
 ![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731132961/posts/file_umuj0z.png)
