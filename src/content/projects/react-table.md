@@ -91,3 +91,29 @@ volumes:
 
 
 ```
+
+```dockerfile
+FROM --platform = linux / amd64 node: 12
+
+# Install nodemon and node - pre - gyp globally
+RUN npm install - g nodemon node - pre - gyp 
+RUN npm rebuild bcrypt--build - from - source
+
+# Set the working directory
+WORKDIR / app
+
+# Copy the package files and install dependencies
+COPY package *.json./
+  RUN npm install
+
+# Copy the rest of the application code
+COPY. .
+
+# Expose port for internal server
+EXPOSE 5000
+
+# Command to run the server
+CMD["npm", "start"]
+
+
+```
