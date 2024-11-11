@@ -1,10 +1,24 @@
 ---
 title: React table
 pubDate: 2024-11-10T16:00:00.000Z
-description: data tables
+description: Data tables
 ---
 
-![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731333811/posts/file_kwnmgb.png)![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731140374/posts/file_salbnu.png)![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731140396/posts/file_xb4rb1.png)![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731140379/posts/file_ejwb1t.jpg)
+In September 2020, I started work with EM Services. With 5 teammates, 1 whom was comfortable writing in Javascript and 4 who wanted to learn on this project. The project ended on December 2020 after development and meetings for just over 12 weeks.
+
+Ka Yi, Joel, Daniel, Raymond, Yee Qing.
+
+![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731333811/posts/file_kwnmgb.png)
+
+We built two client-server systems to support the company's internal and external project management processes. Frontend is in React libraries while backend serves an Express.js restful API with a connection to postgresql. React was a natural choice to build modern components, especially coming from Java Enterprise, Bootstrap UI coursework.
+
+Here is a mock up of one type of form, and the interface of another type of form.![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731140374/posts/file_salbnu.png)Above is the internal system of type-A forms.
+
+![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731140396/posts/file_xb4rb1.png)Above is the external system of type-R forms.
+
+A fair amount of sections of data grouped by "project items" such as "Preliminary work and handling" and "excavation work". Each section is accompanied by the price, weights and progress of work.
+
+![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731140379/posts/file_ejwb1t.jpg)
 
 ```dockerfile
 version: '3.8'
