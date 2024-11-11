@@ -34,7 +34,7 @@ It wasn't that simple, but I adopted a shortest path method which takes in 2 pos
 * Start / spawn location
 * Destination / tree of life
 
-The monsters (or rubbish creatures) will have to traverse steps and small chasms by jumping up, or jumping over, or dropping between gaps in platforms to move to their objectives. 
+The monsters (or rubbish creatures) will have to traverse steps and small chasms by jumping up, or jumping over, or dropping between gaps in platforms to move to their objectives.
 
 Since our game is covered by a grid system, we can traverse grids from the top left (0,0) to the bottom right(x, y) and calculate the 8 different directions in an octagonal path around the object, and consider if the path is a solid block (pavements and steps) or not. It takes one step if unobstructed, or considers jumping or dropping if obstructed.
 
@@ -136,3 +136,13 @@ Second, an implementation of wave functions to make delightful animations!
 * Make it pretty
 
 This project brought me immense joy on completion, but there were so many nights burnt and bugs to deal with. It gave me an idea of how the gaming industry moves, under a lot of time pressure to deliver.
+
+## Other media
+
+[Screen\_Recording\_2021-11-05\_at\_10.26.13\_AM\_yc7tlr](https://res.cloudinary.com/dbifqlg1w/video/upload/v1731323969/posts/Screen_Recording_2021-11-05_at_10.26.13_AM_yc7tlr.mov "Screen_Recording_2021-11-05_at_10.26.13_AM_yc7tlr")
+
+[Screen\_Recording\_2021-11-03\_at\_11.18.03\_AM\_u0ubok](https://res.cloudinary.com/dbifqlg1w/video/upload/v1731323994/posts/Screen_Recording_2021-11-03_at_11.18.03_AM_u0ubok.mov "Screen_Recording_2021-11-03_at_11.18.03_AM_u0ubok")
+
+[Screen\_Recording\_2021-10-14\_at\_4.20.25\_AM\_ktho1u](https://res.cloudinary.com/dbifqlg1w/video/upload/v1731324046/posts/Screen_Recording_2021-10-14_at_4.20.25_AM_ktho1u.mov "Screen_Recording_2021-10-14_at_4.20.25_AM_ktho1u")
+
+[Screen\_Recording\_2021-10-14\_at\_4.26.23\_AM\_ht34vb](https://res.cloudinary.com/dbifqlg1w/video/upload/v1731324048/posts/Screen_Recording_2021-10-14_at_4.26.23_AM_ht34vb.mov "Screen_Recording_2021-10-14_at_4.26.23_AM_ht34vb")
