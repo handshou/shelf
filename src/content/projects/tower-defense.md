@@ -25,6 +25,8 @@ Two challenges to highlight.
 
 Code on [Github](https://github.com/treeolife/treeolife/blob/3ead2d6cc26bb5987b7482c952f26bef06e059ab/treeoflife/scripts/scr_fill_the_grid/scr_fill_the_grid.gml).
 
+![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731332010/posts/loop-path_xi5xrj.gif)
+
 To carve a small scope and distribute some work (such as level designs), it was best to make drag-and-drop and no-code possible for my teammates with no coding background. In tower defense, enemies must somehow find a way to their objective. We could draw a manual path by hand, for many enemies in many levels, or we could write a pathfinding method and simplify level building!
 
 Guess which we chose :)
