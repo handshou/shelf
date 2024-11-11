@@ -49,3 +49,9 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props
 <!-- iOS Safari -->
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
+<link rel="stylesheet" href="https://unpkg.com/highlightjs@9.16.2/styles/tomorrow-night-blue.css">
+<script type="module">
+import hljs from 'https://unpkg.com/@highlightjs/cdn-assets@11.10.0/es/highlight.min.js';
+//  and it's easy to individually load & register additional languages
+hljs.highlightAll();
+</script>
