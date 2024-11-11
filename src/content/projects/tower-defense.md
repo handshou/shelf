@@ -73,7 +73,7 @@ End function
 
 ```
 
-## Challenge 2: Iteractive items
+## Challenge 2: Interactive items
 
 Code on [Github](https://github.com/treeolife/treeolife/blob/3ead2d6cc26bb5987b7482c952f26bef06e059ab/treeoflife/objects/pItem/Step_0.gml).
 
