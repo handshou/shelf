@@ -8,20 +8,18 @@ description: Saving the earth
 
 Web demo: [itch.io](http://handshou.itch.io/tree-of-life)
 
-I started this project in October 2021, and finished on November 30, 2021. Together with 3 teammates who designed the beautiful art and playtested it with a small group of students weekly. Felisha worked on art and production, Yu Ling worked on our documentation and level designs, Pei Chih crafted our story and art too.
+Tree of Life began in October 2021 and finished in eight weeks. ![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731132961/posts/file_umuj0z.png)
 
-The design requirements:
+* I had 3 teammates,
+* Felisha focused on art and game production
+* Yu Ling on our level designs and writing
+* Pei Chih on  story craft and a large part of art
 
-* A multi-level single player game that has increasing difficulty
-* Final battle/boss
+We playtested and iterated with a small group of students weekly. All groups were doing either top-down 2 dimension games or side-scrollers, but we wanted to stand out.
 
-Tower defense was unique to our batch and so we decided to stand out with a challenging concept. Environmental concerns were also a big theme for us, and we drew on Plants vs Zombies as an inspiration.
+So we landed on **tower defense**, in hindsight, a challenging concept. We also drew on Plants vs Zombies to highlight **environmental** concerns.
 
-Time is a huge privilege during the school term, but since it was my final semester in school, I decided to sink hours into this module. Here's how the 2021 year schedule looked like: 
-
-![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731132961/posts/file_umuj0z.png)
-
-I picked two challenges to write about. First is a path finding algorithm to enable quick level building. If the enemies could move by themselves instead of a set path, we would be done with just level design and difficulty balancing! Sounds simple, right? Right?
+Two challenges to highlight. 
 
 ## Challenge 1: Path finding
 
@@ -102,6 +100,10 @@ Else
         Move x position to the left by decrementing based on time
 
 ```
+
+## Summary
+
+First is a path finding algorithm to enable quick level building. If the enemies could move by themselves instead of a set path, we would be done with just level design and difficulty balancing! Sounds simple, right? Right?
 
 ## Other challenges
 
