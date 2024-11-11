@@ -148,3 +148,5 @@ This project brought me immense joy on completion, but there were so many nights
 [Pathfinding](https://res.cloudinary.com/dbifqlg1w/video/upload/v1731324046/posts/Screen_Recording_2021-10-14_at_4.20.25_AM_ktho1u.mov "Screen_Recording_2021-10-14_at_4.20.25_AM_ktho1u")
 
 [Pathfinding with obstacles](https://res.cloudinary.com/dbifqlg1w/video/upload/v1731324048/posts/Screen_Recording_2021-10-14_at_4.26.23_AM_ht34vb.mov "Screen_Recording_2021-10-14_at_4.26.23_AM_ht34vb")
+
+[Item picking animation](https://res.cloudinary.com/dbifqlg1w/video/upload/v1731325115/posts/Screen_Recording_2024-11-11_at_7.37.30_PM_epdquh.mov "Screen_Recording_2024-11-11_at_7.37.30_PM_epdquh")
