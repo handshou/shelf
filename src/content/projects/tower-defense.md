@@ -19,11 +19,26 @@ We playtested and iterated with a small group of students weekly. All groups wer
 
 So we landed on **tower defense**, in hindsight, a challenging concept. We also drew on Plants vs Zombies to highlight **environmental** concerns.
 
-Two challenges to highlight. 
+Two challenges to highlight.
 
 ## Challenge 1: Path finding
 
 Code on [Github](https://github.com/treeolife/treeolife/blob/3ead2d6cc26bb5987b7482c952f26bef06e059ab/treeoflife/scripts/scr_fill_the_grid/scr_fill_the_grid.gml).
+
+To carve a small scope and distribute some work (such as level designs), it was best to make drag-and-drop and no-code possible for my teammates with no coding background. In tower defense, enemies must somehow find a way to their objective. We could draw a manual path by hand, for many enemies in many levels, or we could write a pathfinding method and simplify level building!
+
+Guess which we chose :)
+
+It wasn't that simple, but I adopted a shortest path method which takes in 2 positions:
+
+* Start / spawn location
+* Destination / tree of life
+
+The monsters (or rubbish creatures) will have to traverse steps and small chasms by jumping up, or jumping over, or dropping between gaps in platforms to move to their objectives. 
+
+Since our game is covered by a grid system, we can traverse grids from the top left (0,0) to the bottom right(x, y) and calculate the 8 different directions in an octagonal path around the object, and consider if the path is a solid block (pavements and steps) or not. It takes one step if unobstructed, or considers jumping or dropping if obstructed.
+
+At the new position, we iterate this process until all paths have been calculated, or we have landed on the destination position.
 
 ```c
 function scr_fill_the_grid(start_x, start_y, goal_x, goal_y) 
@@ -61,6 +76,10 @@ End function
 ## Challenge 2: Iteractive items
 
 Code on [Github](https://github.com/treeolife/treeolife/blob/3ead2d6cc26bb5987b7482c952f26bef06e059ab/treeoflife/objects/pItem/Step_0.gml).
+
+This was my first time applying wave equations in programming. To create objects that float magically and on button press, be collected, we'll have to implement a sine-wave motion. This happens with game time and ticks, which the GameMaker engine has abstracted but leaves us to manipulate the variables for each tick.
+
+The code looks fairly straightforward, but behind it are days and hours of testing to get it just right.
 
 ```c
 // Function that runs inherited events and initializes a timer
@@ -105,10 +124,15 @@ Else
 
 First is a path finding algorithm to enable quick level building. If the enemies could move by themselves instead of a set path, we would be done with just level design and difficulty balancing! Sounds simple, right? Right?
 
-## Other challenges
+Second, an implementation of wave functions to make delightful animations!
+
+## Other challenges from making this
 
 * Game inputs
 * Camera, movement, fluidity
 * Producing game sprites
 * Organisation of code
+* Saving game state - level restarts
 * Make it pretty
+
+This project brought me immense joy on completion, but there were so many nights burnt and bugs to deal with. It gave me an idea of how the gaming industry moves, under a lot of time pressure to deliver.
