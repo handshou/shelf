@@ -137,7 +137,7 @@ Second, an implementation of wave functions to make delightful animations!
 
 This project brought me immense joy on completion, but there were so many nights burnt and bugs to deal with. It gave me an idea of how the gaming industry moves, under a lot of time pressure to deliver.
 
-![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731323133/posts/file_be8cfd.png)![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731323076/posts/file_zet40n.png)![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731323090/posts/file_oqmhxi.png)![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731323000/posts/file_s8nke9.png)![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731322988/posts/file_vsmmah.png)
+![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731323133/posts/file_be8cfd.png)![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731323076/posts/file_zet40n.png)![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731323090/posts/file_oqmhxi.png)![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731323000/posts/file_s8nke9.png)![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731323119/posts/file_a7pfcj.png)![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731322988/posts/file_vsmmah.png)
 
 ## Other media
 
