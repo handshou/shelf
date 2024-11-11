@@ -77,7 +77,7 @@ End function
 
 Code on [Github](https://github.com/treeolife/treeolife/blob/3ead2d6cc26bb5987b7482c952f26bef06e059ab/treeoflife/objects/pItem/Step_0.gml).
 
-![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731330947/posts/loop-picking-2_uc9hi8.gif)
+![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731331690/posts/pickingfull-loop_eykfwa.gif)
 
 This was my first time applying wave equations in programming. To create objects that float magically and on button press, be collected, we'll have to implement a sine-wave motion. This happens with game time and ticks, which the GameMaker engine has abstracted but leaves us to manipulate the variables for each tick.
 
