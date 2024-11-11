@@ -139,10 +139,10 @@ This project brought me immense joy on completion, but there were so many nights
 
 ## Other media
 
-[Screen\_Recording\_2021-11-05\_at\_10.26.13\_AM\_yc7tlr](https://res.cloudinary.com/dbifqlg1w/video/upload/v1731323969/posts/Screen_Recording_2021-11-05_at_10.26.13_AM_yc7tlr.mov "Screen_Recording_2021-11-05_at_10.26.13_AM_yc7tlr")
+[Pathfinding calculations](https://res.cloudinary.com/dbifqlg1w/video/upload/v1731323969/posts/Screen_Recording_2021-11-05_at_10.26.13_AM_yc7tlr.mov "Screen_Recording_2021-11-05_at_10.26.13_AM_yc7tlr")
 
-[Screen\_Recording\_2021-11-03\_at\_11.18.03\_AM\_u0ubok](https://res.cloudinary.com/dbifqlg1w/video/upload/v1731323994/posts/Screen_Recording_2021-11-03_at_11.18.03_AM_u0ubok.mov "Screen_Recording_2021-11-03_at_11.18.03_AM_u0ubok")
+[User interface](https://res.cloudinary.com/dbifqlg1w/video/upload/v1731323994/posts/Screen_Recording_2021-11-03_at_11.18.03_AM_u0ubok.mov "Screen_Recording_2021-11-03_at_11.18.03_AM_u0ubok")
 
-[Screen\_Recording\_2021-10-14\_at\_4.20.25\_AM\_ktho1u](https://res.cloudinary.com/dbifqlg1w/video/upload/v1731324046/posts/Screen_Recording_2021-10-14_at_4.20.25_AM_ktho1u.mov "Screen_Recording_2021-10-14_at_4.20.25_AM_ktho1u")
+[Pathfinding](https://res.cloudinary.com/dbifqlg1w/video/upload/v1731324046/posts/Screen_Recording_2021-10-14_at_4.20.25_AM_ktho1u.mov "Screen_Recording_2021-10-14_at_4.20.25_AM_ktho1u")
 
-[Screen\_Recording\_2021-10-14\_at\_4.26.23\_AM\_ht34vb](https://res.cloudinary.com/dbifqlg1w/video/upload/v1731324048/posts/Screen_Recording_2021-10-14_at_4.26.23_AM_ht34vb.mov "Screen_Recording_2021-10-14_at_4.26.23_AM_ht34vb")
+[Pathfinding with obstacles](https://res.cloudinary.com/dbifqlg1w/video/upload/v1731324048/posts/Screen_Recording_2021-10-14_at_4.26.23_AM_ht34vb.mov "Screen_Recording_2021-10-14_at_4.26.23_AM_ht34vb")
