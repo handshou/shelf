@@ -51,6 +51,39 @@ Approach B is flipping the approach, using frontend to accomodate similar data i
 
 Special mention to Sections class, where 1 Section can have many Sections. This is opposed to having N types of Sections for N types of forms, such as SectionTypeA, SectionTypeB, to SectionTypeN.
 
+## Big picture
+
+We built two client-server systems to support the company's internal and external project management processes. Frontend is in React libraries while backend serves an Express.js restful API with a connection to postgresql. React was a natural choice to build modern components, especially coming from Java Enterprise, Bootstrap UI coursework.
+
+Here is a mock up of one type of form, and the interface of another type of form.![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731140374/posts/file_salbnu.png)Above is the internal system of type-A forms.
+
+![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731140396/posts/file_xb4rb1.png)Above is the external system of type-R forms.
+
+A fair amount of sections of data grouped by "project items" such as "Preliminary work and handling" and "excavation work". Each section is accompanied by the price, weights and progress of work.
+
+### Forms and tables can be painful
+
+Creating forms is a process to make it easier for users to input data. This means we want:
+
+* data loss prevented on page refresh
+* ease of data entry
+* see important information at a glance
+* mistake reversal
+
+React-table features we implemented are editable and dynamic fields, so the user can operate similarly to Microsoft Excel.
+
+React-table also had some nice features that we did not implement, such as filter and sort by columns. It allowed for very interactive tables.
+
+## Learning
+
+I have grown appreciation to keep project growth linear. Simplify steps, carve steps to accomodate space for growth.
+
+On management of complexity, I have seen how complexity can affect projects over time to produce bloat, which leads to bigger and slower builds. Changes become more difficult to implement due to bloat and bad code organisation. Noise in warnings pile up and errors go unnoticed until things eventually break.
+
+On management of delegating and splitting work, drawing clear lines and shaping team values is important to steer the project forward. We lost some time to git management, redesigning frontend state management, revisiting the API and schema to make adjustments, and just a lot of documents and meetings.
+
+The team took 2 weeks off close to launch and exams to furnish a 500-page report with class, sequence, use case diagrams.
+
 ### API Complexity
 
 Note: I have minimised irrelevant parts, remaining code should highlight fetching data to hydrate the data tables. 
@@ -564,39 +597,6 @@ There are many bad practices written in this. I did not plan user stories and ti
 In a following project, I took these learning experiences and applied them to handle and document endpoints well. 
 
 TODO - Write up for BTIX Web app.
-
-## Big picture
-
-We built two client-server systems to support the company's internal and external project management processes. Frontend is in React libraries while backend serves an Express.js restful API with a connection to postgresql. React was a natural choice to build modern components, especially coming from Java Enterprise, Bootstrap UI coursework.
-
-Here is a mock up of one type of form, and the interface of another type of form.![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731140374/posts/file_salbnu.png)Above is the internal system of type-A forms.
-
-![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731140396/posts/file_xb4rb1.png)Above is the external system of type-R forms.
-
-A fair amount of sections of data grouped by "project items" such as "Preliminary work and handling" and "excavation work". Each section is accompanied by the price, weights and progress of work.
-
-### Forms and tables can be painful
-
-Creating forms is a process to make it easier for users to input data. This means we want:
-
-* data loss prevented on page refresh
-* ease of data entry
-* see important information at a glance
-* mistake reversal
-
-React-table features we implemented are editable and dynamic fields, so the user can operate similarly to Microsoft Excel.
-
-React-table also had some nice features that we did not implement, such as filter and sort by columns. It allowed for very interactive tables.
-
-## Learning
-
-I have a grown appreciation of structures to keep project growth linear. Simplify in steps, each step carved to accomodate space for project growth.
-
-On management of complexity, I have seen how complexity can affect projects over time to produce bloat, which leads to bigger and slower builds. Changes become more difficult to implement due to bloat and bad code organisation. Noise in warnings pile up and errors go unnoticed until things eventually break.
-
-On management of delegating and splitting work, drawing clear lines and shaping team values is important to steer the project forward. We lost some time to git management, redesigning frontend state management, revisiting the API and schema to make adjustments, and just a lot of documents and meetings.
-
-We even had to take 2 weeks off close to launch and exams to furnish a 500-page report with class, sequence, use case diagrams.
 
 ## Other media
 
