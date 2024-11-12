@@ -57,6 +57,10 @@ Note: There are bad practices I'm aware of. The endpoints do not adhere to restf
 
 These were written by different members in the team, and I wanted to show that an honest take, the pool of code we had. I did not plan user stories and tickets to allocate work at depth.
 
+#### Learning points applied in the following semester of 2021![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731390199/posts/file_oxcemi.png)
+
+I took these learning experiences and applied them to another project by handling all the endpoints.
+
 #### server/routes/claims/section.js
 
 ```javascript
