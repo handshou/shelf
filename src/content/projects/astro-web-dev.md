@@ -6,6 +6,8 @@ description: Awesome websites
 
 ![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731334711/posts/file_t22nxy.png)![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731334716/posts/file_eqy1im.png)
 
+Code on [Github](https://github.com/handshou/shelf).
+
 Many developers have blogs, but not all are active, not all are technical. Mine fell into both camps.
 
 This is the longest running web dev project I've worked on. In January 2023, I moved this website off my home-based Raspberry Pi, running a local copy of GhostCMS with an Nginx reverse proxy. Almost 2 years later (Nov 2024), I'm still working on it.
