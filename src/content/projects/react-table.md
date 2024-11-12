@@ -12,9 +12,9 @@ Ka Yi, Joel, Daniel, Raymond, Yee Qing.
 
 ## Understanding business needs: Many types of forms
 
-Project management documents are sometimes in paper form, filed in binders. 
+Project management documents are sometimes in paper form, filed in binders.
 
-The first step of data transformation has happened and documents have been saved in Excel spreadsheets (exportable as csv). 
+The first step of data transformation has happened and documents have been saved in Excel spreadsheets (exportable as csv).
 
 The second step is us. Centralisation of data in databases to:
 
@@ -31,11 +31,11 @@ Data is scattered in different formats, each project has its own type of form. O
 
 ### Challenge 2: External vendors have non-standard forms
 
-One reason for the mini explosion of form types is the work with multiple external teams, and no requirement to standardise data formats. This means flexibility of our data ingestion is important, which will affect database design, trade-offs. 
+One reason for the mini explosion of form types is the work with multiple external teams, and no requirement to standardise data formats. This means flexibility of our data ingestion is important, which will affect database design, trade-offs.
 
 ### Database design
 
-Two approaches: A, B. 
+Two approaches: A, B.
 
 A, Model the database to separate project types - Project 1 and 2 has Class X and Class Y.
 
@@ -648,6 +648,10 @@ A fair amount of sections of data grouped by "project items" such as "Preliminar
 
 ![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731140379/posts/file_ejwb1t.jpg)
 
+### Dockerisation to abstract development environment
+
+#### docker-compose.yml
+
 ```dockerfile
 version: '3.8'
 services:
@@ -734,7 +738,10 @@ volumes:
 
 ```
 
+#### Dockerfile for each server and each client, this is Internal Server
+
 ```dockerfile
+
 FROM --platform = linux / amd64 node: 12
 
 # Install nodemon and node - pre - gyp globally
