@@ -53,6 +53,10 @@ Special mention to Sections class, where 1 Section can have many Sections. This 
 
 ### API Complexity
 
+Note: There are bad practices I'm aware of. The endpoints do not adhere to restful standards. 
+
+These were written by different members in the team, and I wanted to show that an honest take, the pool of code we had. I did not plan user stories and tickets to allocate work at depth.
+
 #### server/routes/claims/section.js
 
 ```javascript
@@ -650,7 +654,7 @@ A fair amount of sections of data grouped by "project items" such as "Preliminar
 
 Creating forms is a process to make it easier for users to input data. This means we want:
 
-*  data loss prevented on page refresh 
+* data loss prevented on page refresh
 * ease of data entry
 * see important information at a glance
 * mistake reversal
