@@ -107,7 +107,6 @@ router.get("/:section_id", async (req, res) => {
 // GET child sections of section id
 router.get("/children/:section_id", async (req, res) => {
   try {
-    // console.log("here");
     const { section_id } = req.params;
     const getChildSections = await pool.query(
       "SELECT * FROM sections WHERE parent_section_id = $1",
@@ -122,7 +121,6 @@ router.get("/children/:section_id", async (req, res) => {
 // GET root-level section
 router.get("/form/:form_id", async (req, res) => {
   try {
-    // console.log("section route");
     const { form_id } = req.params;
     const allForms = await pool.query(
       `SELECT *
@@ -138,7 +136,6 @@ router.get("/form/:form_id", async (req, res) => {
 
 // POST creation section 2 and 3
 router.post("/", async (req, res) => {
-  // console.log("here");
   try {
     const {
       parent_section_id,
@@ -151,7 +148,6 @@ router.post("/", async (req, res) => {
       gl_code,
       template_id,
     } = req.body;
-    // console.log(req.body);
 
     const newSection = await pool.query(
       "INSERT INTO sections (parent_section_id, form_id, section_serial_no, section_heading, section_type, amount, division, gl_code, template_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
@@ -168,7 +164,6 @@ router.post("/", async (req, res) => {
         template_id,
       ],
     );
-    // console.log(newSection.rows[0]);
     const newlyCreatedSectionId = newSection.rows[0].section_id;
     res.status(201).json({
       status: "success",
@@ -177,12 +172,10 @@ router.post("/", async (req, res) => {
       },
     });
     if (template_id !== null) {
-      //for RR - condition : template ID is not null for work description
-      //Autofill the dataentry for work descriptions under RR based on template
+      // for RR - condition : template ID is not null for work description
+      // Autofill the dataentry for work descriptions under RR based on template
       const templateEntries =
         await getTemplateEntriesFromTemplateId(template_id);
-      // console.log(templateEntries);
-      // console.log("here");
       const newDataEntry = await autoAddDataEntryToSection(
         templateEntries,
         newlyCreatedSectionId,
@@ -252,7 +245,6 @@ router.put("/", async (req, res) => {
         section_id,
       ],
     );
-    // console.log(updateSection.rows[0]);
     res.status(201).json({
       status: "success",
       data: {
@@ -264,20 +256,15 @@ router.put("/", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
 // PUT template id of section
 router.put("/template", async (req, res) => {
   try {
     const { section_id, template_id } = req.body;
-
-    // console.log("sectionId:" + section_id);
-
-    // console.log("templateId: " + template_id);
     const updateSection = await pool.query(
       "UPDATE Sections SET template_id = $1  WHERE section_id = $2 RETURNING *",
       [template_id, section_id],
     );
-    // console.log(updateSection.rows[0]);
-
     res.status(201).json({
       status: "success",
       data: {
@@ -300,118 +287,50 @@ async function getTemplateEntriesFromTemplateId(template_id) {
 }
 
 async function autoAddDataEntryToSection(templateEntries, section_id, form_id) {
-  // console.log("auto");
-  // console.log(templateEntries);
-  // console.log(section_id);
-
-  let i = 0;
   for (i = 0; i < templateEntries.length; i++) {
-    // console.log(templateEntries[i].templateentry_name);
-    try {
-      const newDataEntry = await pool.query(
-        "INSERT INTO dataentry (form_id, row_serial_no, section_id, dataentry_name, template_entry_id) VALUES ($1, $2 , $3, $4, $5) RETURNING *",
-        [
-          form_id,
-          i,
-          section_id,
-          templateEntries[i].templateentry_name,
-          templateEntries[i].templateentry_id,
-        ],
-      );
-    } catch (error) {
-      console.log(error);
-    }
+      const newDataEntry = await ...
   }
-  // console.log("exit loop");
 }
 
 // GET all comment_threads
 router.get("/comments", async (req, res) => {
-  // console.log("here");
-  try {
-    const allThreads = await pool.query(
-      `SELECT *
-      FROM comment_threads`,
-    );
-    res.json(allThreads.rows);
-  } catch (error) {
-    console.error(error.message);
-  }
+  ...
 });
 
 router.get(
   "/calculation/contractSumFromSections/:form_id",
   async (req, res) => {
-    try {
-      const { form_id } = req.params;
-      const sections = await pool.query(
-        "SELECT amount FROM sections WHERE form_id = $1",
-        [form_id],
-      );
-      console.log(sections.rows);
-      let totalContractSum = 0;
-      let i = 0;
-      for (i = 0; i < sections.rows.length; i++) {
-        let amount = sections.rows[i].amount;
-        if (amount === null) {
-          amount = 0;
-        }
-        totalContractSum += Number.parseFloat(amount);
-      }
-      console.log(totalContractSum);
-      res.json(totalContractSum);
-    } catch (error) {
-      console.log(error);
+    const sections = await ...
+    let totalContractSum = 0;
+    for (i = 0; i < sections.rows.length; i++) {
+      let amount = sections.rows[i].amount;
+      ...
+      totalContractSum += Number.parseFloat(amount);
     }
+    res.json(totalContractSum);
   },
 );
 
 router.get("/calculation/voSumFromDataEntry/:form_id", async (req, res) => {
-  try {
-    const { form_id } = req.params;
-    const dataEntries = await pool.query(
-      "SELECT variation_order FROM dataentry WHERE form_id = $1",
-      [form_id],
-    );
-    console.log(dataEntries.rows);
-    let totalContractSum = 0;
-    let i = 0;
-    for (i = 0; i < dataEntries.rows.length; i++) {
-      let amount = dataEntries.rows[i].variation_order;
-      if (amount === null) {
-        amount = 0;
-      }
-      totalContractSum += Number.parseFloat(amount);
-    }
-    console.log(totalContractSum);
-    res.json(totalContractSum);
-  } catch (error) {
-    console.log(error);
+  const dataEntries = await ...
+  let totalContractSum = 0;
+  for (i = 0; i < dataEntries.rows.length; i++) {
+    let amount = dataEntries.rows[i].variation_order;
+    totalContractSum += Number.parseFloat(amount);
   }
+  res.json(totalContractSum);
 });
 
 router.get("/calculation/contractSumDataEntry/:form_id", async (req, res) => {
-  try {
-    const { form_id } = req.params;
-    const dataEntries = await pool.query(
-      "SELECT tender_sum FROM dataentry WHERE form_id = $1",
-      [form_id],
-    );
-    console.log(dataEntries.rows);
-    let totalContractSum = 0;
-    let i = 0;
-    for (i = 0; i < dataEntries.rows.length; i++) {
-      let amount = dataEntries.rows[i].tender_sum;
-      if (amount === null) {
-        amount = 0;
-      }
-      totalContractSum += Number.parseFloat(amount);
-    }
-    console.log(totalContractSum);
-    res.json(totalContractSum);
-  } catch (error) {
-    console.log(error);
+  const { form_id } = req.params;
+  const dataEntries = await ...
+  let totalContractSum = 0;
+  for (i = 0; i < dataEntries.rows.length; i++) {
+    let amount = dataEntries.rows[i].tender_sum;
+    ...
+    totalContractSum += Number.parseFloat(amount);
   }
+  res.json(totalContractSum);
 });
 
 module.exports = router;
