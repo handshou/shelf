@@ -59,7 +59,9 @@ These were written by different members in the team, and I wanted to show that a
 
 #### Learning points applied in the following semester of 2021![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731390199/posts/file_oxcemi.png)
 
-In a following project, I took these learning experiences and applied them to handle and document endpoints well. TODO: Write up for BTIX Web app.
+In a following project, I took these learning experiences and applied them to handle and document endpoints well. 
+
+TODO - Write up for BTIX Web app.
 
 Back to endpoint for Sections:
 
