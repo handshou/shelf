@@ -53,17 +53,7 @@ Special mention to Sections class, where 1 Section can have many Sections. This 
 
 ### API Complexity
 
-Note: There are bad practices I'm aware of. The endpoints do not adhere to restful standards. 
-
-These were written by different members in the team, and I wanted to show that an honest take, the pool of code we had. I did not plan user stories and tickets to allocate work at depth.
-
-#### Learning points applied in the following semester of 2021![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731390199/posts/file_oxcemi.png)
-
-In a following project, I took these learning experiences and applied them to handle and document endpoints well. 
-
-TODO - Write up for BTIX Web app.
-
-Back to endpoint for Sections:
+Note: I have minimised irrelevant parts, remaining code should highlight fetching data to hydrate the data tables. 
 
 #### server/routes/claims/section.js
 
@@ -566,6 +556,14 @@ const morphOptionsHeader = (sections, sticky) => {
 export { morphOptionsData, morphOptionsHeader };
 
 ```
+
+There are many bad practices written in this. I did not plan user stories and tickets to allocate work at depth. The endpoints do not adhere to restful standards. The code was puddling up into one file. 
+
+#### Learning points applied in the following semester of 2021![](https://res.cloudinary.com/dbifqlg1w/image/upload/v1731390199/posts/file_oxcemi.png)
+
+In a following project, I took these learning experiences and applied them to handle and document endpoints well. 
+
+TODO - Write up for BTIX Web app.
 
 ## Big picture
 
