@@ -14,7 +14,8 @@
       "**/.vercel/**",
       "**/public/**",
       "**/.vscode/**",
-      "**/tina/**"
+      "**/tina/**",
+      "**/playwright-report/**"
     ]
   },
   "formatter": {

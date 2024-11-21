@@ -2,6 +2,7 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '@styles/global.css'
+import '@styles/tomorrow-night-blue.css'
 
 export interface Props {
 	title: string
@@ -17,7 +18,11 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIAAAAAAAAiIiAAAAAAAiIiIgAAAAACEiIiAAAAAAIRIiIAAAAAACESIAAAAAAAAiIAAAAAAAAAAAAAAAD//wAA/v8AAP5/AAD/fwAA/38AAP9/AAD8/wAA/f8AAPj/AADwfwAA4D8AAOA/AADgPwAA8H8AAPj/AAD//wAA" rel="icon" type="image/x-icon">
+<link
+  href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiIAAAAAAAAiIiAAAAAAAiIiIgAAAAACEiIiAAAAAAIRIiIAAAAAACESIAAAAAAAAiIAAAAAAAAAAAAAAAD//wAA/v8AAP5/AAD/fwAA/38AAP9/AAD8/wAA/f8AAPj/AADwfwAA4D8AAOA/AADgPwAA8H8AAPj/AAD//wAA"
+  rel="icon"
+  type="image/x-icon"
+/>
 <meta name="generator" content={Astro.generator} />
 
 <!-- Canonical URL -->
@@ -43,15 +48,13 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
 <!-- Chrome, Firefox OS, and Opera -->
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#FFFFFF" />
 <!-- Windows Phone -->
-<meta name="msapplication-navbutton-color" content="#FFFFFF">
+<meta name="msapplication-navbutton-color" content="#FFFFFF" />
 <!-- iOS Safari -->
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="black-translucent"
+/>
 
-<link rel="stylesheet" href="https://unpkg.com/highlightjs@9.16.2/styles/tomorrow-night-blue.css">
-<script type="module">
-import hljs from 'https://unpkg.com/@highlightjs/cdn-assets@11.10.0/es/highlight.min.js';
-//  and it's easy to individually load & register additional languages
-hljs.highlightAll();
-</script>
+<script is:inline type="module" src="/src/lib/highlight.js" />

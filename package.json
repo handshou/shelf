@@ -4,7 +4,7 @@
   "version": "0.0.2",
   "private": true,
   "scripts": {
-    "test": "npx playwright test",
+    "test": "npx playwright test --trace=on",
     "dev": "export NODE_ENV=development; tinacms dev -c 'astro dev --host'",
     "start": "astro dev",
     "build": "tinacms build && astro check && astro build",
@@ -38,6 +38,7 @@
     "class-variance-authority": "^0.7.0",
     "cloudinary": "^2.5.0",
     "clsx": "^2.1.1",
+    "highlight.js": "^11.10.0",
     "lucide-react": "^0.453.0",
     "nanostores": "^0.11.3",
     "next-tinacms-cloudinary": "^9.0.0",
