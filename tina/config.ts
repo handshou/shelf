@@ -1,5 +1,5 @@
 import { defineConfig } from "tinacms"
-import { type MapType, Map as EmbedMap } from "../src/components/react/Tina/map"
+import { type MapType, Map as EmbedMap } from "../src/components/react/Tina/Map"
 import { IFrame } from "../src/components/react/Tina/IFrame"
 
 import { validateGPSCoordinates } from "../src/lib/map"
