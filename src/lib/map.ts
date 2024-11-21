@@ -99,8 +99,8 @@ export const convertDMSToDecimal = (dms: string) => {
 	}
 
 	// Convert latitude and longitude
-	const latitude = convertSingleDMS(latString)
-	const longitude = convertSingleDMS(lonString)
+	const latitude = convertSingleDMS(latString).toString()
+	const longitude = convertSingleDMS(lonString).toString()
 
 	return { latitude, longitude }
 }
