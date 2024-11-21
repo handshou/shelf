@@ -12,8 +12,8 @@ import { auto } from '@cloudinary/url-gen/qualifiers/format'
 
 import { extractImageIdFromUrl, extractVideoIdFromUrl } from '@/lib/cloudinary'
 import { convertDMSToDecimal, validateGPSCoordinates } from '@/lib/map'
-import { Map as EmbedMap, type MapType } from '@rc/Tina/Map'
 import { IFrame } from '@rc/Tina/IFrame'
+import { Map as EmbedMap, type MapType } from '@rc/Tina/Map'
 
 // TODO: https://tina.io/docs/editing/blocks/
 
