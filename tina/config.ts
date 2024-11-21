@@ -1,11 +1,14 @@
 import { defineConfig } from "tinacms";
-import { type MapType, IFrame, TinaEmbed, validateGPSCoordinates } from "../src/components/react/travelslot";
+import { type MapType, Map as EmbedMap } from "../src/components/react/Tina/map"
+import { IFrame } from "../src/components/react/travelslot";
+
+import { validateGPSCoordinates } from "../src/lib/map";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
 const mapField = {
   components: {
-    TinaEmbed,
+    EmbedMap,
     IFrame
   },
   templates: [
