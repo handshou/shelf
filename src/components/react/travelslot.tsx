@@ -13,11 +13,9 @@ import { auto } from '@cloudinary/url-gen/qualifiers/format'
 import { extractImageIdFromUrl, extractVideoIdFromUrl } from '@/lib/cloudinary'
 import { convertDMSToDecimal, validateGPSCoordinates } from '@/lib/map'
 import { Map as EmbedMap, type MapType } from '@rc/Tina/Map'
+import { IFrame } from '@rc/Tina/IFrame'
 
 // TODO: https://tina.io/docs/editing/blocks/
-const IFrame = ({ embedCode }) => {
-	return <div dangerouslySetInnerHTML={{ __html: embedCode }} />
-}
 
 interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 	url: string
@@ -136,4 +134,4 @@ const TravelComponent = (props: {
 	)
 }
 
-export { type LinkProps, TravelComponent, IFrame }
+export { type LinkProps, TravelComponent }

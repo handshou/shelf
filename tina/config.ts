@@ -1,11 +1,11 @@
-import { defineConfig } from "tinacms";
+import { defineConfig } from "tinacms"
 import { type MapType, Map as EmbedMap } from "../src/components/react/Tina/map"
-import { IFrame } from "../src/components/react/travelslot";
+import { IFrame } from "../src/components/react/Tina/IFrame"
 
-import { validateGPSCoordinates } from "../src/lib/map";
+import { validateGPSCoordinates } from "../src/lib/map"
 
 // Your hosting provider likely exposes this as an environment variable
-const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main";
+const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main"
 const mapField = {
   components: {
     EmbedMap,
@@ -86,8 +86,8 @@ export default defineConfig({
   },
   media: {
     loadCustomStore: async () => {
-      const pack = await import("next-tinacms-cloudinary");
-      return pack.TinaCloudCloudinaryMediaStore;
+      const pack = await import("next-tinacms-cloudinary")
+      return pack.TinaCloudCloudinaryMediaStore
     },
   },
   schema: {
@@ -250,4 +250,4 @@ export default defineConfig({
     indexBatchSize: 100,
     maxSearchIndexFieldLength: 100
   },
-});
+})
