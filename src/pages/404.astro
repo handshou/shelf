@@ -1,72 +1,55 @@
 ---
-import BaseHead from '@ac/BaseHead.astro'
-import Browser from '@ac/Browser.astro'
+import BaseLayout from "@layouts/Safari.astro";
 
-import { SITE_DESCRIPTION, SITE_TITLE } from '@/config'
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/config";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			h1 {
-                display: flex;
-                align-items: center;
-                flex-direction: column;
-			}
-			ul {
-				list-style-type: none;
-				padding: unset;
-			}
-			ul li {
-				display: flex;
-			}
-			ul li time {
-				flex: 0 0 130px;
-				font-style: italic;
-				color: #595959;
-			}
+<style>
+  h1 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  ul {
+    list-style-type: none;
+    padding: unset;
+  }
+  ul li {
+    display: flex;
+  }
+  ul li time {
+    flex: 0 0 130px;
+    font-style: italic;
+    color: #595959;
+  }
 
-    	    .content {
-	    	    display: flex;
-	        	align-items: center;
-		        flex-direction: column;
-	        }
-		</style>
-	</head>
-	<body>
-		<Browser>
-			<h1>:o</h1>
-                <div class="content">
-                    <p><b>uh oh, page not found</b></p>
-                    <ul>
-                        <li>
-                            <a href="/blog">
-                                🪴 garden
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/travels">
-                                🚴 travels
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/projects">
-                                👨‍💻 projects
-                            </a>
-                        </li>
-                        {/*
-                        <li>
-                            Browse photo 
-                            <a href="albums">
-                                <b>📷 albums</b> 
-                            </a>
-                        </li>
-                        */}
-                    </ul>
-            </div>
-		</Browser>
-	</body>
-</html>
-
+  .content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 50vh;
+  }
+</style>
+<BaseLayout
+  content={{
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  }}
+>
+  <div class="content">
+    <h1>:o</h1>
+    <p><b>uh oh, page not found</b></p>
+    <ul>
+      <li>
+        <a href="/blog"> 🪴 garden</a>
+      </li>
+      <li>
+        <a href="/travels"> 🚴 travels</a>
+      </li>
+      <li>
+        <a href="/projects"> 👨‍💻 projects</a>
+      </li>
+    </ul>
+  </div>
+</BaseLayout>
