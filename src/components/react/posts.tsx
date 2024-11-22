@@ -2,6 +2,8 @@ import { tinaField, useTina } from 'tinacms/dist/react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import type { PostsQuery } from '../../../tina/__generated__/types'
 
+import { RichTextContent } from '@rc/Tina/RichTextContent'
+
 export const PostComponent = (props: {
 	data: PostsQuery
 	variables: {
@@ -37,7 +39,7 @@ export const PostComponent = (props: {
 			</div>
 			<hr />
 			<div className="prose font-sans" data-tina-field={tinaField(data.posts, 'body')}>
-				<TinaMarkdown content={data.posts.body} />
+				<RichTextContent content={data.posts.body} />
 			</div>
 		</>
 	)

@@ -1,7 +1,8 @@
 import { tinaField, useTina } from 'tinacms/dist/react'
-import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import '@styles/global.css'
 import type { ProjectsQuery } from '../../../tina/__generated__/types'
+
+import { RichTextContent } from '@rc/Tina/RichTextContent'
 
 export const ProjectComponent = (props: {
 	data: ProjectsQuery
@@ -30,7 +31,7 @@ export const ProjectComponent = (props: {
 				{title}
 			</h1>
 			<div className="prose font-sans" data-tina-field={tinaField(data.projects, 'body')}>
-				<TinaMarkdown content={data.projects.body} />
+				<RichTextContent content={data.projects.body} />
 			</div>
 			<div className="py-4 font-sans text-sm uppercase text-neutral-400">
 				updated{' '}

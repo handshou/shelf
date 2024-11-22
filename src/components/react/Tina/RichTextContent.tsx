@@ -1,14 +1,10 @@
-import type { ReactNode } from 'react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
-import { convertDMSToDecimal, validateGPSCoordinates } from '@/lib/map'
-import { IFrame } from '@rc/Tina/IFrame'
-import { Map as EmbedMap, type MapType } from '@rc/Tina/Map'
-import { CldImage, CldVideo } from '@rc/cloudinary'
 
-interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  url: string
-  children: ReactNode
-}
+import { convertDMSToDecimal, validateGPSCoordinates } from '@/lib/map'
+import {
+  IFrame, Map as EmbedMap, CldImage, CldVideo,
+  type MapType, type LinkProps
+} from '@rc/Tina'
 
 const components = {
   a: (props: LinkProps) => (
@@ -54,5 +50,25 @@ const components = {
   },
 }
 
-{/* @ts-ignore component types must match TinaMarkdown component types*/ }
-export const RichTextContent = ({ content }) => < TinaMarkdown components={components} content={content} />
+export const RichTextContent = ({ content }) =>
+  <article
+    className="
+            prose 
+            prose-img:rounded-lg 
+            prose-base 
+            prose-neutral 
+            lg:prose-neutral 
+            first:prose-tr:bg-slate-50
+            first:prose-tr:text-gray-500
+            first:prose-tr:text-xs
+            first:prose-tr:uppercase
+            first:prose-tr:font-medium
+            not-first:hover:prose-tr:bg-orange-50
+            prose-table:!border-none
+            prose-td:!border-none
+            prose-td:!p-1
+            "
+  >
+    {/* @ts-ignore component types must match TinaMarkdown component types*/}
+    < TinaMarkdown components={components} content={content} />
+  </article>

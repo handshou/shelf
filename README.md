@@ -1,11 +1,9 @@
 # Shelf 📚
-
 Make your website and use your Github sign in for **everything**. 
 
 Be ready in 10 minutes! 
 
 ## Writing and publishing made simple
-
 Made with love
 
 - Astro 
@@ -16,7 +14,6 @@ Made with love
 ## Quick start
 
 ### Prerequisites
-
 Signing up for everything takes the biggest part. Then its all downhill!
 
 1. A Github account
@@ -25,25 +22,20 @@ Signing up for everything takes the biggest part. Then its all downhill!
 1. Sign in https://console.cloudinary.com/console
 
 ### One click deploy
-
 Have your environment variables ready, see [here](#environment-variables) to get them.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fhandshou%2Fastro-vercel&env=TINA_PUBLIC_CLIENT_ID,TINA_CONTENT_TOKEN,TINA_SEARCH_TOKEN)
 
 ## Developers
-
 Here are some instructions to make your own changes or contribute.
 
 ### Testing
-
 E2E coming!
 
 ### Running locally
-
 Setup `.env` with environment variables. Check [Commands](#commands).
 
 ### Contributing
-
 Fork this repository. Allow updates to be fetched by adding an upstream remote.
 
 ```bash
@@ -77,7 +69,6 @@ git remote -v
 | CLOUDINARY_API_SECRET  | [Settings](https://console.cloudinary.com/settings) > API Keys |
 
 ### Commands
-
 All commands are run from the root of the project.
 
 Essentials:
@@ -99,7 +90,6 @@ Others:
 | `npm run astro --help` | Get help using the Astro CLI                     |
 
 ### Credits
-
 Astro
 
 Tina-astro
@@ -107,6 +97,5 @@ Tina-astro
 Deploy button is inspired by [Starter Kit](https://github.com/opengovsg/starter-kit).
 
 ### Thanks
-
 Your interest in this project is appreciated!
 
