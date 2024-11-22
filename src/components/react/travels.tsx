@@ -1,7 +1,7 @@
 import { tinaField, useTina } from 'tinacms/dist/react'
 import type { TravelsQuery } from '../../../tina/__generated__/types'
 
-import { RichTextContent } from '@rc/Tina/RichTextContent'
+import { RichTextContent } from '@rc/RichTextContent'
 
 const TravelComponent = (props: {
 	data: TravelsQuery

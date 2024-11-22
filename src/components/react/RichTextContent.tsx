@@ -1,10 +1,10 @@
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 
-import { convertDMSToDecimal, validateGPSCoordinates } from '@/lib/map'
-import {
-  IFrame, Map as EmbedMap, CldImage, CldVideo,
-  type MapType, type LinkProps
-} from '@rc/Tina'
+import { convertDMSToDecimal, validateGPSCoordinates } from '../../lib/map'
+import { Map as EmbedMap, type MapType } from '@rc/Tina/Map'
+import { IFrame } from '@rc/Tina/IFrame'
+import { CldImage, CldVideo } from '@rc/Tina/cloudinary'
+import type { LinkProps } from '@rc/Tina/link'
 
 const components = {
   a: (props: LinkProps) => (

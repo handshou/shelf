@@ -1,6 +1,7 @@
 import { defineConfig } from "tinacms"
 
-import { Map as EmbedMap, IFrame, type MapType } from "../src/components/react/Tina"
+import { Map as EmbedMap, type MapType } from "../src/components/react/Tina/Map"
+import { IFrame } from "../src/components/react/Tina/IFrame"
 import { validateGPSCoordinates } from "../src/lib/map"
 
 // Your hosting provider likely exposes this as an environment variable
