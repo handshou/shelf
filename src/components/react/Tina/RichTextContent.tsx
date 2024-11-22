@@ -54,4 +54,5 @@ const components = {
   },
 }
 
-export const RichTextContent = ({ content }: { any }) => < TinaMarkdown components={components} content={content} />
+{/* @ts-ignore component types must match TinaMarkdown component types*/ }
+export const RichTextContent = ({ content }) => < TinaMarkdown components={components} content={content} />

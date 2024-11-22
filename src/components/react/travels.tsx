@@ -1,7 +1,5 @@
-import type { TravelsQuery } from '../../../tina/__generated__/types'
-
-// TODO: https://tina.io/docs/editing/blocks/
 import { tinaField, useTina } from 'tinacms/dist/react'
+import type { TravelsQuery } from '../../../tina/__generated__/types'
 
 import { RichTextContent } from '@rc/Tina/RichTextContent'
 
@@ -13,7 +11,6 @@ const TravelComponent = (props: {
 	query: string
 }) => {
 	const { data } = useTina(props)
-
 	const { title } = data.travels
 
 	return (
@@ -44,7 +41,6 @@ const TravelComponent = (props: {
             prose-td:!p-1
             "
 					>
-						{/* @ts-ignore component types must match TinaMarkdown component types*/}
 						<RichTextContent content={data.travels.body} />
 					</article>
 				</div>
