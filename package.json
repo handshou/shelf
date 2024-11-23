@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "test": "npx playwright test --trace=on",
+    "test:watch": "PWTEST_WATCH=1 npx playwright test",
     "dev": "export NODE_ENV=development; tinacms dev -c 'astro dev --host'",
     "start": "astro dev",
     "build": "tinacms build && astro check && astro build",
