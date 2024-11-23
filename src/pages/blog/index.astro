@@ -3,8 +3,24 @@ import { getCollection } from 'astro:content'
 
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/config'
 import BaseLayout from '@layouts/Safari.astro'
+import client from 'tina/__generated__/client'
 
 const postsCollection = await getCollection('posts')
+
+const postsResponse = await client.queries.postsConnection({
+	sort: 'pubDate',
+	last: -1,
+})
+
+const postsFromTina = postsResponse.data.postsConnection.edges?.map((post) => {
+	return {
+		slug: post?.node?._sys.filename,
+		data: {
+			title: post?.node?.title,
+			pubDate: post?.node?.pubDate,
+		},
+	}
+})
 
 const posts = postsCollection.sort(
 	(a, b) =>
@@ -69,7 +85,7 @@ const LocaleConfig: Intl.DateTimeFormatOptions = {
   <section class="font-sans pt-4">
     <ul>
       {
-        posts.map((post) => (
+        postsFromTina?.map((post) => (
           <li>
             <div class="row">
               <div class="col">
