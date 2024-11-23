@@ -51,11 +51,11 @@ const contentHeader = {
 <BaseLayout content={contentHeader}>
   <div class="project-content">
     {
-      projectsFromTina.map((proj) => (
+      projectsFromTina?.map((proj) => (
         <ProjectCard
           className=""
           title={proj.data.title}
-          footer={`Updated ${new Date(proj.data.pubDate).toLocaleDateString(
+          footer={`Updated ${new Date(proj.data.pubDate as string).toLocaleDateString(
             "en-us",
             {
               year: "numeric",
