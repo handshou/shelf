@@ -1,6 +1,7 @@
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 
 import { convertDMSToDecimal, validateGPSCoordinates } from '@/lib/map'
+
 import { IFrame } from '@rc/Tina/IFrame'
 import { Map as EmbedMap, type MapType } from '@rc/Tina/Map'
 import { CldImage, CldVideo } from '@rc/Tina/cloudinary'
@@ -24,11 +25,7 @@ const components = {
 		if (typeof validateGPSCoordinates(gpsCoordinates) === 'string')
 			gpsCoordinates = "30 19' 45.49N, 35 26' 34.86E"
 
-		return (
-			<>
-				<EmbedMap {...convertDMSToDecimal(gpsCoordinates)} mapType={mapType} />
-			</>
-		)
+		return <EmbedMap {...convertDMSToDecimal(gpsCoordinates)} mapType={mapType} />
 	},
 
 	IFrame: (props: {
