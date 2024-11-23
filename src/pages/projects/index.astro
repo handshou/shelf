@@ -1,16 +1,26 @@
 ---
-import { getCollection } from 'astro:content'
-
 import BaseLayout from '@layouts/Safari.astro'
 import { ProjectCard } from '@rc/Card'
 
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/config'
+import client from 'tina/__generated__/client'
 
-const projectsCollection = await getCollection('projects')
+const projectsResponse = await client.queries.projectsConnection({
+	sort: 'pubDate',
+	last: -1,
+  filter: { published: { eq: true } },
+})
 
-const projects = projectsCollection.sort(
-	(a, b) => Number(new Date(b.data.pubDate.valueOf())) - Number(new Date(a.data.pubDate.valueOf()))
-)
+const projectsFromTina = projectsResponse.data.projectsConnection.edges?.map((projects) => {
+	return {
+		slug: projects?.node?._sys.filename,
+		data: {
+			title: projects?.node?.title,
+			pubDate: projects?.node?.pubDate,
+			description: projects?.node?.description,
+		},
+	}
+})
 
 const contentHeader = {
 	title: SITE_TITLE,
@@ -35,11 +45,11 @@ const contentHeader = {
 <BaseLayout content={contentHeader}>
   <div class="project-content">
     {
-      projects.map((proj) => (
+      projectsFromTina?.map((proj) => (
         <ProjectCard
           className=""
           title={proj.data.title}
-          footer={`Updated ${new Date(proj.data.pubDate).toLocaleDateString(
+          footer={`Updated ${new Date(proj.data.pubDate as string).toLocaleDateString(
             "en-us",
             {
               year: "numeric",

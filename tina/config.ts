@@ -114,6 +114,18 @@ export default defineConfig({
         },
         fields: [
           {
+            type: "boolean",
+            name: "published",
+            label: "Published",
+            ui: {
+              component: "toggle",
+              toggleLabels: {
+                true: 'On',
+                false: 'Off',
+              },
+            },
+          },
+          {
             type: "string",
             name: "title",
             label: "Title",
@@ -162,6 +174,18 @@ export default defineConfig({
           },
         },
         fields: [
+          {
+            type: "boolean",
+            name: "published",
+            label: "Published",
+            ui: {
+              component: "toggle",
+              toggleLabels: {
+                true: 'On',
+                false: 'Off',
+              },
+            },
+          },
           {
             name: "hero",
             type: "image",
@@ -214,6 +238,18 @@ export default defineConfig({
           },
         },
         fields: [
+          {
+            type: "boolean",
+            name: "published",
+            label: "Published",
+            ui: {
+              component: "toggle",
+              toggleLabels: {
+                true: 'On',
+                false: 'Off',
+              },
+            },
+          },
           {
             type: "string",
             name: "title",

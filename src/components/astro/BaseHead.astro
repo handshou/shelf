@@ -57,4 +57,9 @@ const { title, description, image = '/placeholder-social.jpg' } = Astro.props
   content="black-translucent"
 />
 
-<script is:inline type="module" src="/src/lib/highlight.js" />
+<script>
+import hljs from 'highlight.js'
+
+hljs.highlightAll()
+</script>
+
