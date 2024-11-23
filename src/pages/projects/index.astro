@@ -5,7 +5,23 @@ import BaseLayout from '@layouts/Safari.astro'
 import { ProjectCard } from '@rc/Card'
 
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/config'
+import client from 'tina/__generated__/client'
 
+const projectsResponse = await client.queries.projectsConnection({
+	sort: 'pubDate',
+	last: -1,
+})
+
+const projectsFromTina = projectsResponse.data.projectsConnection.edges?.map((projects) => {
+	return {
+		slug: projects?.node?._sys.filename,
+		data: {
+			title: projects?.node?.title,
+			pubDate: projects?.node?.pubDate,
+			description: projects?.node?.description,
+		},
+	}
+})
 const projectsCollection = await getCollection('projects')
 
 const projects = projectsCollection.sort(
@@ -35,7 +51,7 @@ const contentHeader = {
 <BaseLayout content={contentHeader}>
   <div class="project-content">
     {
-      projects.map((proj) => (
+      projectsFromTina.map((proj) => (
         <ProjectCard
           className=""
           title={proj.data.title}
