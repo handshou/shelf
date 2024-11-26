@@ -7,8 +7,6 @@ import Backtrack from '@ac/Backtrack.astro'
 import Safari from '@layouts/Safari.astro'
 import { ProjectComponent } from '@rc/projects'
 
-Astro.response.headers.set('Cache-Control', 'max-age=0')
-
 const { slug } = Astro.params
 const { host, referer } = Astro.locals
 

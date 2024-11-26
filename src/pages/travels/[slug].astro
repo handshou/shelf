@@ -4,9 +4,6 @@ import TravelLayout from '@layouts/Travel.astro'
 import { TravelComponent } from '@rc/travels'
 import { client } from '../../../tina/__generated__/client'
 
-Astro.response.headers.set('Cache-Control', 'max-age=0')
-Astro.response.headers.set('Cache-Control', 's-maxage=0')
-
 const { slug } = Astro.params
 
 /* @ts-ignore */
