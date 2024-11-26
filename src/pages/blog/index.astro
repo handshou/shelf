@@ -6,7 +6,7 @@ import client from 'tina/__generated__/client'
 const postsResponse = await client.queries.postsConnection({
 	sort: 'pubDate',
 	last: -1,
-  filter: { published: { eq: true } },
+	filter: { published: { eq: true } },
 })
 
 const postsFromTina = postsResponse.data.postsConnection.edges?.map((post) => {
@@ -30,7 +30,6 @@ const LocaleConfig: Intl.DateTimeFormatOptions = {
 	day: '2-digit',
 }
 ---
-
 <style>
   h1 {
     display: flex;

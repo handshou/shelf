@@ -1,23 +1,36 @@
 ---
-import { getEntry } from 'astro:content'
-import Backtrack from '@ac/Backtrack.astro'
-import BaseLayout from '@layouts/Safari.astro'
-import { PostComponent } from '@rc/posts'
+import { isAdmin as isAdminUrl } from '@/lib/tina'
+import type { Posts, PostsQuery } from 'tina/__generated__/types'
 import { client } from '../../../tina/__generated__/client'
+
+import Backtrack from '@ac/Backtrack.astro'
+import Safari from '@layouts/Safari.astro'
+import { PostComponent } from '@rc/posts'
 
 Astro.response.headers.set('Cache-Control', 'max-age=0')
 Astro.response.headers.set('Cache-Control', 's-maxage=0')
 
 const { slug } = Astro.params
+const { host, referer } = Astro.locals
 
-// @ts-ignore
-const posts = await getEntry('posts', slug)
+let response: {
+	data: PostsQuery
+	variables: { relativePath: string }
+	query: string
+}
+const isAdmin = isAdminUrl({ host, referer })
 
-if (posts === undefined) {
+try {
+	response = await client.queries.posts({ relativePath: `${slug}.mdx` })
+} catch (err) {
 	return Astro.redirect('/404')
 }
 
-const response = await client.queries.posts({ relativePath: `${slug}.mdx` })
+const post = response.data.posts as Posts
+
+if (!post.published && !isAdmin) {
+	return Astro.redirect('/404')
+}
 ---
 
 <style>
@@ -28,10 +41,10 @@ const response = await client.queries.posts({ relativePath: `${slug}.mdx` })
     background-color: #eee;
   }
 </style>
-<BaseLayout content={posts.data}>
+<Safari content={{ title: post.title, description: post.description }}>
   <div class="sticky">
     <Backtrack url="/blog" title="back to 🪴 garden" />
   </div>
   {/* @ts-ignore */}
   <PostComponent client:tina {...response} />
-</BaseLayout>
+</Safari>

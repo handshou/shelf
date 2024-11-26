@@ -1,4 +1,5 @@
 ---
+published: true
 title: Astro Notion
 description: List of updates
 pubDate: 2023-01-02T00:00:00.000Z
