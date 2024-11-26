@@ -3,7 +3,9 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "@/config";
 import BaseLayout from "@layouts/Safari.astro";
 import client from "tina/__generated__/client";
 
-const { token } = Astro.locals
+
+const data = Astro.locals
+const { token } = data
 console.log("token", token)
 
 const postsResponse = await client.queries.postsConnection({
