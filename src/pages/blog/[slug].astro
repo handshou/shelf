@@ -1,31 +1,38 @@
 ---
-import { getEntry } from 'astro:content'
-import Backtrack from '@ac/Backtrack.astro'
-import BaseLayout from '@layouts/Safari.astro'
-import { PostComponent } from '@rc/posts'
-import { client } from '../../../tina/__generated__/client'
+import { getEntry } from "astro:content";
+import Backtrack from "@ac/Backtrack.astro";
+import BaseLayout from "@layouts/Safari.astro";
+import { PostComponent } from "@rc/posts";
+import { client } from "../../../tina/__generated__/client";
 
-Astro.response.headers.set('Cache-Control', 'max-age=0')
-Astro.response.headers.set('Cache-Control', 's-maxage=0')
+Astro.response.headers.set("Cache-Control", "max-age=0");
+Astro.response.headers.set("Cache-Control", "s-maxage=0");
 
-const { slug } = Astro.params
+const { slug } = Astro.params;
 
 // @ts-ignore
-const posts = await getEntry('posts', slug)
+const posts = await getEntry("posts", slug);
 
 if (posts === undefined) {
-	return Astro.redirect('/404')
+  return Astro.redirect("/404");
 }
 
-const data = Astro.locals
-const { host, referer } = data
-console.log("host", host)
-console.log("referer", referer)
-console.log("split", host && referer?.split(host))
+const data = Astro.locals;
+// host: "shelf-git-middleware-handshous-projects.vercel.app"
+// referer: "https://shelf-git-middleware-handshous-projects.vercel.app/admin/index.html"
+const { host, referer } = data;
 
-const response = await client.queries.posts({ relativePath: `${slug}.mdx` })
-if (!response.data.posts.published && !client?.initialized) {
-  return Astro.redirect('/404')
+const urlSplit = host && referer?.split(host);
+const isAdmin = () => {
+  for (let i = 0; urlSplit && i < urlSplit?.length; i++) {
+    if (urlSplit) 
+      if(urlSplit[i]?.startsWith("/admin")) return true;
+  }
+};
+
+const response = await client.queries.posts({ relativePath: `${slug}.mdx` });
+if (!response.data.posts.published && !isAdmin) {
+  return Astro.redirect("/404");
 }
 ---
 
