@@ -1,44 +1,26 @@
 ---
-import { getEntry } from "astro:content";
+import type { Posts } from "tina/__generated__/types";
+import { client } from "../../../tina/__generated__/client";
+import { isAdmin as isAdminUrl } from "@/lib/tina";
+
 import Backtrack from "@ac/Backtrack.astro";
 import BaseLayout from "@layouts/Safari.astro";
 import { PostComponent } from "@rc/posts";
-import { client } from "../../../tina/__generated__/client";
 
 Astro.response.headers.set("Cache-Control", "max-age=0");
 Astro.response.headers.set("Cache-Control", "s-maxage=0");
 
 const { slug } = Astro.params;
+const { host, referer } = Astro.locals;
 
-// @ts-ignore
-const posts = await getEntry("posts", slug);
-
-if (posts === undefined) {
-  return Astro.redirect("/404");
-}
-
-const data = Astro.locals;
-// host: "shelf-git-middleware-handshous-projects.vercel.app"
-// referer: "https://shelf-git-middleware-handshous-projects.vercel.app/admin/index.html"
-const { host, referer } = data;
-
-const urlSplit = host && referer?.split(host);
-const isAdmin = () => {
-  for (let i = 0; urlSplit && i < urlSplit?.length; i++) {
-    if (urlSplit) 
-      if(urlSplit[i]?.startsWith("/admin")) return true;
-  }
-  return false;
-};
-
-console.log("isAdmin", isAdmin())
-
+const isAdmin = isAdminUrl({ host, referer });
 const response = await client.queries.posts({ relativePath: `${slug}.mdx` });
-if (!response.data.posts.published && !isAdmin()) {
+const post = response.data.posts as Posts;
+
+if (!post.published && !isAdmin) {
   return Astro.redirect("/404");
 }
 ---
-
 <style>
   .sticky {
     position: sticky;
@@ -47,7 +29,7 @@ if (!response.data.posts.published && !isAdmin()) {
     background-color: #eee;
   }
 </style>
-<BaseLayout content={posts.data}>
+<BaseLayout content={{ title: post.title, description: post.description }}>
   <div class="sticky">
     <Backtrack url="/blog" title="back to 🪴 garden" />
   </div>
