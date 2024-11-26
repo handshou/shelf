@@ -17,11 +17,11 @@ let response: {
 	data: PostsQuery
 	variables: { relativePath: string }
 	query: string
-} 
+}
 const isAdmin = isAdminUrl({ host, referer })
 
 try {
-  response = await client.queries.posts({ relativePath: `${slug}.mdx` })
+	response = await client.queries.posts({ relativePath: `${slug}.mdx` })
 } catch (err) {
 	return Astro.redirect('/404')
 }
