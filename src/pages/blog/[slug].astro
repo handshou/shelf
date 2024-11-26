@@ -1,6 +1,6 @@
 ---
 import { isAdmin as isAdminUrl } from '@/lib/tina'
-import type { Posts } from 'tina/__generated__/types'
+import type { Posts, PostsQuery } from 'tina/__generated__/types'
 import { client } from '../../../tina/__generated__/client'
 
 import Backtrack from '@ac/Backtrack.astro'
@@ -14,7 +14,11 @@ const { slug } = Astro.params
 const { host, referer } = Astro.locals
 
 const isAdmin = isAdminUrl({ host, referer })
-const response = await client.queries.posts({ relativePath: `${slug}.mdx` })
+const response: {
+	data: PostsQuery
+	variables: { relativePath: string }
+	query: string
+} = await client.queries.posts({ relativePath: `${slug}.mdx` })
 const post = response.data.posts as Posts
 
 if (!post.published && !isAdmin) {

@@ -1,27 +1,28 @@
 ---
-import { getEntry } from 'astro:content'
-import Backtrack from '@ac/Backtrack.astro'
-import BaseLayout from '@layouts/Safari.astro'
-import { ProjectComponent } from '@rc/projects'
+import { isAdmin as isAdminUrl } from '@/lib/tina'
 import { client } from '../../../tina/__generated__/client'
-import { type ProjectsQuery } from '../../../tina/__generated__/types'
+import type { Projects, ProjectsQuery } from '../../../tina/__generated__/types'
+
+import Backtrack from '@ac/Backtrack.astro'
+import Safari from '@layouts/Safari.astro'
+import { ProjectComponent } from '@rc/projects'
 
 Astro.response.headers.set('Cache-Control', 'max-age=0')
 
 const { slug } = Astro.params
+const { host, referer } = Astro.locals
 
-// @ts-ignore
-const proj = await getEntry('projects', slug)
-
-if (proj === undefined) {
-	return Astro.redirect('/404')
-}
-
+const isAdmin = isAdminUrl({ host, referer })
 const response: {
 	data: ProjectsQuery
 	variables: { relativePath: string }
 	query: string
 } = await client.queries.projects({ relativePath: `${slug}.md` })
+const project = response.data.projects as Projects
+
+if (!project.published && !isAdmin) {
+	return Astro.redirect('/404')
+}
 ---
 
 <style>
@@ -32,10 +33,10 @@ const response: {
     background-color: #eee;
   }
 </style>
-<BaseLayout content={proj.data}>
+<Safari content={{ title: project.title, description: project.description }}>
   <div class="sticky">
     <Backtrack url="/projects" title="back to 👨‍💻 projects" />
   </div>
   {/* @ts-expect-error */}
   <ProjectComponent client:tina {...response} />
-</BaseLayout>
+</Safari>
