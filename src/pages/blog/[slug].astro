@@ -28,6 +28,7 @@ const isAdmin = () => {
     if (urlSplit) 
       if(urlSplit[i]?.startsWith("/admin")) return true;
   }
+  return false;
 };
 
 const response = await client.queries.posts({ relativePath: `${slug}.mdx` });
