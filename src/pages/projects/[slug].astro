@@ -20,7 +20,7 @@ let response: {
 const isAdmin = isAdminUrl({ host, referer })
 
 try {
-	response = await client.queries.projects({ relativePath: `${slug}.mdx` })
+	response = await client.queries.projects({ relativePath: `${slug}.md` })
 } catch (err) {
 	return Astro.redirect('/404')
 }
