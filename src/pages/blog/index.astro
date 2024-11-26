@@ -1,34 +1,34 @@
 ---
-import { SITE_DESCRIPTION, SITE_TITLE } from "@/config";
-import BaseLayout from "@layouts/Safari.astro";
-import client from "tina/__generated__/client";
+import { SITE_DESCRIPTION, SITE_TITLE } from '@/config'
+import BaseLayout from '@layouts/Safari.astro'
+import client from 'tina/__generated__/client'
 
 const postsResponse = await client.queries.postsConnection({
-  sort: "pubDate",
-  last: -1,
-  filter: { published: { eq: true } },
-});
+	sort: 'pubDate',
+	last: -1,
+	filter: { published: { eq: true } },
+})
 
 const postsFromTina = postsResponse.data.postsConnection.edges?.map((post) => {
-  return {
-    slug: post?.node?._sys.filename,
-    data: {
-      title: post?.node?.title,
-      pubDate: post?.node?.pubDate,
-    },
-  };
-});
+	return {
+		slug: post?.node?._sys.filename,
+		data: {
+			title: post?.node?.title,
+			pubDate: post?.node?.pubDate,
+		},
+	}
+})
 
 const contentHeader = {
-  title: SITE_TITLE,
-  description: SITE_DESCRIPTION,
-};
+	title: SITE_TITLE,
+	description: SITE_DESCRIPTION,
+}
 
 const LocaleConfig: Intl.DateTimeFormatOptions = {
-  year: "numeric",
-  month: "short",
-  day: "2-digit",
-};
+	year: 'numeric',
+	month: 'short',
+	day: '2-digit',
+}
 ---
 <style>
   h1 {

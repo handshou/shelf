@@ -2,9 +2,9 @@
 /// <reference types="astro/client" />
 
 declare namespace App {
-  interface Locals {
-    token?: string,
-    referer?: string,
-    host?: string,
-  }
+	interface Locals {
+		token?: string
+		referer?: string
+		host?: string
+	}
 }

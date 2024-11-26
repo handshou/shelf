@@ -8,7 +8,7 @@ import client from 'tina/__generated__/client'
 const projectsResponse = await client.queries.projectsConnection({
 	sort: 'pubDate',
 	last: -1,
-  filter: { published: { eq: true } },
+	filter: { published: { eq: true } },
 })
 
 const projectsFromTina = projectsResponse.data.projectsConnection.edges?.map((projects) => {
