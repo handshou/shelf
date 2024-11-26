@@ -31,10 +31,10 @@ const isAdmin = () => {
   return false;
 };
 
-console.log("isAdmin", isAdmin)
+console.log("isAdmin", isAdmin())
 
 const response = await client.queries.posts({ relativePath: `${slug}.mdx` });
-if (!response.data.posts.published && !isAdmin) {
+if (!response.data.posts.published && !isAdmin()) {
   return Astro.redirect("/404");
 }
 ---
