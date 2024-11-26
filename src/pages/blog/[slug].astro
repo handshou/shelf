@@ -18,8 +18,10 @@ if (posts === undefined) {
 }
 
 const data = Astro.locals
-const { token } = data
-console.log("token", token)
+const { host, referer } = data
+console.log("host", host)
+console.log("referer", referer)
+console.log("split", host && referer?.split(host))
 
 const response = await client.queries.posts({ relativePath: `${slug}.mdx` })
 if (!response.data.posts.published && !client?.initialized) {

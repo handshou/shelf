@@ -4,5 +4,7 @@
 declare namespace App {
   interface Locals {
     token?: string,
+    referer?: string,
+    host?: string,
   }
 }
