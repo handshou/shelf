@@ -12,7 +12,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '@/config'
 
 <BaseLayout content={{ title: SITE_TITLE, description: SITE_DESCRIPTION }}>
   <div class="content mt-4 rounded-lg">
-    <TravelsMenu assets={[...jordanAssets, ...israelAssets, ...hanoiAssets]} />
+    <TravelsMenu server:defer assets={[...jordanAssets, ...israelAssets, ...hanoiAssets]} />
   </div>
 
   <div class="hidden lg:block lg:w-1/5"></div>
