@@ -12,12 +12,18 @@ Astro.response.headers.set('Cache-Control', 'max-age=0')
 const { slug } = Astro.params
 const { host, referer } = Astro.locals
 
-const isAdmin = isAdminUrl({ host, referer })
-const response: {
+let response: {
 	data: ProjectsQuery
 	variables: { relativePath: string }
 	query: string
-} = await client.queries.projects({ relativePath: `${slug}.md` })
+}
+const isAdmin = isAdminUrl({ host, referer })
+
+try {
+  response = await client.queries.projects({ relativePath: `${slug}.mdx` })
+} catch (err) {
+	return Astro.redirect('/404')
+}
 const project = response.data.projects as Projects
 
 if (!project.published && !isAdmin) {
