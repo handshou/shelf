@@ -42,5 +42,5 @@ if (!project.published && !isAdmin) {
     <Backtrack url="/projects" title="back to 👨‍💻 projects" />
   </div>
   {/* @ts-expect-error */}
-  <ProjectComponent client:tina {...response} />
+  <ProjectComponent server:defer client:tina {...response} />
 </Safari>

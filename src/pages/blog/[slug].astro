@@ -43,5 +43,5 @@ if (!post.published && !isAdmin) {
     <Backtrack url="/blog" title="back to 🪴 garden" />
   </div>
   {/* @ts-ignore */}
-  <PostComponent client:tina {...response} />
+  <PostComponent server:defer client:tina {...response} />
 </Safari>
