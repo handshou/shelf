@@ -131,6 +131,7 @@ export default defineConfig({
             label: "Title",
             isTitle: true,
             required: true,
+            searchable: true,
           },
           {
             type: "datetime",
@@ -148,6 +149,7 @@ export default defineConfig({
             name: "body",
             label: "Body",
             isBody: true,
+            searchable: true,
             templates: mapField.templates,
             components: mapField.components,
           },
@@ -197,6 +199,7 @@ export default defineConfig({
             label: "Title",
             isTitle: true,
             required: true,
+            searchable: true,
           },
           {
             type: "datetime",
@@ -214,6 +217,7 @@ export default defineConfig({
             name: "body",
             label: "Body",
             isBody: true,
+            searchable: true,
           },
         ],
       },
@@ -256,6 +260,7 @@ export default defineConfig({
             label: "Title",
             isTitle: true,
             required: true,
+            searchable: true,
           },
           {
             type: "datetime",
@@ -273,6 +278,7 @@ export default defineConfig({
             name: "body",
             label: "Body",
             isBody: true,
+            searchable: true,
           },
         ],
       },
