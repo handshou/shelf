@@ -15,19 +15,20 @@ if (travels === undefined) {
 
 const response = await client.queries.travels({ relativePath: `${slug}.mdx` })
 ---
+{/* @ts-ignore */}
 <TravelLayout content={travels.data}>
     {/* @ts-ignore */}
     <TravelComponent client:tina {...response} client:visible />
 </TravelLayout>
 
 <script>
-  import { isBottom, titlePosition } from '@store/titleStore'
+    import { isBottom, titlePosition } from "@store/titleStore";
 
- titlePosition.subscribe(() => {
-     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-       isBottom.set(true)
-     } else {
-       isBottom.set(false)
-     }
-  })
+    titlePosition.subscribe(() => {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+            isBottom.set(true);
+        } else {
+            isBottom.set(false);
+        }
+    });
 </script>
