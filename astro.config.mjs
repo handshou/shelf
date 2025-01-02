@@ -37,8 +37,4 @@ export default defineConfig({
 		webAnalytics: { enabled: true },
 		speedInsights: { enabled: true },
 	}),
-	experimental: {
-		contentLayer: true,
-		serverIslands: true,
-	},
 })
