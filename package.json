@@ -52,6 +52,11 @@
     "tailwindcss-animate": "^1.0.7",
     "tinacms": "^2.3.0"
   },
+  "overrides": {
+    "astro-cloudinary": {
+      "astro": "^5.1.2"
+    }
+  },
   "devDependencies": {
     "@biomejs/biome": "1.9.3",
     "@playwright/test": "^1.40.1",
