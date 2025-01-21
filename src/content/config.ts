@@ -11,6 +11,27 @@ const postsCollection = defineCollection({
 })
 
 export const collections = {
+	taipei: defineCollection({
+		loader: cldAssetsLoader({
+			folder: 'travels/taipei',
+			limit: 20,
+			fields: ['last_updated', 'width', 'height', 'secure_url'],
+		}),
+	}),
+	fukuoka: defineCollection({
+		loader: cldAssetsLoader({
+			folder: 'travels/fukuoka',
+			limit: 20,
+			fields: ['last_updated', 'width', 'height', 'secure_url'],
+		}),
+	}),
+	tokyo: defineCollection({
+		loader: cldAssetsLoader({
+			folder: 'travels/tokyo',
+			limit: 20,
+			fields: ['last_updated', 'width', 'height', 'secure_url'],
+		}),
+	}),
 	hanoi: defineCollection({
 		loader: cldAssetsLoader({
 			folder: 'travels/hanoi',
