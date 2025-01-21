@@ -11,10 +11,16 @@ const results = await Promise.allSettled([
 	getCollection('jordan'),
 	getCollection('hanoi'),
 	getCollection('israel'),
+        getCollection('tokyo'),
+        getCollection('taipei'),
+        getCollection('fukuoka'),
 ])
 const jordanAssets = isFulfilled(results[0]) ? results[0].value : []
 const hanoiAssets = isFulfilled(results[1]) ? results[1].value : []
 const israelAssets = isFulfilled(results[2]) ? results[2].value : []
+const tokyoAssets = isFulfilled(results[3]) ? results[3].value : []
+const taipeiAssets = isFulfilled(results[4]) ? results[4].value : []
+const fukuokaAssets = isFulfilled(results[5]) ? results[5].value : []
 
 import { SITE_DESCRIPTION, SITE_TITLE } from '@/config'
 ---
@@ -23,7 +29,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '@/config'
     <div class="content mt-4 rounded-lg">
         <TravelsMenu
             server:defer
-            assets={[...jordanAssets, ...hanoiAssets, ...israelAssets]}
+            assets={[...jordanAssets, ...hanoiAssets, ...israelAssets, ...tokyoAssets, ...taipeiAssets, ...fukuokaAssets]}
         />
     </div>
 
