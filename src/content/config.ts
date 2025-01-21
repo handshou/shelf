@@ -35,21 +35,21 @@ export const collections = {
 	hanoi: defineCollection({
 		loader: cldAssetsLoader({
 			folder: 'travels/hanoi',
-			limit: 40,
+			limit: 15,
 			fields: ['last_updated', 'width', 'height', 'secure_url'],
 		}),
 	}),
 	israel: defineCollection({
 		loader: cldAssetsLoader({
 			folder: 'travels/israel',
-			limit: 40,
+			limit: 15,
 			fields: ['last_updated', 'width', 'height', 'secure_url'],
 		}),
 	}),
 	jordan: defineCollection({
 		loader: cldAssetsLoader({
 			folder: 'travels/jordan',
-			limit: 40,
+			limit: 20,
 			fields: ['last_updated', 'width', 'height', 'secure_url'],
 		}),
 	}),
