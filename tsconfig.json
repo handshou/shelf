@@ -23,6 +23,6 @@
       }
     ]
   },
-  "include": [".astro/types.d.ts", "src/**/*.ts", "src/**/*.astro", "src/**/*.tsx", "src/**/*.jsx"],
+  "include": ["**/*", ".astro/types.d.ts", "src/**/*.ts", "src/**/*.astro", "src/**/*.tsx", "src/**/*.jsx"],
   "exclude": ["node_modules", "dist"]
 }
