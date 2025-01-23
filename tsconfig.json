@@ -24,5 +24,5 @@
     ]
   },
   "include": ["**/*", ".astro/types.d.ts", "src/**/*.ts", "src/**/*.astro", "src/**/*.tsx", "src/**/*.jsx"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "public/admin/assets/*"]
 }
