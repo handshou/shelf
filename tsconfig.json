@@ -4,7 +4,6 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@config": ["src/content/config.ts"],
       "@store/*": ["src/lib/store/*"],
       "@styles/*": ["src/lib/styles/*"],
       "@layouts/*": ["src/layouts/*"],
@@ -24,5 +23,5 @@
     ]
   },
   "include": ["**/*", ".astro/types.d.ts", "src/**/*.ts", "src/**/*.astro", "src/**/*.tsx", "src/**/*.jsx"],
-  "exclude": ["node_modules", "dist", "public/admin/assets/*"]
+  "exclude": ["node_modules", "dist"]
 }
