@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content'
 import { cldAssetsLoader } from 'astro-cloudinary/loaders'
+import { glob } from 'astro/loaders'
 
 const postsCollection = defineCollection({
 	type: 'content',
@@ -10,7 +11,17 @@ const postsCollection = defineCollection({
 	}),
 })
 
+const travels = {
+    loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/travels' }),
+	schema: z.object({
+		title: z.string(),
+		pubDate: z.union([z.null(), z.undefined(), z.string(), z.date()]),
+		description: z.string(),
+	}),
+}
+
 export const collections = {
+    travels,
 	hanoi: defineCollection({
 		loader: cldAssetsLoader({
 			folder: 'travels/hanoi',
