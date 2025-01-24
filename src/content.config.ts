@@ -18,7 +18,7 @@ const travels = {
     },
     schema: z.object({
         title: z.string(),
-        published: z.boolean(),
+        published: z.boolean().optional(),
         pubDate: z.union([z.null(), z.undefined(), z.string(), z.date()]),
         description: z.string(),
     }),
