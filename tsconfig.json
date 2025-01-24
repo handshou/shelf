@@ -10,6 +10,7 @@
       "@ac/*": ["src/components/astro/*"],
       "@rc/*": ["src/components/react/*"]
     },
+    "verbatimModuleSyntax": true,
     "strictNullChecks": true,
     "allowJs": true,
     "jsx": "react-jsx",
