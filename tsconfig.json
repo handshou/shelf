@@ -8,14 +8,14 @@
       "@styles/*": ["src/lib/styles/*"],
       "@layouts/*": ["src/layouts/*"],
       "@ac/*": ["src/components/astro/*"],
-      "@rc/*": ["src/components/react/*"]
+      "@rc/*": ["src/components/react/*"],
+      "@tina/*": ["tina/*"]
     },
     "verbatimModuleSyntax": true,
     "strictNullChecks": true,
     "allowJs": true,
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "types": ["node"],
     "moduleResolution": "node16",
     "plugins": [
       {
@@ -23,6 +23,6 @@
       }
     ]
   },
-  "include": ["**/*", ".astro/types.d.ts", "src/**/*.ts", "src/**/*.astro", "src/**/*.tsx", "src/**/*.jsx"],
+  "include": ["**/*", ".astro/types.d.ts", "tina/__generated__/*", "src/*.ts", "src/content.config.ts", "src/**/*.ts", "src/**/*.astro", "src/**/*.tsx", "src/**/*.jsx"],
   "exclude": ["node_modules", "dist"]
 }

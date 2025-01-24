@@ -1,8 +1,8 @@
 import { defineConfig } from "tinacms"
 
-import { Map as EmbedMap, type MapType } from "../src/components/react/Tina/Map"
-import { IFrame } from "../src/components/react/Tina/IFrame"
-import { validateGPSCoordinates } from "../src/lib/map"
+import { Map as EmbedMap, type MapType } from "@/components/react/Tina/Map"
+import { IFrame } from "@/components/react/Tina/IFrame"
+import { validateGPSCoordinates } from "@/lib/map"
 
 // Your hosting provider likely exposes this as an environment variable
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main"
