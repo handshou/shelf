@@ -59,7 +59,7 @@ const taipei = defineCollection({
 const fukuoka = defineCollection({
     loader: cldAssetsLoader({
         folder: 'travels/fukuoka',
-        limit: 5,
+        limit: 40,
         fields: ['last_updated', 'width', 'height', 'secure_url'],
     }),
 })
@@ -67,7 +67,7 @@ const fukuoka = defineCollection({
 const tokyo = defineCollection({
     loader: cldAssetsLoader({
         folder: 'travels/tokyo',
-        limit: 5,
+        limit: 40,
         fields: ['last_updated', 'width', 'height', 'secure_url'],
     }),
 })

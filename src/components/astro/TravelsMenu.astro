@@ -17,7 +17,6 @@ const imgExists = (img: AssetType) => img.data.last_updated
 
 // Shuffle assets
 const shuffledAssets = assets
-	.filter(imgExists)
 	.map((value: AssetType) => ({ value, sort: Math.random() }))
 	.sort(
 		(a: { value: AssetType; sort: number }, b: { value: AssetType; sort: number }) =>
