@@ -17,6 +17,7 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "moduleResolution": "node16",
+    "module": "node16",
     "plugins": [
       {
         "name": "@astrojs/ts-plugin"
