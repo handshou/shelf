@@ -1,5 +1,5 @@
 import '@styles/globals.css'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button.tsx'
 import { ArrowLeftIcon } from '@radix-ui/react-icons'
 
 export default function BackButton() {

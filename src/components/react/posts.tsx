@@ -1,7 +1,7 @@
 import { tinaField, useTina } from 'tinacms/dist/react'
-import type { PostsQuery } from '../../../tina/__generated__/types'
+import type { PostsQuery } from '../../../tina/__generated__/types.ts'
 
-import { RichTextContent } from '@rc/RichTextContent'
+import { RichTextContent } from '@rc/RichTextContent.tsx'
 
 export const PostComponent = (props: {
 	data: PostsQuery

@@ -1,4 +1,4 @@
-import { SITE_TITLE } from '@/config'
+import { SITE_TITLE } from '@/config.ts'
 import { expect, test } from '@playwright/test'
 
 test('blog is visible', async ({ page }) => {

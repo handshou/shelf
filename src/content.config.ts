@@ -1,6 +1,6 @@
 import { z, defineCollection } from 'astro:content'
 import { cldAssetsLoader } from 'astro-cloudinary/loaders'
-import { client } from '@tina/__generated__/client'
+import { client } from '@tina/__generated__/client.ts'
 import type { LoaderContext } from "astro/loaders";
 
 const travels = {

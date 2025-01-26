@@ -1,5 +1,5 @@
 import { useStore } from '@nanostores/react'
-import { showNavigation } from '@store/titleStore'
+import { showNavigation } from '@store/titleStore.js'
 
 export default function BottomNavigation() {
 	const showNav = useStore(showNavigation)

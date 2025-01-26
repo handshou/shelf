@@ -9,8 +9,8 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from '@/components/ui/card'
-import { cn } from '@/lib/utils'
+} from '@/components/ui/card.tsx'
+import { cn } from '@/lib/utils.ts'
 
 type CardProps = ComponentProps<typeof Card>
 

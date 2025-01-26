@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
-import type { TravelsQuery } from '../../../tina/__generated__/types'
+import type { TravelsQuery } from '../../../tina/__generated__/types.ts'
 
 import { useTina } from 'tinacms/dist/react'
 
 import '@styles/globals.css'
 import { ChevronRightIcon } from '@radix-ui/react-icons'
 
-import { SITE_TITLE } from '@/config'
+import { SITE_TITLE } from '@/config.ts'
 
-import { breadcrumbPosition, isBottom, showNavigation, titlePosition } from '@store/titleStore'
+import { breadcrumbPosition, isBottom, showNavigation, titlePosition } from '@store/titleStore.js'
 
 export const TopNavigation = (props: {
 	data: TravelsQuery

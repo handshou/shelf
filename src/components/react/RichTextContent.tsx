@@ -1,11 +1,11 @@
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 
-import { convertDMSToDecimal, validateGPSCoordinates } from '@/lib/map'
+import { convertDMSToDecimal, validateGPSCoordinates } from '@/lib/map.ts'
 
-import { IFrame } from '@rc/Tina/IFrame'
-import { Map as EmbedMap, type MapType } from '@rc/Tina/Map'
-import { CldImage, CldVideo } from '@rc/Tina/cloudinary'
-import type { LinkProps } from '@rc/Tina/link'
+import { IFrame } from '@rc/Tina/IFrame.tsx'
+import { Map as EmbedMap, type MapType } from '@rc/Tina/Map.tsx'
+import { CldImage, CldVideo } from '@rc/Tina/cloudinary.tsx'
+import type { LinkProps } from '@rc/Tina/link.tsx'
 
 const components = {
 	a: (props: LinkProps) => (

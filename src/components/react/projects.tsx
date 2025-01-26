@@ -1,8 +1,8 @@
 import { tinaField, useTina } from 'tinacms/dist/react'
 import '@styles/global.css'
-import type { ProjectsQuery } from '../../../tina/__generated__/types'
+import type { ProjectsQuery } from '../../../tina/__generated__/types.ts'
 
-import { RichTextContent } from '@rc/RichTextContent'
+import { RichTextContent } from '@rc/RichTextContent.tsx'
 
 export const ProjectComponent = (props: {
 	data: ProjectsQuery

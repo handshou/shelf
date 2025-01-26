@@ -1,4 +1,4 @@
-import { extractImageIdFromUrl, extractVideoIdFromUrl } from '@/lib/cloudinary'
+import { extractImageIdFromUrl, extractVideoIdFromUrl } from '@/lib/cloudinary.ts'
 import { AdvancedImage, AdvancedVideo, lazyload, responsive } from '@cloudinary/react'
 import { Cloudinary } from '@cloudinary/url-gen'
 import { quality } from '@cloudinary/url-gen/actions/delivery'

@@ -2,7 +2,7 @@ import { Readable } from 'node:stream'
 import { v2 as cloudinary } from 'cloudinary'
 
 import auth from '@tinacms/auth'
-import { createMediaHandler, mediaHandlerConfig } from 'next-tinacms-cloudinary/dist/handlers'
+import { createMediaHandler, mediaHandlerConfig } from 'next-tinacms-cloudinary/dist/handlers.js'
 
 import type { APIRoute } from 'astro'
 interface CustomRequest extends Request {

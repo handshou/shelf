@@ -5,6 +5,7 @@ import { TopNavigation } from '@rc/TopNavigation'
 import { client } from '../../tina/__generated__/client'
 
 const { slug } = Astro.params
+/* @ts-ignore */
 const { data } = await client.queries.travels({ relativePath: `${slug}.mdx` })
 
 const { content } = Astro.props
