@@ -24,53 +24,32 @@ const travels = {
     }),
 }
 
-const hanoi = defineCollection({
-    loader: cldAssetsLoader({
-        folder: 'travels/hanoi',
-        limit: 5,
-        fields: ['last_updated', 'width', 'height', 'secure_url'],
-    }),
-})
+const hasCloudinaryCreds = !!(
+    (import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME || process.env.PUBLIC_CLOUDINARY_CLOUD_NAME) &&
+    (import.meta.env.PUBLIC_CLOUDINARY_API_KEY || process.env.PUBLIC_CLOUDINARY_API_KEY) &&
+    (import.meta.env.CLOUDINARY_API_SECRET || process.env.CLOUDINARY_API_SECRET)
+)
 
-const israel = defineCollection({
-    loader: cldAssetsLoader({
-        folder: 'travels/israel',
-        limit: 5,
-        fields: ['last_updated', 'width', 'height', 'secure_url'],
-    }),
-})
+const cldCollection = (folder: string, limit: number) =>
+    defineCollection({
+        loader: hasCloudinaryCreds
+            ? cldAssetsLoader({
+                folder,
+                limit,
+                fields: ['last_updated', 'width', 'height', 'secure_url'],
+            })
+            : async () => {
+                console.warn(`[content] Cloudinary credentials missing; "${folder}" collection is empty`)
+                return []
+            },
+    })
 
-const jordan = defineCollection({
-    loader: cldAssetsLoader({
-        folder: 'travels/jordan',
-        limit: 5,
-        fields: ['last_updated', 'width', 'height', 'secure_url'],
-    }),
-})
-
-const taipei = defineCollection({
-    loader: cldAssetsLoader({
-        folder: 'travels/taipei',
-        limit: 5,
-        fields: ['last_updated', 'width', 'height', 'secure_url'],
-    }),
-})
-
-const fukuoka = defineCollection({
-    loader: cldAssetsLoader({
-        folder: 'travels/fukuoka',
-        limit: 40,
-        fields: ['last_updated', 'width', 'height', 'secure_url'],
-    }),
-})
-
-const tokyo = defineCollection({
-    loader: cldAssetsLoader({
-        folder: 'travels/tokyo',
-        limit: 40,
-        fields: ['last_updated', 'width', 'height', 'secure_url'],
-    }),
-})
+const hanoi = cldCollection('travels/hanoi', 5)
+const israel = cldCollection('travels/israel', 5)
+const jordan = cldCollection('travels/jordan', 5)
+const taipei = cldCollection('travels/taipei', 5)
+const fukuoka = cldCollection('travels/fukuoka', 40)
+const tokyo = cldCollection('travels/tokyo', 40)
 
 export const collections = {
     travels,
