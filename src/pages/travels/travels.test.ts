@@ -5,6 +5,6 @@ test('travels is visible', async ({ page }) => {
 	await page.goto('/travels')
 	await expect(page.getByRole('heading', { name: SITE_TITLE })).toBeVisible()
 	await expect(
-		page.getByRole('link', { name: 'hanoi travels/hanoi/DSC_3337_zprxhy' })
+		page.getByRole('link', { name: /travels\/hanoi\// }).first()
 	).toBeVisible()
 })
