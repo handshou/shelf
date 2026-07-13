@@ -4,8 +4,9 @@ import { Map as EmbedMap, type MapType } from "../src/components/react/Tina/Map.
 import { IFrame } from "../src/components/react/Tina/IFrame.tsx"
 import { validateGPSCoordinates } from "../src/lib/map.js"
 
-// Your hosting provider likely exposes this as an environment variable
-const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || "main"
+// Content lives in shelf-private, so TinaCloud only knows that repo's
+// branches. Code branches (Vercel previews) must not leak in here.
+const branch = process.env.TINA_BRANCH || "main"
 const mapField = {
   components: {
     EmbedMap,
