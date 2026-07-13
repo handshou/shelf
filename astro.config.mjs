@@ -4,7 +4,7 @@ import { defineConfig } from 'astro/config'
 import react from '@astrojs/react'
 import vercel from '@astrojs/vercel'
 
-import tailwind from '@astrojs/tailwind'
+import tailwindcss from '@tailwindcss/vite'
 
 const tina = ({ directiveName = 'tina' } = {}) => ({
 	name: 'tina-cms',
@@ -24,14 +24,10 @@ export default defineConfig({
 	image: {
 		domains: ['res.cloudinary.com'],
 	},
-	integrations: [
-		mdx({}),
-		react(),
-		tina(),
-		tailwind({
-			applyBaseStyles: false,
-		}),
-	],
+	integrations: [mdx({}), react(), tina()],
+	vite: {
+		plugins: [tailwindcss()],
+	},
 	output: 'server',
 	adapter: vercel({
 		webAnalytics: { enabled: true },

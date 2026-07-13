@@ -12,7 +12,7 @@ export default function BottomNavigation() {
 				<li>
 					<a
 						href="/travels/taiwan"
-						className="block px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded transition-colors duration-200"
+						className="block px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-sm transition-colors duration-200"
 					>
 						Taiwan
 					</a>
@@ -20,7 +20,7 @@ export default function BottomNavigation() {
 				<li>
 					<a
 						href="/travels/dresden"
-						className="block px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded transition-colors duration-200"
+						className="block px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-sm transition-colors duration-200"
 					>
 						Dresden
 					</a>
@@ -28,7 +28,7 @@ export default function BottomNavigation() {
 				<li>
 					<a
 						href="/travels/israel"
-						className="block px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded transition-colors duration-200"
+						className="block px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-sm transition-colors duration-200"
 					>
 						Israel
 					</a>
@@ -36,7 +36,7 @@ export default function BottomNavigation() {
 				<li>
 					<a
 						href="/travels/japan"
-						className="block px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded transition-colors duration-200"
+						className="block px-3 py-1 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 rounded-sm transition-colors duration-200"
 					>
 						Japan
 					</a>
