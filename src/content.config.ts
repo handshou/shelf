@@ -3,7 +3,7 @@ import { client } from '@tina/__generated__/client.ts'
 import type { LoaderContext } from 'astro/loaders'
 import { v2 as cloudinary } from 'cloudinary'
 
-const travels = {
+const travels = defineCollection({
 	loader: async (context: LoaderContext) => {
 		const travelsResponse = await client.queries.travelsConnection()
 		return travelsResponse.data.travelsConnection.edges
@@ -11,18 +11,20 @@ const travels = {
 			.map((travel) => {
 				return {
 					...travel?.node,
-					id: travel?.node?.id,
+					// Astro 6 getEntry matches ids exactly (no legacy slug
+					// fallback), so key entries by filename, not Tina's path id
+					id: travel?.node?._sys?.filename ?? travel?.node?.id,
 					tinaInfo: travel.node?._sys,
 				}
 			})
 	},
 	schema: z.object({
 		title: z.string(),
-		published: z.boolean().optional(),
+		published: z.boolean().nullish(),
 		pubDate: z.union([z.null(), z.undefined(), z.string(), z.date()]),
 		description: z.string(),
 	}),
-}
+})
 
 const hasCloudinaryCreds = !!(
 	(import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME || process.env.PUBLIC_CLOUDINARY_CLOUD_NAME) &&
