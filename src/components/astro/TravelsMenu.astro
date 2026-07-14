@@ -1,5 +1,4 @@
 ---
-import { CldImage } from 'astro-cloudinary'
 import '@styles/globals.css'
 
 const { assets } = Astro.props
@@ -23,6 +22,14 @@ const shuffledAssets = assets
 			a.sort - b.sort
 	)
 	.map(({ value }) => value)
+
+// Replaces astro-cloudinary's CldImage: c_fill 4:5 crop, auto format/quality
+const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME
+const cldUrl = (publicId: string, width: number) =>
+	`https://res.cloudinary.com/${cloudName}/image/upload/c_fill,w_${width},h_${Math.round(width * 1.25)},g_center/f_auto/q_auto/v1/${publicId}`
+const srcsetWidths = [640, 828, 1080, 1280, 1668]
+const cldSrcset = (publicId: string) =>
+	srcsetWidths.map((w) => `${cldUrl(publicId, w)} ${w}w`).join(', ')
 ---
 
 <html>
@@ -35,17 +42,16 @@ const shuffledAssets = assets
               <div class="opacity-80 font-sans text-xs text-neutral-200 text-left drop-shadow-md left-2 bottom-2 absolute pr-1">
                 {asset.data.folder.split("/")[1]}
               </div>
-              <CldImage
+              <img
                 class="h-auto w-full object-cover rounded-lg"
                 alt={asset.data.public_id}
-                src={asset.data.public_id}
-                width={asset.data.width * 0.4}
-                height={asset.data.width * 0.5}
-                crop="fill"
-                gravity="center"
-                aspectRatio={5 / 4}
-                format="auto"
+                src={cldUrl(asset.data.public_id, 1080)}
+                srcset={cldSrcset(asset.data.public_id)}
                 sizes="(max-width: 640px) 40vw, 30vw"
+                width={Math.round(asset.data.width * 0.4)}
+                height={Math.round(asset.data.width * 0.5)}
+                loading="lazy"
+                decoding="async"
               />
             </a>
           </div>

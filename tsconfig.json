@@ -24,6 +24,16 @@
       }
     ]
   },
-  "include": ["**/*", ".astro/types.d.ts", "tina/__generated__/*", "src/*.ts", "src/content.config.ts", "src/**/*.ts", "src/**/*.astro", "src/**/*.tsx", "src/**/*.jsx"],
+  "include": [
+    "**/*",
+    ".astro/types.d.ts",
+    "tina/__generated__/*",
+    "src/*.ts",
+    "src/content.config.ts",
+    "src/**/*.ts",
+    "src/**/*.astro",
+    "src/**/*.tsx",
+    "src/**/*.jsx"
+  ],
   "exclude": ["node_modules", "dist"]
 }
