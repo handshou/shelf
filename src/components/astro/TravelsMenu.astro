@@ -12,8 +12,6 @@ type AssetType = {
 	}
 }
 
-const imgExists = (img: AssetType) => img.data.last_updated
-
 // Shuffle assets
 const shuffledAssets = assets
 	.map((value: AssetType) => ({ value, sort: Math.random() }))
@@ -32,13 +30,11 @@ const cldSrcset = (publicId: string) =>
 	srcsetWidths.map((w) => `${cldUrl(publicId, w)} ${w}w`).join(', ')
 ---
 
-<html>
-  <body>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
       {
         shuffledAssets.map((asset: AssetType) => (
           <div class="relative ease-out duration-300 hover:-translate-y-1">
-            <a href={asset.data.folder}>
+            <a href={`/${asset.data.folder}`}>
               <div class="opacity-80 font-sans text-xs text-neutral-200 text-left drop-shadow-md left-2 bottom-2 absolute pr-1">
                 {asset.data.folder.split("/")[1]}
               </div>
@@ -57,6 +53,4 @@ const cldSrcset = (publicId: string) =>
           </div>
         ))
       }
-    </div>
-  </body>
-</html>
+</div>
