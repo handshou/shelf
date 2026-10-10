@@ -56,9 +56,21 @@ A clean `npm ci`, full cloud-validated build against the staged content branch, 
 
 The Chrome suite passes all 17 tests after a fresh development-cache restart. Typechecking against a running development server had invalidated Vite's optimizer cache during an earlier browser run, causing `504 Outdated Optimize Dep` hydration requests. No browser assertions were weakened.
 
+## Reviewed Vercel preview
+
+Plannotator reviewed the runtime patch with no changes requested. The patch is committed as `53e2d1c` on `fix/vercel-runtime-boundary`.
+
+CLI login succeeded as `handshou` using Vercel CLI 63.1.2. A Linux-built preview of the exact reviewed commit is available at `https://shelf-bwudse65v-handshous-projects.vercel.app`. Only that deployment received `TINA_BRANCH=chore/graphql-3-schema` build/runtime overrides; production code, content schema, and environment settings were not promoted.
+
+The preview returns HTTP 200 for the homepage, blog, projects, travels, Hanoi, Jordan, and admin index. Same-origin unauthenticated upload returns HTTP 401. Headless Chrome confirms hydrated back navigation and successful individual page/admin initialization.
+
+Rapidly navigating away from the gallery can abort the pending `TravelsMenu` server-island fetch and produce an uncaught `Failed to fetch`. The same sequence reproduces on unchanged stable production, so this is a separately tracked pre-existing navigation issue, not the native-binding regression.
+
+The native CLI unexpectedly added itself to local dependencies. Those unrelated manifest/lockfile edits were undone. The verified preview was rebuilt from a clean archive of the reviewed commit using the JS CLI implementation.
+
 ## Next steps
 
-1. Review the targeted runtime patch in Plannotator.
-2. Configure the code preview to use `TINA_BRANCH=chore/graphql-3-schema` and build it on Vercel. The current CLI login cannot access the production project's scope.
-3. Verify the real preview's public pages, admin delivery, and unauthenticated upload rejection before promoting the content schema or production code.
+1. Obtain approval to promote the staged content schema and reviewed runtime fix to production.
+2. Verify production pages, admin delivery, upload authorization, and runtime logs after release.
+3. Address the pre-existing aborted server-island fetch separately.
 4. Investigate remaining transitive advisories without incompatible blanket overrides.
