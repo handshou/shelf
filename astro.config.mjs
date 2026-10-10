@@ -21,6 +21,7 @@ const tina = ({ directiveName = 'tina' } = {}) => ({
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://hansel.co',
+	compressHTML: true,
 	image: {
 		domains: ['res.cloudinary.com'],
 	},
@@ -31,6 +32,5 @@ export default defineConfig({
 	output: 'server',
 	adapter: vercel({
 		webAnalytics: { enabled: true },
-		speedInsights: { enabled: true },
 	}),
 })
