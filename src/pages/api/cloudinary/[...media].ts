@@ -1,7 +1,7 @@
 import { Readable } from 'node:stream'
 import { v2 as cloudinary } from 'cloudinary'
 
-import auth from '@tinacms/auth'
+import { isUserAuthorized } from '@tinacms/auth'
 import { createMediaHandler, mediaHandlerConfig } from 'next-tinacms-cloudinary/dist/handlers.js'
 
 import type { APIRoute } from 'astro'
@@ -18,7 +18,18 @@ interface CustomRequest extends Request {
 
 export const config = mediaHandlerConfig
 
-const { isAuthorized } = auth
+const isMediaAuthorized = async (request: CustomRequest): Promise<boolean> => {
+	const clientID = process.env.TINA_PUBLIC_CLIENT_ID
+	const token = request.headers.get('authorization')
+	if (!clientID || !token?.startsWith('Bearer ')) return false
+
+	try {
+		const user = await isUserAuthorized({ clientID, token })
+		return user?.verified === true
+	} catch {
+		return false
+	}
+}
 
 cloudinary.config({
 	cloud_name: process.env.PUBLIC_CLOUDINARY_CLOUD_NAME || '',
@@ -31,17 +42,8 @@ const handler = createMediaHandler({
 	api_key: process.env.PUBLIC_CLOUDINARY_API_KEY || '',
 	api_secret: process.env.CLOUDINARY_API_SECRET || '',
 	authorized: async (req, _res): Promise<boolean> => {
-		try {
-			if (process.env.NODE_ENV === 'development') {
-				return true
-			}
-			const user = await isAuthorized(req)
-
-			return user ? user.verified : false
-		} catch (e) {
-			console.error(e)
-			return false
-		}
+		if (process.env.NODE_ENV === 'development') return true
+		return isMediaAuthorized(req as CustomRequest)
 	},
 })
 
@@ -55,17 +57,6 @@ const setupRequest = (request: CustomRequest, url: URL) => {
 	const offset = params.get('offset') || ''
 	const clientID = params.get('clientID') || ''
 	const mediaId = decodeURIComponent(url.pathname.split('/').pop() || '')
-
-	// Retrieve the authorization token from headers
-	const authorization = request.headers.get('authorization')
-
-	let token = ''
-	if (authorization?.startsWith('Bearer ')) {
-		token = authorization
-	}
-	// Pass the token into the request object or handle it as needed
-	// @ts-expect-error
-	request.headers.authorization = token
 
 	const media = ['media', mediaId] as [string, string]
 
@@ -94,7 +85,7 @@ export const POST: APIRoute = async ({ request: req, url }) => {
 	const request = req as CustomRequest
 	setupRequest(request, url)
 
-	if (!isAuthorized(request)) {
+	if (!(await isMediaAuthorized(request))) {
 		return new Response(JSON.stringify({ message: 'sorry this user is unauthorized' }), {
 			status: 401,
 			headers: { 'Content-Type': 'application/json' },
