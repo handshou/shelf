@@ -31,24 +31,21 @@ These counts include dependency propagation and are not counts of distinct explo
 - All 17 unit tests pass, including serialized Tina configuration preservation.
 - All 17 Chrome browser tests pass, including local-admin initialization. Firefox and WebKit were not revalidated in this pass.
 - The existing pinned navigation benchmark passes without changing its baseline.
-- Astro's production asset build passes against the local Tina schema.
+- Full production builds pass against both the temporary content schema branch and TinaCloud `main`, with cloud checks enabled.
 - Generated application JavaScript gzip total is 395,855 bytes, compared with 724,545 bytes from a clean Node 24 build of the merge-base: approximately 45% smaller. This is an asset-size comparison, not a browser latency measurement.
 
-The application asset build is diagnostic validation only, not approval to deploy. It does not replace the full TinaCloud build gate.
+## TinaCloud schema migration
 
-## Production blocker
+The initial production build was correctly blocked because the new CLI generated GraphQL 3.0.0 while TinaCloud indexed 2.4.7. The new schema introduces the `RichText` scalar and uses it for existing rich-text fields.
 
-The complete `npm run build` fails TinaCloud's schema check:
+The content repository's deployed schema was verified to match the previous public-code schema. Only `tina/tina-lock.json` was updated in `handshou/shelf-private`; collection definitions, editor configuration, and documents were unchanged.
 
-- Local GraphQL version: 3.0.0.
-- Indexed TinaCloud GraphQL version: 2.4.7.
-- Reported difference: non-breaking addition of the `RichText` type.
+The migration was first pushed to `chore/graphql-3-schema` and validated through a complete production build. Existing document and rich-text reads passed through both the legacy Tina 2.4 API and the Tina 3.0 API. The schema was then promoted to the content repository's `main` in commit `881bede` and a full production build against TinaCloud `main` passed. Existing public travel pages continued returning HTTP 200 during migration.
 
-The public code repository and TinaCloud's content repository are separate. The matching generated Tina schema must be coordinated with the content project and indexed before this upgrade can be deployed. Do not skip cloud checks or change the content branch merely to make the build pass. No production push has been made from this branch.
+Cloud checks and performance baselines were not disabled or weakened. The full cloud-validated build retained the same 395,855-byte application JavaScript gzip total.
 
 ## Next steps
 
-1. Coordinate the GraphQL schema upgrade with the TinaCloud content repository.
-2. Rerun the complete production build with cloud checks enabled.
-3. Rerun browser checks and performance budgets before release.
-4. Investigate remaining transitive advisories without incompatible blanket overrides.
+1. Release the reviewed code upgrade and verify the Vercel production deployment.
+2. Smoke-test public pages, admin delivery, and unauthenticated upload rejection.
+3. Investigate remaining transitive advisories without incompatible blanket overrides.
