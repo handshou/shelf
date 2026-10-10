@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useSyncExternalStore } from 'react'
 import type { TravelsQuery } from '../../../tina/__generated__/types.ts'
 
 import { useTina } from 'tinacms/dist/react'
@@ -8,7 +8,11 @@ import { ChevronRightIcon } from '@radix-ui/react-icons'
 
 import { SITE_TITLE } from '@/config.ts'
 
-import { breadcrumbPosition, isBottom, showNavigation, titlePosition } from '@store/titleStore.js'
+import {
+	getNavigationSnapshot,
+	getServerNavigationSnapshot,
+	subscribeNavigation,
+} from '@store/travelNavigation.ts'
 
 export const TopNavigation = (props: {
 	data: TravelsQuery
@@ -20,48 +24,11 @@ export const TopNavigation = (props: {
 	const { data } = useTina(props)
 	const { title: tinaTitle } = data.travels
 
-	const [showTitle, setShowTitle] = useState(false)
-	const [lastScrollY, setLastScrollY] = useState(0)
-
-	useEffect(() => {
-		const titleElement = document.querySelector('.travel-title')
-		const crumbElement = document.querySelector('.travel-crumb')
-		window?.addEventListener(
-			'scroll',
-			() => {
-				const titleRect = titleElement?.getBoundingClientRect()
-				const crumbRect = crumbElement?.getBoundingClientRect()
-				const { top = 0, height = 0 } = titleRect ?? {}
-				titlePosition.set(top + height)
-				breadcrumbPosition.set(crumbRect?.height || 0)
-				if (window.scrollY > lastScrollY) {
-					showNavigation.set(false)
-				} else {
-					showNavigation.set(true)
-				}
-				setLastScrollY(window.scrollY)
-			},
-			{ passive: true }
-		)
-
-		return window?.removeEventListener('wheel', () => {
-			const titleRect = titleElement?.getBoundingClientRect()
-			const crumbRect = crumbElement?.getBoundingClientRect()
-			const { top = 0, height = 0 } = titleRect ?? {}
-			titlePosition.set(top + height)
-			breadcrumbPosition.set(crumbRect?.height || 0)
-		})
-	}, [lastScrollY])
-
-	useEffect(() => {
-		titlePosition.subscribe((pos) => {
-			if (pos - breadcrumbPosition.get() >= 0 || isBottom.get()) {
-				setShowTitle(false)
-			} else {
-				setShowTitle(true)
-			}
-		})
-	}, [])
+	const { showTitle, isBottom } = useSyncExternalStore(
+		subscribeNavigation,
+		getNavigationSnapshot,
+		getServerNavigationSnapshot
+	)
 
 	return (
 		<div className="travel-crumb sticky top-0 z-10 bg-white lg:h-16 h-12">
@@ -85,7 +52,7 @@ export const TopNavigation = (props: {
 								travels
 							</a>
 						</li>
-						{isBottom.get() && (
+						{isBottom && (
 							<li className="flex items-center text-gray-900 font-bold">
 								<span className="mx-2">
 									<ChevronRightIcon />
