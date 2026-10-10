@@ -6,6 +6,8 @@
   "scripts": {
     "test": "npx playwright test --trace=on",
     "test:unit": "node --experimental-strip-types --experimental-test-module-mocks --test tests/unit/*.test.mjs",
+    "test:runtime": "node --test tests/runtime/*.test.mjs",
+    "postinstall": "node scripts/patch-vercel-runtime.mjs",
     "typecheck": "astro check",
     "bench:navigation": "node --experimental-strip-types scripts/bench-navigation.mjs 60786be7f82b6dcebe451d136549d4dd469682ee",
     "test:watch": "PWTEST_WATCH=1 npx playwright test",
@@ -24,7 +26,7 @@
     "@astrojs/react": "^7.0.1",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/ts-plugin": "^1.10.4",
-    "@astrojs/vercel": "^11.0.13",
+    "@astrojs/vercel": "11.0.13",
     "@cloudinary/react": "^1.13.0",
     "@cloudinary/url-gen": "^1.21.0",
     "@fontsource/geist-sans": "^5.1.0",

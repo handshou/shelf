@@ -28,7 +28,7 @@ These counts include dependency propagation and are not counts of distinct explo
 ## Validation
 
 - Biome lint and Astro typecheck pass.
-- All 17 unit tests pass, including serialized Tina configuration preservation.
+- All 21 unit tests pass, including serialized Tina configuration preservation and four adapter-patch checks.
 - All 17 Chrome browser tests pass, including local-admin initialization. Firefox and WebKit were not revalidated in this pass.
 - The existing pinned navigation benchmark passes without changing its baseline.
 - Full production builds pass against both the temporary content schema branch and TinaCloud `main`, with cloud checks enabled.
@@ -44,8 +44,21 @@ The migration was first pushed to `chore/graphql-3-schema` and validated through
 
 Cloud checks and performance baselines were not disabled or weakened. The full cloud-validated build retained the same 395,855-byte application JavaScript gzip total.
 
+## Production runtime failure and targeted patch
+
+The initial upgraded Vercel deployment completed its build but server routes failed with `FUNCTION_INVOCATION_FAILED`. Rolldown's native binding could not be loaded. Code production was rolled back in `f238d00`, and the content schema was rolled back in `e9d44b1`. The staged GraphQL 3 schema remains available on the content repository's `chore/graphql-3-schema` branch.
+
+The adapter's runtime entrypoint imported routing constants from its build adapter module, which also imported the Rolldown middleware builder. An isolated copy of the generated function reproduced the native-binding failure. The lockfile already contained Linux binding entries; regenerating the lockfile was not the targeted remedy.
+
+The fix pins `@astrojs/vercel` to 11.0.13 and applies `patches/astrojs-vercel-11.0.13.json` through `scripts/patch-vercel-runtime.mjs` during `postinstall`. Routing constants move into a shared lightweight module; their values and original adapter exports are preserved. Package version and before/after SHA-256 checks reject unsupported sources. The patch is idempotent.
+
+A clean `npm ci`, full cloud-validated build against the staged content branch, and `npm run test:runtime` pass. The runtime test copies the generated Node function outside the project dependency tree, imports its actual handler, verifies no Rolldown package is shipped, and checks homepage HTTP 200 and unauthenticated upload HTTP 401. The output targets `nodejs24.x` and retains the 395,855-byte application JavaScript gzip total against the unchanged 724,545-byte merge-base baseline.
+
+The Chrome suite passes all 17 tests after a fresh development-cache restart. Typechecking against a running development server had invalidated Vite's optimizer cache during an earlier browser run, causing `504 Outdated Optimize Dep` hydration requests. No browser assertions were weakened.
+
 ## Next steps
 
-1. Release the reviewed code upgrade and verify the Vercel production deployment.
-2. Smoke-test public pages, admin delivery, and unauthenticated upload rejection.
-3. Investigate remaining transitive advisories without incompatible blanket overrides.
+1. Review the targeted runtime patch in Plannotator.
+2. Configure the code preview to use `TINA_BRANCH=chore/graphql-3-schema` and build it on Vercel. The current CLI login cannot access the production project's scope.
+3. Verify the real preview's public pages, admin delivery, and unauthenticated upload rejection before promoting the content schema or production code.
+4. Investigate remaining transitive advisories without incompatible blanket overrides.
