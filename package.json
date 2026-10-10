@@ -9,7 +9,7 @@
     "typecheck": "astro check",
     "bench:navigation": "node --experimental-strip-types scripts/bench-navigation.mjs 60786be7f82b6dcebe451d136549d4dd469682ee",
     "test:watch": "PWTEST_WATCH=1 npx playwright test",
-    "dev": "export NODE_ENV=development; tinacms dev -c 'astro dev --host'",
+    "dev": "export NODE_ENV=development; tinacms dev -c 'astro dev --host --ignore-lock'",
     "start": "astro dev",
     "build": "tinacms build && astro build",
     "lint": "biome check .",
@@ -19,57 +19,59 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "^6.0.3",
-    "@astrojs/react": "^5.0.7",
+    "@astrojs/check": "^0.9.10",
+    "@astrojs/mdx": "^8.0.3",
+    "@astrojs/react": "^7.0.1",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/ts-plugin": "^1.10.4",
-    "@astrojs/vercel": "^10.0.8",
+    "@astrojs/vercel": "^11.0.13",
     "@cloudinary/react": "^1.13.0",
     "@cloudinary/url-gen": "^1.21.0",
     "@fontsource/geist-sans": "^5.1.0",
     "@nanostores/react": "^0.8.0",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.1.0",
-    "@tailwindcss/vite": "^4.3.2",
-    "@tinacms/auth": "^1.1.3",
-    "@tinacms/cli": "^2.5.3",
+    "@tailwindcss/vite": "^4.3.3",
+    "@tinacms/auth": "^1.1.5",
+    "@tinacms/cli": "^4.0.1",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vercel/analytics": "^1.3.2",
     "@vercel/speed-insights": "^1.1.0",
-    "astro": "^6.4.8",
+    "astro": "^7.3.8",
     "class-variance-authority": "^0.7.0",
     "cloudinary": "^2.5.0",
     "clsx": "^2.1.1",
     "highlight.js": "^11.10.0",
     "lucide-react": "^0.453.0",
     "nanostores": "^0.11.3",
-    "next-tinacms-cloudinary": "^27.0.0",
+    "next-tinacms-cloudinary": "^27.0.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sharp": "^0.33.5",
+    "sharp": "^0.35.5",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss": "^4.3.2",
-    "tinacms": "^3.10.0"
+    "tailwindcss": "^4.3.3",
+    "tinacms": "^3.14.3"
   },
   "overrides": {
-    "vite": "^7",
-    "@tinacms/cli": {
-      "vite": "^4.5.0"
+    "next-tinacms-cloudinary": {
+      "multer": "^2.4.0"
+    },
+    "@vercel/routing-utils": {
+      "path-to-regexp": "^6.3.0"
     }
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.3",
     "@playwright/test": "^1.40.1",
-    "@tailwindcss/typography": "^0.5.15",
-    "@types/node": "^20.7.1",
+    "@tailwindcss/typography": "^0.5.20",
+    "@types/node": "^24.0.0",
     "prettier-plugin-astro": "^0.12.0",
-    "sass": "^1.57.1",
+    "sass": "^1.105.1",
     "typescript": "^5.2.2",
     "vite-tsconfig-paths": "^5.0.1"
   },
   "engines": {
-    "node": ">=22.12.0"
+    "node": "^22.12.0 || ^24.0.0"
   }
 }
