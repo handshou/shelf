@@ -15,7 +15,8 @@
       "**/public/**",
       "**/.vscode/**",
       "**/tina/**",
-      "**/playwright-report/**"
+      "**/playwright-report/**",
+      "**/test-results/**"
     ]
   },
   "formatter": {

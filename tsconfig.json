@@ -16,8 +16,8 @@
     "allowJs": true,
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "moduleResolution": "node16",
-    "module": "node16",
+    "moduleResolution": "bundler",
+    "module": "ESNext",
     "plugins": [
       {
         "name": "@astrojs/ts-plugin"
@@ -35,5 +35,12 @@
     "src/**/*.tsx",
     "src/**/*.jsx"
   ],
-  "exclude": ["node_modules", "dist"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".vercel",
+    "public/admin",
+    "playwright-report",
+    "test-results"
+  ]
 }

@@ -1,4 +1,4 @@
-import { defineConfig } from "tinacms"
+import { defineConfig, type TinaField } from "tinacms"
 
 import { Map as EmbedMap, type MapType } from "../src/components/react/Tina/Map.tsx"
 import { IFrame } from "../src/components/react/Tina/IFrame.tsx"
@@ -7,6 +7,48 @@ import { validateGPSCoordinates } from "../src/lib/map.js"
 // Content lives in shelf-private, so TinaCloud only knows that repo's
 // branches. Code branches (Vercel previews) must not leak in here.
 const branch = process.env.TINA_BRANCH || "main"
+type StringField = Extract<TinaField, { type: 'string' }>
+
+const publishedField = () => ({
+  type: 'boolean' as const,
+  name: 'published',
+  label: 'Published',
+  ui: {
+    component: 'toggle',
+    toggleLabels: { true: 'On', false: 'Off' },
+  },
+})
+
+const mapTypeField: StringField & {
+  ui: NonNullable<StringField['ui']> & { defaultItem: { mapType: MapType } }
+} = {
+  type: 'string',
+  name: 'mapType',
+  label: 'Map Type',
+  ui: {
+    defaultItem: { mapType: 'Openstreetmaps' },
+  },
+  options: [
+    { value: 'Openstreetmaps', label: 'Openstreetmaps' },
+    { value: 'GoogleGPS', label: 'Google GPS' },
+    { value: 'GoogleSearch', label: 'Google Search' },
+    { value: 'GoogleGeneral', label: 'Google General (no marker)' },
+  ],
+}
+
+const gpsCoordinatesField: StringField & {
+  isRequired: boolean
+  placeholder: string
+  validate: typeof validateGPSCoordinates
+} = {
+  type: 'string',
+  name: 'gpsCoordinates',
+  label: 'GPS Coordinates',
+  isRequired: true,
+  placeholder: '30 19 45.49N, 35 26 34.86E',
+  validate: validateGPSCoordinates,
+}
+
 const mapField = {
   components: {
     EmbedMap,
@@ -18,7 +60,7 @@ const mapField = {
       label: "cldVideo",
       fields: [
         {
-          type: 'string',
+          type: 'string' as const,
           name: 'videoUrl',
           label: 'Video URL'
         },
@@ -29,7 +71,7 @@ const mapField = {
       label: "iFrame",
       fields: [
         {
-          type: 'string',
+          type: 'string' as const,
           name: 'embedCode',
           label: 'Embed Code'
         },
@@ -39,41 +81,21 @@ const mapField = {
       name: "Map",
       label: "Map",
       fields: [
-        {
-          type: 'string',
-          name: 'mapType',
-          label: 'Map Type',
-          ui: {
-            defaultItem: {
-              mapType: "Openstreetmaps" as MapType,
-            },
-          },
-          options: [
-            {
-              value: "Openstreetmaps", label: "Openstreetmaps"
-            },
-            {
-              value: "GoogleGPS", label: "Google GPS"
-            },
-            {
-              value: "GoogleSearch", label: "Google Search"
-            },
-            {
-              value: "GoogleGeneral", label: "Google General (no marker)"
-            },
-          ]
-        },
-        {
-          type: 'string',
-          name: 'gpsCoordinates',
-          label: 'GPS Coordinates',
-          isRequired: true,
-          placeholder: '30 19 45.49N\, 35 26 34.86E',
-          validate: validateGPSCoordinates,
-        },
+        mapTypeField,
+        gpsCoordinatesField,
       ],
     },
   ],
+}
+
+const travelBodyField = {
+  type: 'rich-text' as const,
+  name: 'body',
+  label: 'Body',
+  isBody: true,
+  searchable: true,
+  templates: mapField.templates,
+  components: mapField.components,
 }
 
 export default defineConfig({
@@ -114,18 +136,7 @@ export default defineConfig({
           },
         },
         fields: [
-          {
-            type: "boolean",
-            name: "published",
-            label: "Published",
-            ui: {
-              component: "toggle",
-              toggleLabels: {
-                true: 'On',
-                false: 'Off',
-              },
-            },
-          },
+          publishedField(),
           {
             type: "string",
             name: "title",
@@ -145,15 +156,7 @@ export default defineConfig({
             label: "Description",
             required: true,
           },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Body",
-            isBody: true,
-            searchable: true,
-            templates: mapField.templates,
-            components: mapField.components,
-          },
+          travelBodyField,
         ],
       },
       {
@@ -177,18 +180,7 @@ export default defineConfig({
           },
         },
         fields: [
-          {
-            type: "boolean",
-            name: "published",
-            label: "Published",
-            ui: {
-              component: "toggle",
-              toggleLabels: {
-                true: 'On',
-                false: 'Off',
-              },
-            },
-          },
+          publishedField(),
           {
             name: "hero",
             type: "image",
@@ -243,18 +235,7 @@ export default defineConfig({
           },
         },
         fields: [
-          {
-            type: "boolean",
-            name: "published",
-            label: "Published",
-            ui: {
-              component: "toggle",
-              toggleLabels: {
-                true: 'On',
-                false: 'Off',
-              },
-            },
-          },
+          publishedField(),
           {
             type: "string",
             name: "title",

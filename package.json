@@ -5,6 +5,9 @@
   "private": true,
   "scripts": {
     "test": "npx playwright test --trace=on",
+    "test:unit": "node --experimental-strip-types --experimental-test-module-mocks --test tests/unit/*.test.mjs",
+    "typecheck": "astro check",
+    "bench:navigation": "node --experimental-strip-types scripts/bench-navigation.mjs 60786be7f82b6dcebe451d136549d4dd469682ee",
     "test:watch": "PWTEST_WATCH=1 npx playwright test",
     "dev": "export NODE_ENV=development; tinacms dev -c 'astro dev --host'",
     "start": "astro dev",

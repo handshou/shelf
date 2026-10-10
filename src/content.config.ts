@@ -1,22 +1,15 @@
 import { defineCollection, z } from 'astro:content'
 import { client } from '@tina/__generated__/client.ts'
-import type { LoaderContext } from 'astro/loaders'
 import { v2 as cloudinary } from 'cloudinary'
 
 const travels = defineCollection({
-	loader: async (context: LoaderContext) => {
+	loader: async () => {
 		const travelsResponse = await client.queries.travelsConnection()
-		return travelsResponse.data.travelsConnection.edges
-			?.filter((travel) => !!travel)
-			.map((travel) => {
-				return {
-					...travel?.node,
-					// Astro 6 getEntry matches ids exactly (no legacy slug
-					// fallback), so key entries by filename, not Tina's path id
-					id: travel?.node?._sys?.filename ?? travel?.node?.id,
-					tinaInfo: travel.node?._sys,
-				}
-			})
+		return (travelsResponse.data.travelsConnection.edges ?? []).flatMap((travel) => {
+			const node = travel?.node
+			if (!node) return []
+			return [{ ...node, id: node._sys.filename, tinaInfo: node._sys }]
+		})
 	},
 	schema: z.object({
 		title: z.string(),
