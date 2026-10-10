@@ -14,7 +14,8 @@ import HeaderLink from './HeaderLink.astro'
 			<div class="btn max-btn"></div>
 		</div>
 		<div class="tabs">
-			<HeaderLink href="/" emoji="🧑🏽‍🌾">home</HeaderLink>
+			<HeaderLink href="/" emoji="🧑🏽‍🌾">home</>
+      </HeaderLink>
 			<HeaderLink href="/blog" emoji="🪴">garden</HeaderLink>
       <HeaderLink href="/travels" emoji="🚴">travels</HeaderLink>
 			<HeaderLink href="/projects" emoji="👨‍💻">projects</HeaderLink>
@@ -22,13 +23,13 @@ import HeaderLink from './HeaderLink.astro'
 		<div class="wrapper"></div>
 	</nav>
 </header>
-<div class="bg">
+<body class="bg">
 	<div class="content">
 		<div id="scroll" class="scroll">
 			<slot />
 		</div>
 	</div>
-</div>
+</body>
 <style>
 	.tabs {
 		display: flex;
