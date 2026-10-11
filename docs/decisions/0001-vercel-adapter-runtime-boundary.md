@@ -2,7 +2,7 @@
 
 Date: 2026-10-11
 Branch: `chore/vercel-adapter-11-0-12`
-Status: Local tests pass. Review and preview approval are pending. Production remains at `9239a78`.
+Status: Local tests, review, and Vercel preview pass. Production approval is pending. Production remains at `9239a78`.
 
 ## Reason
 
@@ -30,9 +30,15 @@ Application JavaScript stays at 395,855 gzip bytes. Its limit is 724,545 bytes f
 
 The server package grows from 35,388,934 to 35,487,470 bytes. That adds 98,536 bytes, about 0.28%. We have not measured the effect on startup time.
 
-## Before release
+## Preview result
 
-Review the change in Plannotator and test a Linux-built Vercel preview. Check the public pages, admin, interactive components, and upload rejection. Ask for production approval after those checks pass.
+Plannotator approved the change with no further requests after we simplified this note. Commit `58c3ef6` removes the patch and pins the adapter.
+
+The Linux-built preview is https://shelf-3hoymdsqw-handshous-projects.vercel.app. Its homepage, blog, projects, travels, Hanoi, Jordan, and admin return HTTP 200. Uploads without login return HTTP 401. Chrome checks pass for page and admin startup and the back button after it loads. The checked runtime logs contain no errors.
+
+The first upload failed with `Not authorized` despite read access to the project. Renewing the CLI login allowed the same source to deploy. This did not change production.
+
+The preview uses TinaCloud `main`. No content, schema, or production settings changed. Ask for production approval before merging this branch.
 
 ## Rollback
 
