@@ -2,7 +2,7 @@
 
 Date: 2026-10-11
 Branch: `chore/vercel-adapter-11-0-12`
-Status: Local tests, review, and Vercel preview pass. Production approval is pending. Production remains at `9239a78`.
+Status: Accepted. Local tests, review, and Vercel preview pass. The user approved the production release.
 
 ## Reason
 
@@ -38,11 +38,11 @@ The Linux-built preview is https://shelf-3hoymdsqw-handshous-projects.vercel.app
 
 The first upload failed with `Not authorized` despite read access to the project. Renewing the CLI login allowed the same source to deploy. This did not change production.
 
-The preview uses TinaCloud `main`. No content, schema, or production settings changed. Ask for production approval before merging this branch.
+The preview uses TinaCloud `main`. No content, schema, or production settings changed. After these checks passed, the user approved merging this branch and releasing adapter 11.0.12.
 
 ## Rollback
 
-Keep production at `9239a78` during the test. If we release 11.0.12 and find a problem, revert this change to restore the working 11.0.13 patch. The Tina content and schema need no rollback because this change does not touch them.
+If the 11.0.12 release fails, revert this change to restore the working 11.0.13 patch from `9239a78`. Check the resulting deployment. The Tina content and schema need no rollback because this change does not touch them.
 
 ## References
 
