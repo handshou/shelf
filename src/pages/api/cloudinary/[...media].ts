@@ -1,5 +1,6 @@
-import { Readable } from 'node:stream'
 import { v2 as cloudinary } from 'cloudinary'
+import { createCloudinaryUpload } from '../../../lib/cloudinary-upload.ts'
+import { createMediaUploadRoute } from '../../../lib/media-upload-route.ts'
 
 import { isUserAuthorized } from '@tinacms/auth'
 import { createMediaHandler, mediaHandlerConfig } from 'next-tinacms-cloudinary/dist/handlers.js'
@@ -18,7 +19,7 @@ interface CustomRequest extends Request {
 
 export const config = mediaHandlerConfig
 
-const isMediaAuthorized = async (request: CustomRequest): Promise<boolean> => {
+const isMediaAuthorized = async (request: Request): Promise<boolean> => {
 	const clientID = process.env.TINA_PUBLIC_CLIENT_ID
 	const token = request.headers.get('authorization')
 	if (!clientID || !token?.startsWith('Bearer ')) return false
@@ -81,65 +82,12 @@ export const GET: APIRoute = ({ request: req, url }) => {
 	})
 }
 
-export const POST: APIRoute = async ({ request: req, url }) => {
-	const request = req as CustomRequest
-	setupRequest(request, url)
-
-	if (!(await isMediaAuthorized(request))) {
-		return new Response(JSON.stringify({ message: 'sorry this user is unauthorized' }), {
-			status: 401,
-			headers: { 'Content-Type': 'application/json' },
-		})
-	}
-
-	// Retrieve the formData from the request
-	const formData = await request.formData()
-	const file = formData.get('file') as File
-	const directory = formData.get('directory') as string
-
-	if (!file || !file.arrayBuffer) {
-		return new Response(JSON.stringify({ error: 'No file uploaded or invalid file type' }), {
-			status: 400,
-		})
-	}
-
-	// Convert the file to an ArrayBuffer
-	const arrayBuffer = await file.arrayBuffer()
-
-	// Convert the ArrayBuffer to a Buffer (Node.js)
-	const buffer = Buffer.from(arrayBuffer)
-
-	// Create a readable stream from the buffer
-	const stream = Readable.from(buffer)
-
-	// Cloudinary upload stream
-	return new Promise((resolve, reject) => {
-		const uploadStream = cloudinary.uploader.upload_stream(
-			{
-				folder: directory.replace(/^\//, ''),
-				use_filename: true,
-				resource_type: 'auto',
-				overwrite: false,
-			},
-			(error, result) => {
-				if (error) {
-					console.error('Cloudinary upload error:', error)
-					reject(new Response(JSON.stringify({ error: error.message }), { status: 500 }))
-				} else {
-					resolve(
-						new Response(JSON.stringify(result), {
-							status: 200,
-							headers: { 'Content-Type': 'application/json' },
-						})
-					)
-				}
-			}
-		)
-
-		// Pipe the stream to Cloudinary
-		stream.pipe(uploadStream)
-	})
-}
+export const POST = createMediaUploadRoute({
+	authorize: isMediaAuthorized,
+	upload: createCloudinaryUpload((options, callback) =>
+		cloudinary.uploader.upload_stream(options, callback)
+	),
+})
 
 export const DELETE: APIRoute = ({ request: req, url }) => {
 	const request = req as CustomRequest

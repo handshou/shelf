@@ -20,7 +20,13 @@ mock.module('cloudinary', {
 				upload_stream(_options, callback) {
 					uploadCount++
 					const stream = new PassThrough()
-					stream.on('finish', () => callback(null, { public_id: 'travels/test' }))
+					stream.on('finish', () =>
+						callback(null, {
+							public_id: 'travels/test',
+							secure_url: 'https://example.com/photo.jpg',
+							original_filename: 'photo',
+						})
+					)
 					stream.resume()
 					return stream
 				},
